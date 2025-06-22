@@ -1,0 +1,4 @@
+Sitemap: https://til.code-drill.eu/sitemapindex.xml
+
+User-Agent: *
+Host: til.code-drill.eu
