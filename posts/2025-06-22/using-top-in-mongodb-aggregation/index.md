@@ -14,7 +14,7 @@ As mongo docs says:
 MongoDB aggregation stage limits
 Each stage can use up to 100 MB of RAM. You will get an error from the database if you exceed this limit. 
 ```
-So if you are having a problem and you need the first (or last) element from a sorted collection, you can use the top operator. 
+So if you are having this problem and you need the first (or last) element from a sorted collection, you can use the top operator. 
 
 So instead of sorting:
 ```
