@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<?xml-stylesheet type="text/xsl" href="assets/xml/rss.xsl" media="all"?><rss version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Today I Learned</title><link>https://til.code-drill.eu/</link><description>Things I've learned, collected in code-drill/til.</description><atom:link href="https://til.code-drill.eu/rss.xml" rel="self" type="application/rss+xml"></atom:link><language>en</language><copyright>Contents © 2025 &lt;a href="mailto:michal@code-drill.eu"&gt;Michał Rutkowski&lt;/a&gt; </copyright><lastBuildDate>Sun, 22 Jun 2025 19:27:35 GMT</lastBuildDate><generator>Nikola (getnikola.com)</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>Using top in mongodb aggregation</title><link>https://til.code-drill.eu/posts/2025-06-22/using-top-in-mongodb-aggregation/</link><dc:creator>Michał Rutkowski</dc:creator><description>&lt;p&gt;As mongo docs says:&lt;/p&gt;
+<?xml-stylesheet type="text/xsl" href="../assets/xml/rss.xsl" media="all"?><rss version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Today I Learned (Posts about db)</title><link>https://til.code-drill.eu/</link><description></description><atom:link href="https://til.code-drill.eu/categories/db.xml" rel="self" type="application/rss+xml"></atom:link><language>en</language><copyright>Contents © 2025 &lt;a href="mailto:michal@code-drill.eu"&gt;Michał Rutkowski&lt;/a&gt; </copyright><lastBuildDate>Sun, 22 Jun 2025 19:27:35 GMT</lastBuildDate><generator>Nikola (getnikola.com)</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>Using top in mongodb aggregation</title><link>https://til.code-drill.eu/posts/2025-06-22/using-top-in-mongodb-aggregation/</link><dc:creator>Michał Rutkowski</dc:creator><description>&lt;p&gt;As mongo docs says:&lt;/p&gt;
 &lt;div class="code"&gt;&lt;pre class="code literal-block"&gt;&lt;span class="n"&gt;MongoDB&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;aggregation&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;stage&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;limits&lt;/span&gt;
 &lt;span class="n"&gt;Each&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;stage&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;can&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;use&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;up&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;to&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="mh"&gt;100&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;MB&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;of&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;RAM&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;You&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;will&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;get&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;an&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;error&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;from&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;the&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;database&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="k"&gt;if&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;you&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;exceed&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;this&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;limit&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
@@ -95,33 +95,4 @@
 &lt;span class="w"&gt;    &lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="p"&gt;{&lt;/span&gt;
 &lt;span class="w"&gt;    &lt;/span&gt;&lt;span class="nl"&gt;allowDiskUse:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;false&lt;/span&gt;
 &lt;span class="w"&gt;    &lt;/span&gt;&lt;span class="p"&gt;})&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;</description><category>aggregation</category><category>db</category><category>mongodb</category><category>top</category><guid>https://til.code-drill.eu/posts/2025-06-22/using-top-in-mongodb-aggregation/</guid><pubDate>Sun, 22 Jun 2025 18:59:15 GMT</pubDate></item><item><title>Gitignore windows cmd util</title><link>https://til.code-drill.eu/posts/2025-06-22/gitignore-windows-cmd-util/</link><dc:creator>Michał Rutkowski</dc:creator><description>&lt;p&gt;Simple utility that lets you generate .gitignore using cmd/shell.
-You must have curl in your path.&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;windows/cmd: &lt;code&gt;gitignore.cmd&lt;/code&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;div class="code"&gt;&lt;pre class="code literal-block"&gt;&lt;span class="nv"&gt;@echo&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="k"&gt;off&lt;/span&gt;
-&lt;span class="n"&gt;curl&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;sL&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nl"&gt;https&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="o"&gt;//&lt;/span&gt;&lt;span class="n"&gt;www&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;toptal&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;com&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;developers&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;gitignore&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;api&lt;/span&gt;&lt;span class="o"&gt;/%*&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-
-&lt;ul&gt;
-&lt;li&gt;linux - add function into your aliases file or .*rc&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;function for alias
-    &lt;code&gt;shell
-    function gitignore() { curl -sL https://www.toptal.com/developers/gitignore/api/\$@ ;}&lt;/code&gt;&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;zsh - code to run to add function to &lt;code&gt;.zshrc&lt;/code&gt;
-    &lt;code&gt;shell
-    echo "function gitignore() { curl -sL https://www.toptal.com/developers/gitignore/api/\$@ ;}" &amp;gt;&amp;gt; ~/.zshrc&lt;/code&gt;&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;bash - code to run to add function to  &lt;code&gt;.bash&lt;/code&gt;
-    &lt;code&gt;shell
-    echo "function gitignore() { curl -sL https://www.toptal.com/developers/gitignore/api/\$@ ;}" &amp;gt;&amp;gt; ~/.bashrc&lt;/code&gt;&lt;/p&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;and than you can type:&lt;/p&gt;
-&lt;div class="code"&gt;&lt;pre class="code literal-block"&gt;gitignore&lt;span class="w"&gt; &lt;/span&gt;python,pycharm,django
-&lt;/pre&gt;&lt;/div&gt;</description><category>bash</category><category>cmd</category><category>command-line</category><category>git</category><category>gitignore</category><category>linux</category><category>windows</category><category>zsh</category><guid>https://til.code-drill.eu/posts/2025-06-22/gitignore-windows-cmd-util/</guid><pubDate>Sun, 22 Jun 2025 11:47:35 GMT</pubDate></item></channel></rss>
+&lt;/pre&gt;&lt;/div&gt;</description><category>aggregation</category><category>db</category><category>mongodb</category><category>top</category><guid>https://til.code-drill.eu/posts/2025-06-22/using-top-in-mongodb-aggregation/</guid><pubDate>Sun, 22 Jun 2025 18:59:15 GMT</pubDate></item></channel></rss>

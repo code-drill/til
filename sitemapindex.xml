@@ -6,40 +6,60 @@
     xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9
                         http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
  <sitemap>
+  <loc>https://til.code-drill.eu/categories/aggregation.xml</loc>
+  <lastmod>2025-06-22T19:27:00Z</lastmod>
+ </sitemap>
+ <sitemap>
   <loc>https://til.code-drill.eu/categories/bash.xml</loc>
-  <lastmod>2025-06-22T13:01:00Z</lastmod>
+  <lastmod>2025-06-22T19:27:00Z</lastmod>
+ </sitemap>
+ <sitemap>
+  <loc>https://til.code-drill.eu/categories/cat_db.xml</loc>
+  <lastmod>2025-06-22T19:27:00Z</lastmod>
  </sitemap>
  <sitemap>
   <loc>https://til.code-drill.eu/categories/cat_git.xml</loc>
-  <lastmod>2025-06-22T13:01:00Z</lastmod>
+  <lastmod>2025-06-22T19:27:00Z</lastmod>
  </sitemap>
  <sitemap>
   <loc>https://til.code-drill.eu/categories/cmd.xml</loc>
-  <lastmod>2025-06-22T13:01:00Z</lastmod>
+  <lastmod>2025-06-22T19:27:00Z</lastmod>
  </sitemap>
  <sitemap>
   <loc>https://til.code-drill.eu/categories/command-line.xml</loc>
-  <lastmod>2025-06-22T13:01:00Z</lastmod>
+  <lastmod>2025-06-22T19:27:00Z</lastmod>
+ </sitemap>
+ <sitemap>
+  <loc>https://til.code-drill.eu/categories/db.xml</loc>
+  <lastmod>2025-06-22T19:27:00Z</lastmod>
  </sitemap>
  <sitemap>
   <loc>https://til.code-drill.eu/categories/git.xml</loc>
-  <lastmod>2025-06-22T13:01:00Z</lastmod>
+  <lastmod>2025-06-22T19:27:00Z</lastmod>
  </sitemap>
  <sitemap>
   <loc>https://til.code-drill.eu/categories/gitignore.xml</loc>
-  <lastmod>2025-06-22T13:01:00Z</lastmod>
+  <lastmod>2025-06-22T19:27:00Z</lastmod>
  </sitemap>
  <sitemap>
   <loc>https://til.code-drill.eu/categories/linux.xml</loc>
-  <lastmod>2025-06-22T13:01:00Z</lastmod>
+  <lastmod>2025-06-22T19:27:00Z</lastmod>
+ </sitemap>
+ <sitemap>
+  <loc>https://til.code-drill.eu/categories/mongodb.xml</loc>
+  <lastmod>2025-06-22T19:27:00Z</lastmod>
+ </sitemap>
+ <sitemap>
+  <loc>https://til.code-drill.eu/categories/top.xml</loc>
+  <lastmod>2025-06-22T19:27:00Z</lastmod>
  </sitemap>
  <sitemap>
   <loc>https://til.code-drill.eu/categories/windows.xml</loc>
-  <lastmod>2025-06-22T13:01:00Z</lastmod>
+  <lastmod>2025-06-22T19:27:00Z</lastmod>
  </sitemap>
  <sitemap>
   <loc>https://til.code-drill.eu/categories/zsh.xml</loc>
-  <lastmod>2025-06-22T13:01:00Z</lastmod>
+  <lastmod>2025-06-22T19:27:00Z</lastmod>
  </sitemap>
  <sitemap>
   <loc>https://til.code-drill.eu/galleries/rss.xml</loc>
@@ -47,10 +67,10 @@
  </sitemap>
  <sitemap>
   <loc>https://til.code-drill.eu/rss.xml</loc>
-  <lastmod>2025-06-22T13:01:00Z</lastmod>
+  <lastmod>2025-06-22T19:27:00Z</lastmod>
  </sitemap>
  <sitemap>
   <loc>https://til.code-drill.eu/sitemap.xml</loc>
-  <lastmod>2025-06-22T14:05:00Z</lastmod>
+  <lastmod>2025-06-22T19:27:00Z</lastmod>
  </sitemap>
 </sitemapindex>

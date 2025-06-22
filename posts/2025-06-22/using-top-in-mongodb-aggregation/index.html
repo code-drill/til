@@ -2,32 +2,39 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<meta name="description" content="Things I've learned, collected in code-drill/til.">
 <meta name="viewport" content="width=device-width">
-<title>Today I Learned | Today I Learned</title>
-<link href="assets/css/all-nocdn.css" rel="stylesheet" type="text/css">
-<link rel="alternate" type="application/rss+xml" title="RSS" href="rss.xml">
-<link rel="canonical" href="https://til.code-drill.eu/">
-<!--[if lt IE 9]><script src="assets/js/html5.js"></script><![endif]-->
+<title>Using top in mongodb aggregation | Today I Learned</title>
+<link href="../../../assets/css/all-nocdn.css" rel="stylesheet" type="text/css">
+<link rel="alternate" type="application/rss+xml" title="RSS" href="../../../rss.xml">
+<link rel="canonical" href="https://til.code-drill.eu/posts/2025-06-22/using-top-in-mongodb-aggregation/">
+<!--[if lt IE 9]><script src="../../../assets/js/html5.js"></script><![endif]-->
 </head>
 <body class="home blog">
     <div id="wrap" style="width:850px">
         <div id="container" style="width:560px">
             
             
-        <div class="postbox">
-        <h1><a href="posts/2025-06-22/using-top-in-mongodb-aggregation/">Using top in mongodb aggregation</a></h1>
-            <div class="meta" style="background-color: rgb(234, 234, 234); ">
-                <span class="authordate">
-                    Posted: <time class="published" datetime="2025-06-22T20:59:15+02:00">2025-06-22 20:59</time></span>
-                <br><span class="tags">Tags: 
-                            <a class="tag" href="categories/aggregation/"><span>aggregation</span></a>
-                            <a class="tag" href="categories/db/"><span>db</span></a>
-                            <a class="tag" href="categories/mongodb/"><span>mongodb</span></a>
-                            <a class="tag" href="categories/top/"><span>top</span></a>
+    <div class="post">
+    
+    <h1 class="p-name entry-title" itemprop="headline name"><a href="." class="u-url">Using top in mongodb aggregation</a></h1>
+
+        <div class="meta" style="background-color: rgb(234, 234, 234); ">
+        <span class="authordate">
+            Posted: <time class="published" datetime="2025-06-22T20:59:15+02:00">2025-06-22 20:59</time>
+               [<a href="index.md" id="sourcelink">Source</a>]
+        </span>
+        <br><span class="tags">Tags: 
+                    <a class="tag" href="../../../categories/aggregation/"><span>aggregation</span></a>
+                    <a class="tag" href="../../../categories/db/"><span>db</span></a>
+                    <a class="tag" href="../../../categories/mongodb/"><span>mongodb</span></a>
+                    <a class="tag" href="../../../categories/top/"><span>top</span></a>
                 </span>
-            </div>
-        <p>As mongo docs says:</p>
+                <br><span class="authordate">
+            
+
+        </span>
+        </div>
+    <p>As mongo docs says:</p>
 <div class="code"><pre class="code literal-block"><span class="n">MongoDB</span><span class="w"> </span><span class="n">aggregation</span><span class="w"> </span><span class="n">stage</span><span class="w"> </span><span class="n">limits</span>
 <span class="n">Each</span><span class="w"> </span><span class="n">stage</span><span class="w"> </span><span class="n">can</span><span class="w"> </span><span class="n">use</span><span class="w"> </span><span class="n">up</span><span class="w"> </span><span class="n">to</span><span class="w"> </span><span class="mh">100</span><span class="w"> </span><span class="n">MB</span><span class="w"> </span><span class="n">of</span><span class="w"> </span><span class="n">RAM</span><span class="p">.</span><span class="w"> </span><span class="n">You</span><span class="w"> </span><span class="n">will</span><span class="w"> </span><span class="n">get</span><span class="w"> </span><span class="n">an</span><span class="w"> </span><span class="n">error</span><span class="w"> </span><span class="n">from</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="n">database</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="n">you</span><span class="w"> </span><span class="n">exceed</span><span class="w"> </span><span class="n">this</span><span class="w"> </span><span class="n">limit</span><span class="p">.</span><span class="w"> </span>
 </pre></div>
@@ -124,71 +131,13 @@
 <span class="w">    </span><span class="nl">allowDiskUse:</span><span class="w"> </span><span class="n">false</span>
 <span class="w">    </span><span class="p">})</span>
 </pre></div>
-            
     
-
-
-        </div>
-        <div class="postbox">
-        <h1><a href="posts/2025-06-22/gitignore-windows-cmd-util/">Gitignore windows cmd util</a></h1>
-            <div class="meta" style="background-color: rgb(234, 234, 234); ">
-                <span class="authordate">
-                    Posted: <time class="published" datetime="2025-06-22T13:47:35+02:00">2025-06-22 13:47</time></span>
-                <br><span class="tags">Tags: 
-                            <a class="tag" href="categories/bash/"><span>bash</span></a>
-                            <a class="tag" href="categories/cmd/"><span>cmd</span></a>
-                            <a class="tag" href="categories/command-line/"><span>command-line</span></a>
-                            <a class="tag" href="categories/git/"><span>git</span></a>
-                            <a class="tag" href="categories/gitignore/"><span>gitignore</span></a>
-                            <a class="tag" href="categories/linux/"><span>linux</span></a>
-                            <a class="tag" href="categories/windows/"><span>windows</span></a>
-                            <a class="tag" href="categories/zsh/"><span>zsh</span></a>
-                </span>
-            </div>
-        <p>Simple utility that lets you generate .gitignore using cmd/shell.
-You must have curl in your path.</p>
-<ul>
-<li>windows/cmd: <code>gitignore.cmd</code>
-</li>
-</ul>
-<div class="code"><pre class="code literal-block"><span class="nv">@echo</span><span class="w"> </span><span class="k">off</span>
-<span class="n">curl</span><span class="w"> </span><span class="o">-</span><span class="n">sL</span><span class="w"> </span><span class="nl">https</span><span class="p">:</span><span class="o">//</span><span class="n">www</span><span class="p">.</span><span class="n">toptal</span><span class="p">.</span><span class="n">com</span><span class="o">/</span><span class="n">developers</span><span class="o">/</span><span class="n">gitignore</span><span class="o">/</span><span class="n">api</span><span class="o">/%*</span>
-</pre></div>
-
-<ul>
-<li>linux - add function into your aliases file or .*rc</li>
-<li>
-<p>function for alias
-    <code>shell
-    function gitignore() { curl -sL https://www.toptal.com/developers/gitignore/api/\$@ ;}</code></p>
-</li>
-<li>
-<p>zsh - code to run to add function to <code>.zshrc</code>
-    <code>shell
-    echo "function gitignore() { curl -sL https://www.toptal.com/developers/gitignore/api/\$@ ;}" &gt;&gt; ~/.zshrc</code></p>
-</li>
-<li>
-<p>bash - code to run to add function to  <code>.bash</code>
-    <code>shell
-    echo "function gitignore() { curl -sL https://www.toptal.com/developers/gitignore/api/\$@ ;}" &gt;&gt; ~/.bashrc</code></p>
-</li>
-</ul>
-<p>and than you can type:</p>
-<div class="code"><pre class="code literal-block">gitignore<span class="w"> </span>python,pycharm,django
-</pre></div>
-            
-    
-
-
-        </div>
-    
-
-    
-    
-
-
-    
-
+        <ul class="pager hidden-print">
+<li class="previous">
+                <a href="../gitignore-windows-cmd-util/" rel="prev" title="Gitignore windows cmd util">Previous post</a>
+            </li>
+        </ul>
+</div>
 
         </div>
         <div id="sidebar">
@@ -202,13 +151,13 @@ You must have curl in your path.</p>
 <li>
             
                 <li>
-<a href="archive.html">Archive</a>
+<a href="../../../archive.html">Archive</a>
                 </li>
 <li>
-<a href="categories/">Tags</a>
+<a href="../../../categories/">Tags</a>
                 </li>
 <li>
-<a href="rss.xml">RSS feed</a>
+<a href="../../../rss.xml">RSS feed</a>
 
             </li>
 <li>
@@ -222,7 +171,7 @@ You must have curl in your path.</p>
         </div>
     </div>
     
-            <script src="assets/js/all-nocdn.js"></script><script>
+            <script src="../../../assets/js/all-nocdn.js"></script><script>
     baguetteBox.run('div#content', {
         ignoreClass: 'islink',
         captions: function(element) {
