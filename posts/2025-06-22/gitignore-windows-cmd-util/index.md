@@ -21,19 +21,19 @@ curl -sL https://www.toptal.com/developers/gitignore/api/%*
 
 - linux - add function into your aliases file or .*rc
   * function for alias
-    ```shell
-    function gitignore() { curl -sL https://www.toptal.com/developers/gitignore/api/\$@ ;}
-    ```
+```shell
+function gitignore() { curl -sL https://www.toptal.com/developers/gitignore/api/\$@ ;}
+```
 
   * zsh - code to run to add function to `.zshrc`
-    ```shell
-    echo "function gitignore() { curl -sL https://www.toptal.com/developers/gitignore/api/\$@ ;}" >> ~/.zshrc
-    ```
+```shell
+echo "function gitignore() { curl -sL https://www.toptal.com/developers/gitignore/api/\$@ ;}" >> ~/.zshrc
+```
 
   * bash - code to run to add function to  `.bash`
-    ```shell
-    echo "function gitignore() { curl -sL https://www.toptal.com/developers/gitignore/api/\$@ ;}" >> ~/.bashrc
-    ```
+```shell
+echo "function gitignore() { curl -sL https://www.toptal.com/developers/gitignore/api/\$@ ;}" >> ~/.bashrc
+```
 
 and than you can type:
 
