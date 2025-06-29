@@ -16,6 +16,80 @@
             
             
         <div class="postbox">
+        <h1><a href="posts/2025-06-29/simple-domain-redirect-on-aws/">Simple Domain Redirect On AWS</a></h1>
+            <div class="meta" style="background-color: rgb(234, 234, 234); ">
+                <span class="authordate">
+                    Posted: <time class="published" datetime="2025-06-29T21:58:07+02:00">2025-06-29 21:58</time></span>
+                <br><span class="tags">Tags: 
+                            <a class="tag" href="categories/aws/"><span>aws</span></a>
+                            <a class="tag" href="categories/route-53/"><span>route 53</span></a>
+                            <a class="tag" href="categories/s3/"><span>s3</span></a>
+                </span>
+            </div>
+        <p>Assuming you have some domain configured on AWS using Route 53: <a href="https://example.eu">example.eu</a><br>
+And now you want to redirect all traffic from <a href="https://example.eu">example.eu</a> to <a href="https://blog.example.eu">blog.example.eu</a></p>
+<h4>Step 1: Create S3 Bucket</h4>
+<ol>
+<li>S3 Console -&gt; Create bucket</li>
+<li>Bucket name: <code>example.eu</code> (must match your domain exactly)</li>
+<li>Keep all default settings -&gt; Create bucket</li>
+</ol>
+<h4>Step 2: Configure S3 for Redirect</h4>
+<ol>
+<li>Select your bucket -&gt; Properties tab</li>
+<li>Static website hosting -&gt; Edit</li>
+<li>Enable static website hosting</li>
+<li>Hosting type: Redirect requests for an object</li>
+<li>Host name: <code>blog.example.eu</code>
+</li>
+<li>Protocol: <code>https</code>
+</li>
+<li>Save changes</li>
+</ol>
+<p>Copy the S3 website endpoint (e.g., <code>http://example.eu.s3-website-us-east-1.amazonaws.com</code>)</p>
+<h4>Step 3: Request SSL Certificate</h4>
+<p>Important: Must be done in us-east-1 region</p>
+<ol>
+<li>Certificate Manager -&gt; Request certificate</li>
+<li>Domain name: <code>example.eu</code>
+</li>
+<li>Validation: DNS validation</li>
+<li>Request certificate</li>
+<li>Create records in Route 53 (button will appear)</li>
+<li>Wait for "Issued" status (5-10 minutes)</li>
+</ol>
+<h4>Step 4: Create CloudFront Distribution</h4>
+<ol>
+<li>CloudFront Console -&gt; Create distribution</li>
+<li>Origin domain: Paste your S3 website endpoint from Step 2 (e.g., <code>http://example.eu.s3-website-us-east-1.amazonaws.com</code>)</li>
+<li>Protocol: HTTP only</li>
+<li>Viewer protocol policy: Redirect HTTP to HTTPS</li>
+<li>Alternate domain names: <code>example.eu</code>
+</li>
+<li>SSL certificate: Select your certificate from Step 3</li>
+<li>Create distribution</li>
+</ol>
+<p>Wait 15-20 minutes for deployment</p>
+<h4>Step 5: Update Route 53</h4>
+<ol>
+<li>Route 53 -&gt; Hosted zones -&gt; example.eu</li>
+<li>Create record</li>
+<li>Record name: Leave empty</li>
+<li>Record type: A</li>
+<li>Alias: Yes</li>
+<li>Route traffic to: CloudFront distribution</li>
+<li>Select your distribution</li>
+<li>Create records</li>
+</ol>
+<p>Wait 5~20 minutes, then test:<br>
+- Opening <code>http://example.eu</code> -&gt; should redirect to <code>https://blog.example.eu</code><br>
+- Opening <code>https://example.eu</code> -&gt; should redirect to <code>https://blog.example.eu</code></p>
+            
+    
+
+
+        </div>
+        <div class="postbox">
         <h1><a href="posts/2025-06-22/using-top-in-mongodb-aggregation/">Using top in mongodb aggregation</a></h1>
             <div class="meta" style="background-color: rgb(234, 234, 234); ">
                 <span class="authordate">
