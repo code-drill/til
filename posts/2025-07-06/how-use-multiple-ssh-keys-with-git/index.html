@@ -48,7 +48,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 
         </span>
         </div>
-    <h3>Step 1: Create Additional SSH Key</h3>
+    <h4>Step 1: Create Additional SSH Key</h4>
 <p>Put an additional key in the SSH config directory, e.g.:</p>
 <p><strong>Windows:</strong></p>
 <div class="code"><pre class="code literal-block"><span class="c">%USERPROFILE%/.ssh/some-name/id_ed25519</span>
@@ -58,7 +58,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <div class="code"><pre class="code literal-block">~/.ssh/some-name/id_ed25519
 </pre></div>
 
-<h3>Step 2: Configure SSH Config</h3>
+<h4>Step 2: Configure SSH Config</h4>
 <p>Now you need to edit (or create) SSH config under:</p>
 <p><strong>Windows:</strong></p>
 <div class="code"><pre class="code literal-block"><span class="c">%USERPROFILE%/.ssh/config</span>
@@ -76,12 +76,12 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     IdentitiesOnly yes
 </pre></div>
 
-<h3>Caution</h3>
+<h4>Caution</h4>
 <p><code>IdentityFile</code> - must be full path to SSH key </p>
-<h3>Notice</h3>
+<h4>Notice</h4>
 <p><code>IdentitiesOnly yes</code> is a crucial SSH configuration option that tells SSH to only use the specific key file you've specified and ignore all other keys.</p>
-<h4>Without <code>IdentitiesOnly yes</code>
-</h4>
+<h5>Without <code>IdentitiesOnly yes</code>
+</h5>
 <p>SSH tries multiple keys in this order</p>
 <ol>
 <li>Keys loaded in SSH agent </li>
@@ -89,14 +89,14 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <li>Your specified key file</li>
 </ol>
 <p>GitHub sees the first key that works and authenticates with that account</p>
-<h4>With <code>IdentitiesOnly yes</code>
-</h4>
+<h5>With <code>IdentitiesOnly yes</code>
+</h5>
 <ul>
 <li>SSH only uses the exact key file you specified</li>
 <li>It ignores SSH agent keys and default keys</li>
 <li>GitHub only sees your intended key</li>
 </ul>
-<h3>Step 3: Configure Repository</h3>
+<h4>Step 3: Configure Repository</h4>
 <p>Go to repo that should use new key.</p>
 <p>Optionally set new username and email for given repo:</p>
 <div class="code"><pre class="code literal-block">git<span class="w"> </span>config<span class="w"> </span>user.name<span class="w"> </span><span class="s2">"username"</span>
@@ -110,7 +110,7 @@ git<span class="w"> </span>config<span class="w"> </span>user.email<span class="
 <p>Where:
 - <code>github-some-new-label</code> - is the same as label after <code>Host</code> in <code>.ssh/config</code> -&gt; <code>Host github-some-new-label</code>
 - <code>username</code> is GitHub username of appropriate user set for repo.</p>
-<h3>Step 4: Test Configuration</h3>
+<h4>Step 4: Test Configuration</h4>
 <p>Test the SSH connection:</p>
 <div class="code"><pre class="code literal-block">ssh<span class="w"> </span>-T<span class="w"> </span>git@github-some-new-label
 </pre></div>
@@ -119,7 +119,7 @@ git<span class="w"> </span>config<span class="w"> </span>user.email<span class="
 <div class="code"><pre class="code literal-block">Hi username! You've successfully authenticated, but GitHub does not provide shell access.
 </pre></div>
 
-<h3>Step 5: Push Changes</h3>
+<h4>Step 5: Push Changes</h4>
 <p>Now you can push using the correct SSH key:</p>
 <div class="code"><pre class="code literal-block">git<span class="w"> </span>push<span class="w"> </span>origin<span class="w"> </span>main
 </pre></div>
@@ -127,6 +127,9 @@ git<span class="w"> </span>config<span class="w"> </span>user.email<span class="
         <ul class="pager hidden-print">
 <li class="previous">
                 <a href="../../2025-06-29/simple-domain-redirect-on-aws/" rel="prev" title="Simple Domain Redirect On AWS">Previous post</a>
+            </li>
+            <li class="next">
+                <a href="../how-to-detect-aws-ecs-deployment-failure/" rel="next" title="how to detect aws ecs deployment failure">Next post</a>
             </li>
         </ul>
 </div>

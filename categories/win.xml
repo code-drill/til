@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<?xml-stylesheet type="text/xsl" href="../assets/xml/rss.xsl" media="all"?><rss version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Today I Learned (Posts about win)</title><link>https://til.code-drill.eu/</link><description></description><atom:link href="https://til.code-drill.eu/categories/win.xml" rel="self" type="application/rss+xml"></atom:link><language>en</language><copyright>Contents © 2025 &lt;a href="mailto:michal@code-drill.eu"&gt;Michał Rutkowski&lt;/a&gt; </copyright><lastBuildDate>Sun, 06 Jul 2025 20:07:26 GMT</lastBuildDate><generator>Nikola (getnikola.com)</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>how use multiple ssh keys with github</title><link>https://til.code-drill.eu/posts/2025-07-06/how-use-multiple-ssh-keys-with-git/</link><dc:creator>Michał Rutkowski</dc:creator><description>&lt;h3&gt;Step 1: Create Additional SSH Key&lt;/h3&gt;
+<?xml-stylesheet type="text/xsl" href="../assets/xml/rss.xsl" media="all"?><rss version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Today I Learned (Posts about win)</title><link>https://til.code-drill.eu/</link><description></description><atom:link href="https://til.code-drill.eu/categories/win.xml" rel="self" type="application/rss+xml"></atom:link><language>en</language><copyright>Contents © 2025 &lt;a href="mailto:michal@code-drill.eu"&gt;Michał Rutkowski&lt;/a&gt; </copyright><lastBuildDate>Sun, 06 Jul 2025 20:43:48 GMT</lastBuildDate><generator>Nikola (getnikola.com)</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>how use multiple ssh keys with github</title><link>https://til.code-drill.eu/posts/2025-07-06/how-use-multiple-ssh-keys-with-git/</link><dc:creator>Michał Rutkowski</dc:creator><description>&lt;h4&gt;Step 1: Create Additional SSH Key&lt;/h4&gt;
 &lt;p&gt;Put an additional key in the SSH config directory, e.g.:&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;Windows:&lt;/strong&gt;&lt;/p&gt;
 &lt;div class="code"&gt;&lt;pre class="code literal-block"&gt;&lt;span class="c"&gt;%USERPROFILE%/.ssh/some-name/id_ed25519&lt;/span&gt;
@@ -9,7 +9,7 @@
 &lt;div class="code"&gt;&lt;pre class="code literal-block"&gt;~/.ssh/some-name/id_ed25519
 &lt;/pre&gt;&lt;/div&gt;
 
-&lt;h3&gt;Step 2: Configure SSH Config&lt;/h3&gt;
+&lt;h4&gt;Step 2: Configure SSH Config&lt;/h4&gt;
 &lt;p&gt;Now you need to edit (or create) SSH config under:&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;Windows:&lt;/strong&gt;&lt;/p&gt;
 &lt;div class="code"&gt;&lt;pre class="code literal-block"&gt;&lt;span class="c"&gt;%USERPROFILE%/.ssh/config&lt;/span&gt;
@@ -27,11 +27,11 @@
     IdentitiesOnly yes
 &lt;/pre&gt;&lt;/div&gt;
 
-&lt;h3&gt;Caution&lt;/h3&gt;
+&lt;h4&gt;Caution&lt;/h4&gt;
 &lt;p&gt;&lt;code&gt;IdentityFile&lt;/code&gt; - must be full path to SSH key &lt;/p&gt;
-&lt;h3&gt;Notice&lt;/h3&gt;
+&lt;h4&gt;Notice&lt;/h4&gt;
 &lt;p&gt;&lt;code&gt;IdentitiesOnly yes&lt;/code&gt; is a crucial SSH configuration option that tells SSH to only use the specific key file you've specified and ignore all other keys.&lt;/p&gt;
-&lt;h4&gt;Without &lt;code&gt;IdentitiesOnly yes&lt;/code&gt;&lt;/h4&gt;
+&lt;h5&gt;Without &lt;code&gt;IdentitiesOnly yes&lt;/code&gt;&lt;/h5&gt;
 &lt;p&gt;SSH tries multiple keys in this order&lt;/p&gt;
 &lt;ol&gt;
 &lt;li&gt;Keys loaded in SSH agent &lt;/li&gt;
@@ -39,13 +39,13 @@
 &lt;li&gt;Your specified key file&lt;/li&gt;
 &lt;/ol&gt;
 &lt;p&gt;GitHub sees the first key that works and authenticates with that account&lt;/p&gt;
-&lt;h4&gt;With &lt;code&gt;IdentitiesOnly yes&lt;/code&gt;&lt;/h4&gt;
+&lt;h5&gt;With &lt;code&gt;IdentitiesOnly yes&lt;/code&gt;&lt;/h5&gt;
 &lt;ul&gt;
 &lt;li&gt;SSH only uses the exact key file you specified&lt;/li&gt;
 &lt;li&gt;It ignores SSH agent keys and default keys&lt;/li&gt;
 &lt;li&gt;GitHub only sees your intended key&lt;/li&gt;
 &lt;/ul&gt;
-&lt;h3&gt;Step 3: Configure Repository&lt;/h3&gt;
+&lt;h4&gt;Step 3: Configure Repository&lt;/h4&gt;
 &lt;p&gt;Go to repo that should use new key.&lt;/p&gt;
 &lt;p&gt;Optionally set new username and email for given repo:&lt;/p&gt;
 &lt;div class="code"&gt;&lt;pre class="code literal-block"&gt;git&lt;span class="w"&gt; &lt;/span&gt;config&lt;span class="w"&gt; &lt;/span&gt;user.name&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="s2"&gt;"username"&lt;/span&gt;
@@ -59,7 +59,7 @@ git&lt;span class="w"&gt; &lt;/span&gt;config&lt;span class="w"&gt; &lt;/span&gt
 &lt;p&gt;Where:
 - &lt;code&gt;github-some-new-label&lt;/code&gt; - is the same as label after &lt;code&gt;Host&lt;/code&gt; in &lt;code&gt;.ssh/config&lt;/code&gt; -&amp;gt; &lt;code&gt;Host github-some-new-label&lt;/code&gt;
 - &lt;code&gt;username&lt;/code&gt; is GitHub username of appropriate user set for repo.&lt;/p&gt;
-&lt;h3&gt;Step 4: Test Configuration&lt;/h3&gt;
+&lt;h4&gt;Step 4: Test Configuration&lt;/h4&gt;
 &lt;p&gt;Test the SSH connection:&lt;/p&gt;
 &lt;div class="code"&gt;&lt;pre class="code literal-block"&gt;ssh&lt;span class="w"&gt; &lt;/span&gt;-T&lt;span class="w"&gt; &lt;/span&gt;git@github-some-new-label
 &lt;/pre&gt;&lt;/div&gt;
@@ -68,7 +68,7 @@ git&lt;span class="w"&gt; &lt;/span&gt;config&lt;span class="w"&gt; &lt;/span&gt
 &lt;div class="code"&gt;&lt;pre class="code literal-block"&gt;Hi username! You've successfully authenticated, but GitHub does not provide shell access.
 &lt;/pre&gt;&lt;/div&gt;
 
-&lt;h3&gt;Step 5: Push Changes&lt;/h3&gt;
+&lt;h4&gt;Step 5: Push Changes&lt;/h4&gt;
 &lt;p&gt;Now you can push using the correct SSH key:&lt;/p&gt;
 &lt;div class="code"&gt;&lt;pre class="code literal-block"&gt;git&lt;span class="w"&gt; &lt;/span&gt;push&lt;span class="w"&gt; &lt;/span&gt;origin&lt;span class="w"&gt; &lt;/span&gt;main
 &lt;/pre&gt;&lt;/div&gt;</description><category>git</category><category>github</category><category>ssh</category><category>win</category><category>windows</category><guid>https://til.code-drill.eu/posts/2025-07-06/how-use-multiple-ssh-keys-with-git/</guid><pubDate>Sun, 06 Jul 2025 15:15:20 GMT</pubDate></item></channel></rss>

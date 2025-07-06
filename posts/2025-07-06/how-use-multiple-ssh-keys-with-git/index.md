@@ -10,7 +10,7 @@
 -->
 Assuming that you have already configured one key to access GitHub using SSH.
 
-## Step 1: Create Additional SSH Key
+### Step 1: Create Additional SSH Key
 
 Put an additional key in the SSH config directory, e.g.:
 
@@ -24,7 +24,7 @@ Put an additional key in the SSH config directory, e.g.:
 ~/.ssh/some-name/id_ed25519
 ```
 
-## Step 2: Configure SSH Config
+### Step 2: Configure SSH Config
 
 Now you need to edit (or create) SSH config under:
 
@@ -47,14 +47,14 @@ Host github-some-new-label
     IdentitiesOnly yes
 ```
 
-## Caution
+### Caution
 `IdentityFile` - must be full path to SSH key 
 
-## Notice
+### Notice
 
 `IdentitiesOnly yes` is a crucial SSH configuration option that tells SSH to only use the specific key file you've specified and ignore all other keys.
 
-### Without `IdentitiesOnly yes`
+#### Without `IdentitiesOnly yes`
 SSH tries multiple keys in this order
 
 1. Keys loaded in SSH agent 
@@ -63,12 +63,12 @@ SSH tries multiple keys in this order
 
 GitHub sees the first key that works and authenticates with that account
 
-### With `IdentitiesOnly yes`
+#### With `IdentitiesOnly yes`
 - SSH only uses the exact key file you specified
 - It ignores SSH agent keys and default keys
 - GitHub only sees your intended key
 
-## Step 3: Configure Repository
+### Step 3: Configure Repository
 
 Go to repo that should use new key.
 
@@ -88,7 +88,7 @@ Where:
 - `github-some-new-label` - is the same as label after `Host` in `.ssh/config` -> `Host github-some-new-label`
 - `username` is GitHub username of appropriate user set for repo.
 
-## Step 4: Test Configuration
+### Step 4: Test Configuration
 
 Test the SSH connection:
 ```shell
@@ -100,7 +100,7 @@ You should see:
 Hi username! You've successfully authenticated, but GitHub does not provide shell access.
 ```
 
-## Step 5: Push Changes
+### Step 5: Push Changes
 
 Now you can push using the correct SSH key:
 ```shell

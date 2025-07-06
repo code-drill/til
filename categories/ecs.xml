@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<?xml-stylesheet type="text/xsl" href="../assets/xml/rss.xsl" media="all"?><rss version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Today I Learned (Posts about aws)</title><link>https://til.code-drill.eu/</link><description></description><atom:link href="https://til.code-drill.eu/categories/aws.xml" rel="self" type="application/rss+xml"></atom:link><language>en</language><copyright>Contents © 2025 &lt;a href="mailto:michal@code-drill.eu"&gt;Michał Rutkowski&lt;/a&gt; </copyright><lastBuildDate>Sun, 06 Jul 2025 20:42:29 GMT</lastBuildDate><generator>Nikola (getnikola.com)</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>how to detect aws ecs deployment failure</title><link>https://til.code-drill.eu/posts/2025-07-06/how-to-detect-aws-ecs-deployment-failure/</link><dc:creator>Michał Rutkowski</dc:creator><description>&lt;p&gt;Recently we had an interesting issue.&lt;br&gt;
+<?xml-stylesheet type="text/xsl" href="../assets/xml/rss.xsl" media="all"?><rss version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Today I Learned (Posts about ecs)</title><link>https://til.code-drill.eu/</link><description></description><atom:link href="https://til.code-drill.eu/categories/ecs.xml" rel="self" type="application/rss+xml"></atom:link><language>en</language><copyright>Contents © 2025 &lt;a href="mailto:michal@code-drill.eu"&gt;Michał Rutkowski&lt;/a&gt; </copyright><lastBuildDate>Sun, 06 Jul 2025 20:42:29 GMT</lastBuildDate><generator>Nikola (getnikola.com)</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>how to detect aws ecs deployment failure</title><link>https://til.code-drill.eu/posts/2025-07-06/how-to-detect-aws-ecs-deployment-failure/</link><dc:creator>Michał Rutkowski</dc:creator><description>&lt;p&gt;Recently we had an interesting issue.&lt;br&gt;
 Due to an incorrect cloud config entry, one of our services fell into an endless loop of failed deployments.  &lt;/p&gt;
 &lt;p&gt;So we had to add some kind of alerts to detect this in the future.&lt;/p&gt;
 &lt;p&gt;We are deploying our services on AWS ECS.&lt;br&gt;
@@ -44,57 +44,4 @@ the natural way was to expose new metrics and add a Prometheus alert based on it
 &lt;span class="c1"&gt;# [...]&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
-&lt;p&gt;Now if there are some problems with failed deployments, we are seeing notifications in our slack.&lt;/p&gt;</description><category>aws</category><category>cloudwatch</category><category>ecs</category><category>prometheus</category><guid>https://til.code-drill.eu/posts/2025-07-06/how-to-detect-aws-ecs-deployment-failure/</guid><pubDate>Sun, 06 Jul 2025 20:21:46 GMT</pubDate></item><item><title>Simple Domain Redirect On AWS</title><link>https://til.code-drill.eu/posts/2025-06-29/simple-domain-redirect-on-aws/</link><dc:creator>Michał Rutkowski</dc:creator><description>&lt;p&gt;Assuming you have some domain configured on AWS using Route 53: &lt;a href="https://example.eu"&gt;example.eu&lt;/a&gt;&lt;br&gt;
-And now you want to redirect all traffic from &lt;a href="https://example.eu"&gt;example.eu&lt;/a&gt; to &lt;a href="https://blog.example.eu"&gt;blog.example.eu&lt;/a&gt;&lt;/p&gt;
-&lt;h4&gt;Step 1: Create S3 Bucket&lt;/h4&gt;
-&lt;ol&gt;
-&lt;li&gt;S3 Console -&amp;gt; Create bucket&lt;/li&gt;
-&lt;li&gt;Bucket name: &lt;code&gt;example.eu&lt;/code&gt; (must match your domain exactly)&lt;/li&gt;
-&lt;li&gt;Keep all default settings -&amp;gt; Create bucket&lt;/li&gt;
-&lt;/ol&gt;
-&lt;h4&gt;Step 2: Configure S3 for Redirect&lt;/h4&gt;
-&lt;ol&gt;
-&lt;li&gt;Select your bucket -&amp;gt; Properties tab&lt;/li&gt;
-&lt;li&gt;Static website hosting -&amp;gt; Edit&lt;/li&gt;
-&lt;li&gt;Enable static website hosting&lt;/li&gt;
-&lt;li&gt;Hosting type: Redirect requests for an object&lt;/li&gt;
-&lt;li&gt;Host name: &lt;code&gt;blog.example.eu&lt;/code&gt;&lt;/li&gt;
-&lt;li&gt;Protocol: &lt;code&gt;https&lt;/code&gt;&lt;/li&gt;
-&lt;li&gt;Save changes&lt;/li&gt;
-&lt;/ol&gt;
-&lt;p&gt;Copy the S3 website endpoint (e.g., &lt;code&gt;http://example.eu.s3-website-us-east-1.amazonaws.com&lt;/code&gt;)&lt;/p&gt;
-&lt;h4&gt;Step 3: Request SSL Certificate&lt;/h4&gt;
-&lt;p&gt;Important: Must be done in us-east-1 region&lt;/p&gt;
-&lt;ol&gt;
-&lt;li&gt;Certificate Manager -&amp;gt; Request certificate&lt;/li&gt;
-&lt;li&gt;Domain name: &lt;code&gt;example.eu&lt;/code&gt;&lt;/li&gt;
-&lt;li&gt;Validation: DNS validation&lt;/li&gt;
-&lt;li&gt;Request certificate&lt;/li&gt;
-&lt;li&gt;Create records in Route 53 (button will appear)&lt;/li&gt;
-&lt;li&gt;Wait for "Issued" status (5-10 minutes)&lt;/li&gt;
-&lt;/ol&gt;
-&lt;h4&gt;Step 4: Create CloudFront Distribution&lt;/h4&gt;
-&lt;ol&gt;
-&lt;li&gt;CloudFront Console -&amp;gt; Create distribution&lt;/li&gt;
-&lt;li&gt;Origin domain: Paste your S3 website endpoint from Step 2 (e.g., &lt;code&gt;http://example.eu.s3-website-us-east-1.amazonaws.com&lt;/code&gt;)&lt;/li&gt;
-&lt;li&gt;Protocol: HTTP only&lt;/li&gt;
-&lt;li&gt;Viewer protocol policy: Redirect HTTP to HTTPS&lt;/li&gt;
-&lt;li&gt;Alternate domain names: &lt;code&gt;example.eu&lt;/code&gt;&lt;/li&gt;
-&lt;li&gt;SSL certificate: Select your certificate from Step 3&lt;/li&gt;
-&lt;li&gt;Create distribution&lt;/li&gt;
-&lt;/ol&gt;
-&lt;p&gt;Wait 15-20 minutes for deployment&lt;/p&gt;
-&lt;h4&gt;Step 5: Update Route 53&lt;/h4&gt;
-&lt;ol&gt;
-&lt;li&gt;Route 53 -&amp;gt; Hosted zones -&amp;gt; example.eu&lt;/li&gt;
-&lt;li&gt;Create record&lt;/li&gt;
-&lt;li&gt;Record name: Leave empty&lt;/li&gt;
-&lt;li&gt;Record type: A&lt;/li&gt;
-&lt;li&gt;Alias: Yes&lt;/li&gt;
-&lt;li&gt;Route traffic to: CloudFront distribution&lt;/li&gt;
-&lt;li&gt;Select your distribution&lt;/li&gt;
-&lt;li&gt;Create records&lt;/li&gt;
-&lt;/ol&gt;
-&lt;p&gt;Wait 5~20 minutes, then test:&lt;br&gt;
-- Opening &lt;code&gt;http://example.eu&lt;/code&gt; -&amp;gt; should redirect to &lt;code&gt;https://blog.example.eu&lt;/code&gt;&lt;br&gt;
-- Opening &lt;code&gt;https://example.eu&lt;/code&gt; -&amp;gt; should redirect to &lt;code&gt;https://blog.example.eu&lt;/code&gt;&lt;/p&gt;</description><category>aws</category><category>route 53</category><category>s3</category><guid>https://til.code-drill.eu/posts/2025-06-29/simple-domain-redirect-on-aws/</guid><pubDate>Sun, 29 Jun 2025 19:58:07 GMT</pubDate></item></channel></rss>
+&lt;p&gt;Now if there are some problems with failed deployments, we are seeing notifications in our slack.&lt;/p&gt;</description><category>aws</category><category>cloudwatch</category><category>ecs</category><category>prometheus</category><guid>https://til.code-drill.eu/posts/2025-07-06/how-to-detect-aws-ecs-deployment-failure/</guid><pubDate>Sun, 06 Jul 2025 20:21:46 GMT</pubDate></item></channel></rss>
