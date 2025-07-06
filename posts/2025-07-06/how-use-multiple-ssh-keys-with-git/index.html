@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width">
+<title>how use multiple ssh keys with github | Today I Learned</title>
+<link href="../../../assets/css/all-nocdn.css" rel="stylesheet" type="text/css">
+<link rel="alternate" type="application/rss+xml" title="RSS" href="../../../rss.xml">
+<link rel="canonical" href="https://til.code-drill.eu/posts/2025-07-06/how-use-multiple-ssh-keys-with-git/">
+<!--[if lt IE 9]><script src="../../../assets/js/html5.js"></script><![endif]--><!-- Google Tag Manager --><script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-M6V4K637');</script><!-- End Google Tag Manager -->
+</head>
+<body class="home blog">
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-QZV88X5FN5"></script><script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-QZV88X5FN5');
+    </script><!-- Google Tag Manager (noscript) --><noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-M6V4K637" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    <!-- End Google Tag Manager (noscript) -->
+    <div id="wrap" style="width:850px">
+        <div id="container" style="width:560px">
+            
+            
+    <div class="post">
+    
+    <h1 class="p-name entry-title" itemprop="headline name"><a href="." class="u-url">how use multiple ssh keys with github</a></h1>
+
+        <div class="meta" style="background-color: rgb(234, 234, 234); ">
+        <span class="authordate">
+            Posted: <time class="published" datetime="2025-07-06T17:15:20+02:00">2025-07-06 17:15</time>
+               [<a href="index.md" id="sourcelink">Source</a>]
+        </span>
+        <br><span class="tags">Tags: 
+                    <a class="tag" href="../../../categories/git/"><span>git</span></a>
+                    <a class="tag" href="../../../categories/github/"><span>github</span></a>
+                    <a class="tag" href="../../../categories/ssh/"><span>ssh</span></a>
+                    <a class="tag" href="../../../categories/win/"><span>win</span></a>
+                    <a class="tag" href="../../../categories/windows/"><span>windows</span></a>
+                </span>
+                <br><span class="authordate">
+            
+
+        </span>
+        </div>
+    <h3>Step 1: Create Additional SSH Key</h3>
+<p>Put an additional key in the SSH config directory, e.g.:</p>
+<p><strong>Windows:</strong></p>
+<div class="code"><pre class="code literal-block"><span class="c">%USERPROFILE%/.ssh/some-name/id_ed25519</span>
+</pre></div>
+
+<p><strong>Linux/macOS:</strong></p>
+<div class="code"><pre class="code literal-block">~/.ssh/some-name/id_ed25519
+</pre></div>
+
+<h3>Step 2: Configure SSH Config</h3>
+<p>Now you need to edit (or create) SSH config under:</p>
+<p><strong>Windows:</strong></p>
+<div class="code"><pre class="code literal-block"><span class="c">%USERPROFILE%/.ssh/config</span>
+</pre></div>
+
+<p><strong>Linux/macOS:</strong></p>
+<div class="code"><pre class="code literal-block">~/.ssh/config
+</pre></div>
+
+<p>Add additional config:</p>
+<div class="code"><pre class="code literal-block">Host github-some-new-label
+    HostName github.com
+    User git
+    IdentityFile c:\Users\USERNAME\.ssh\some-name\id_ed25519
+    IdentitiesOnly yes
+</pre></div>
+
+<h3>Caution</h3>
+<p><code>IdentityFile</code> - must be full path to SSH key </p>
+<h3>Notice</h3>
+<p><code>IdentitiesOnly yes</code> is a crucial SSH configuration option that tells SSH to only use the specific key file you've specified and ignore all other keys.</p>
+<h4>Without <code>IdentitiesOnly yes</code>
+</h4>
+<p>SSH tries multiple keys in this order</p>
+<ol>
+<li>Keys loaded in SSH agent </li>
+<li>Default keys (<code>~/.ssh/id_rsa</code>, <code>~/.ssh/id_ed25519</code>, etc)</li>
+<li>Your specified key file</li>
+</ol>
+<p>GitHub sees the first key that works and authenticates with that account</p>
+<h4>With <code>IdentitiesOnly yes</code>
+</h4>
+<ul>
+<li>SSH only uses the exact key file you specified</li>
+<li>It ignores SSH agent keys and default keys</li>
+<li>GitHub only sees your intended key</li>
+</ul>
+<h3>Step 3: Configure Repository</h3>
+<p>Go to repo that should use new key.</p>
+<p>Optionally set new username and email for given repo:</p>
+<div class="code"><pre class="code literal-block">git<span class="w"> </span>config<span class="w"> </span>user.name<span class="w"> </span><span class="s2">"username"</span>
+git<span class="w"> </span>config<span class="w"> </span>user.email<span class="w"> </span><span class="s2">"your.email@example.com"</span>
+</pre></div>
+
+<p>Update remote to use new GitHub config:</p>
+<div class="code"><pre class="code literal-block">git<span class="w"> </span>remote<span class="w"> </span>set-url<span class="w"> </span>origin<span class="w"> </span>git@github-some-new-label:username/project1.git
+</pre></div>
+
+<p>Where:
+- <code>github-some-new-label</code> - is the same as label after <code>Host</code> in <code>.ssh/config</code> -&gt; <code>Host github-some-new-label</code>
+- <code>username</code> is GitHub username of appropriate user set for repo.</p>
+<h3>Step 4: Test Configuration</h3>
+<p>Test the SSH connection:</p>
+<div class="code"><pre class="code literal-block">ssh<span class="w"> </span>-T<span class="w"> </span>git@github-some-new-label
+</pre></div>
+
+<p>You should see:</p>
+<div class="code"><pre class="code literal-block">Hi username! You've successfully authenticated, but GitHub does not provide shell access.
+</pre></div>
+
+<h3>Step 5: Push Changes</h3>
+<p>Now you can push using the correct SSH key:</p>
+<div class="code"><pre class="code literal-block">git<span class="w"> </span>push<span class="w"> </span>origin<span class="w"> </span>main
+</pre></div>
+    
+        <ul class="pager hidden-print">
+<li class="previous">
+                <a href="../../2025-06-29/simple-domain-redirect-on-aws/" rel="prev" title="Simple Domain Redirect On AWS">Previous post</a>
+            </li>
+        </ul>
+</div>
+
+        </div>
+        <div id="sidebar">
+            <!--Sidebar content-->
+            <h1 id="blog-title">
+                <a href="https://til.code-drill.eu/" title="Today I Learned">Today I Learned</a>
+            </h1>
+            
+            
+            <ul class="unstyled">
+<li>
+            
+                <li>
+<a href="../../../archive.html">Archive</a>
+                </li>
+<li>
+<a href="../../../categories/">Tags</a>
+                </li>
+<li>
+<a href="../../../rss.xml">RSS feed</a>
+
+            </li>
+<li>
+            
+            
+            </ul>
+</div>
+        <div id="footer">
+            Contents © 2025         <a href="mailto:michal@code-drill.eu">Michał Rutkowski</a> - Powered by         <a href="https://getnikola.com" rel="nofollow">Nikola</a>         
+            
+        </div>
+    </div>
+    
+            <script src="../../../assets/js/all-nocdn.js"></script><script>
+    baguetteBox.run('div#content', {
+        ignoreClass: 'islink',
+        captions: function(element) {
+            return element.getElementsByTagName('img')[0].alt;
+    }});
+    </script>
+</body>
+</html>

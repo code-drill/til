@@ -27,7 +27,7 @@
  </sitemap>
  <sitemap>
   <loc>https://til.code-drill.eu/categories/cat_git.xml</loc>
-  <lastmod>2025-07-06T14:12:00Z</lastmod>
+  <lastmod>2025-07-06T20:07:00Z</lastmod>
  </sitemap>
  <sitemap>
   <loc>https://til.code-drill.eu/categories/cmd.xml</loc>
@@ -43,7 +43,11 @@
  </sitemap>
  <sitemap>
   <loc>https://til.code-drill.eu/categories/git.xml</loc>
-  <lastmod>2025-07-06T14:12:00Z</lastmod>
+  <lastmod>2025-07-06T20:07:00Z</lastmod>
+ </sitemap>
+ <sitemap>
+  <loc>https://til.code-drill.eu/categories/github.xml</loc>
+  <lastmod>2025-07-06T20:07:00Z</lastmod>
  </sitemap>
  <sitemap>
   <loc>https://til.code-drill.eu/categories/gitignore.xml</loc>
@@ -66,12 +70,20 @@
   <lastmod>2025-07-06T14:12:00Z</lastmod>
  </sitemap>
  <sitemap>
+  <loc>https://til.code-drill.eu/categories/ssh.xml</loc>
+  <lastmod>2025-07-06T20:07:00Z</lastmod>
+ </sitemap>
+ <sitemap>
   <loc>https://til.code-drill.eu/categories/top.xml</loc>
   <lastmod>2025-07-06T14:12:00Z</lastmod>
  </sitemap>
  <sitemap>
+  <loc>https://til.code-drill.eu/categories/win.xml</loc>
+  <lastmod>2025-07-06T20:07:00Z</lastmod>
+ </sitemap>
+ <sitemap>
   <loc>https://til.code-drill.eu/categories/windows.xml</loc>
-  <lastmod>2025-07-06T14:12:00Z</lastmod>
+  <lastmod>2025-07-06T20:07:00Z</lastmod>
  </sitemap>
  <sitemap>
   <loc>https://til.code-drill.eu/categories/zsh.xml</loc>
@@ -83,10 +95,10 @@
  </sitemap>
  <sitemap>
   <loc>https://til.code-drill.eu/rss.xml</loc>
-  <lastmod>2025-07-06T14:12:00Z</lastmod>
+  <lastmod>2025-07-06T20:07:00Z</lastmod>
  </sitemap>
  <sitemap>
   <loc>https://til.code-drill.eu/sitemap.xml</loc>
-  <lastmod>2025-07-06T14:58:00Z</lastmod>
+  <lastmod>2025-07-06T20:07:00Z</lastmod>
  </sitemap>
 </sitemapindex>
