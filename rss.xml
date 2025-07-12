@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<?xml-stylesheet type="text/xsl" href="assets/xml/rss.xsl" media="all"?><rss version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Today I Learned</title><link>https://til.code-drill.eu/</link><description>Things I've learned, collected in code-drill/til.</description><atom:link href="https://til.code-drill.eu/rss.xml" rel="self" type="application/rss+xml"></atom:link><language>en</language><copyright>Contents © 2025 &lt;a href="mailto:michal@code-drill.eu"&gt;Michał Rutkowski&lt;/a&gt; </copyright><lastBuildDate>Sun, 06 Jul 2025 20:43:48 GMT</lastBuildDate><generator>Nikola (getnikola.com)</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>how to detect aws ecs deployment failure</title><link>https://til.code-drill.eu/posts/2025-07-06/how-to-detect-aws-ecs-deployment-failure/</link><dc:creator>Michał Rutkowski</dc:creator><description>&lt;p&gt;Recently we had an interesting issue.&lt;br&gt;
+<?xml-stylesheet type="text/xsl" href="assets/xml/rss.xsl" media="all"?><rss version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Today I Learned</title><link>https://til.code-drill.eu/</link><description>Things I've learned, collected in code-drill/til.</description><atom:link href="https://til.code-drill.eu/rss.xml" rel="self" type="application/rss+xml"></atom:link><language>en</language><copyright>Contents © 2025 &lt;a href="mailto:michal@code-drill.eu"&gt;Michał Rutkowski&lt;/a&gt; </copyright><lastBuildDate>Sat, 12 Jul 2025 11:16:33 GMT</lastBuildDate><generator>Nikola (getnikola.com)</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>how to detect aws ecs deployment failure</title><link>https://til.code-drill.eu/posts/2025-07-06/how-to-detect-aws-ecs-deployment-failure/</link><dc:creator>Michał Rutkowski</dc:creator><description>&lt;p&gt;Recently we had an interesting issue.&lt;br&gt;
 Due to an incorrect cloud config entry, one of our services fell into an endless loop of failed deployments.  &lt;/p&gt;
 &lt;p&gt;So we had to add some kind of alerts to detect this in the future.&lt;/p&gt;
 &lt;p&gt;We are deploying our services on AWS ECS.&lt;br&gt;
@@ -92,18 +92,18 @@ the natural way was to expose new metrics and add a Prometheus alert based on it
 &lt;/ul&gt;
 &lt;h4&gt;Step 3: Configure Repository&lt;/h4&gt;
 &lt;p&gt;Go to repo that should use new key.&lt;/p&gt;
-&lt;p&gt;Optionally set new username and email for given repo:&lt;/p&gt;
-&lt;div class="code"&gt;&lt;pre class="code literal-block"&gt;git&lt;span class="w"&gt; &lt;/span&gt;config&lt;span class="w"&gt; &lt;/span&gt;user.name&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="s2"&gt;"username"&lt;/span&gt;
+&lt;p&gt;Optionally set new git username and git email for given repo:&lt;/p&gt;
+&lt;div class="code"&gt;&lt;pre class="code literal-block"&gt;git&lt;span class="w"&gt; &lt;/span&gt;config&lt;span class="w"&gt; &lt;/span&gt;user.name&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="s2"&gt;"git username"&lt;/span&gt;
 git&lt;span class="w"&gt; &lt;/span&gt;config&lt;span class="w"&gt; &lt;/span&gt;user.email&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="s2"&gt;"your.email@example.com"&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
 &lt;p&gt;Update remote to use new GitHub config:&lt;/p&gt;
-&lt;div class="code"&gt;&lt;pre class="code literal-block"&gt;git&lt;span class="w"&gt; &lt;/span&gt;remote&lt;span class="w"&gt; &lt;/span&gt;set-url&lt;span class="w"&gt; &lt;/span&gt;origin&lt;span class="w"&gt; &lt;/span&gt;git@github-some-new-label:username/project1.git
+&lt;div class="code"&gt;&lt;pre class="code literal-block"&gt;git&lt;span class="w"&gt; &lt;/span&gt;remote&lt;span class="w"&gt; &lt;/span&gt;set-url&lt;span class="w"&gt; &lt;/span&gt;origin&lt;span class="w"&gt; &lt;/span&gt;git@github-some-new-label:github-user/project1.git
 &lt;/pre&gt;&lt;/div&gt;
 
 &lt;p&gt;Where:
 - &lt;code&gt;github-some-new-label&lt;/code&gt; - is the same as label after &lt;code&gt;Host&lt;/code&gt; in &lt;code&gt;.ssh/config&lt;/code&gt; -&amp;gt; &lt;code&gt;Host github-some-new-label&lt;/code&gt;
-- &lt;code&gt;username&lt;/code&gt; is GitHub username of appropriate user set for repo.&lt;/p&gt;
+- &lt;code&gt;github-user&lt;/code&gt; is GitHub user of appropriate repo; i.e., if https url is &lt;code&gt;https://github.com/code-drill/django-app-template.git&lt;/code&gt; -&amp;gt; then ssh link will be: &lt;code&gt;git@github-code-drill:code-drill/django-app-template.git&lt;/code&gt;.&lt;/p&gt;
 &lt;h4&gt;Step 4: Test Configuration&lt;/h4&gt;
 &lt;p&gt;Test the SSH connection:&lt;/p&gt;
 &lt;div class="code"&gt;&lt;pre class="code literal-block"&gt;ssh&lt;span class="w"&gt; &lt;/span&gt;-T&lt;span class="w"&gt; &lt;/span&gt;git@github-some-new-label

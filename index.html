@@ -154,18 +154,18 @@ the natural way was to expose new metrics and add a Prometheus alert based on it
 </ul>
 <h4>Step 3: Configure Repository</h4>
 <p>Go to repo that should use new key.</p>
-<p>Optionally set new username and email for given repo:</p>
-<div class="code"><pre class="code literal-block">git<span class="w"> </span>config<span class="w"> </span>user.name<span class="w"> </span><span class="s2">"username"</span>
+<p>Optionally set new git username and git email for given repo:</p>
+<div class="code"><pre class="code literal-block">git<span class="w"> </span>config<span class="w"> </span>user.name<span class="w"> </span><span class="s2">"git username"</span>
 git<span class="w"> </span>config<span class="w"> </span>user.email<span class="w"> </span><span class="s2">"your.email@example.com"</span>
 </pre></div>
 
 <p>Update remote to use new GitHub config:</p>
-<div class="code"><pre class="code literal-block">git<span class="w"> </span>remote<span class="w"> </span>set-url<span class="w"> </span>origin<span class="w"> </span>git@github-some-new-label:username/project1.git
+<div class="code"><pre class="code literal-block">git<span class="w"> </span>remote<span class="w"> </span>set-url<span class="w"> </span>origin<span class="w"> </span>git@github-some-new-label:github-user/project1.git
 </pre></div>
 
 <p>Where:
 - <code>github-some-new-label</code> - is the same as label after <code>Host</code> in <code>.ssh/config</code> -&gt; <code>Host github-some-new-label</code>
-- <code>username</code> is GitHub username of appropriate user set for repo.</p>
+- <code>github-user</code> is GitHub user of appropriate repo; i.e., if https url is <code>https://github.com/code-drill/django-app-template.git</code> -&gt; then ssh link will be: <code>git@github-code-drill:code-drill/django-app-template.git</code>.</p>
 <h4>Step 4: Test Configuration</h4>
 <p>Test the SSH connection:</p>
 <div class="code"><pre class="code literal-block">ssh<span class="w"> </span>-T<span class="w"> </span>git@github-some-new-label

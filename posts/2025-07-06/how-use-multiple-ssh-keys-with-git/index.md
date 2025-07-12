@@ -72,21 +72,21 @@ GitHub sees the first key that works and authenticates with that account
 
 Go to repo that should use new key.
 
-Optionally set new username and email for given repo:
+Optionally set new git username and git email for given repo:
 
 ```shell
-git config user.name "username"
+git config user.name "git username"
 git config user.email "your.email@example.com"
 ```
 
 Update remote to use new GitHub config:
 ```shell
-git remote set-url origin git@github-some-new-label:username/project1.git
+git remote set-url origin git@github-some-new-label:github-user/project1.git
 ```
 
 Where:
 - `github-some-new-label` - is the same as label after `Host` in `.ssh/config` -> `Host github-some-new-label`
-- `username` is GitHub username of appropriate user set for repo.
+- `github-user` is GitHub user of appropriate repo; i.e., if https url is `https://github.com/code-drill/django-app-template.git` -> then ssh link will be: `git@github-code-drill:code-drill/django-app-template.git`.
 
 ### Step 4: Test Configuration
 

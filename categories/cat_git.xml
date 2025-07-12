@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<?xml-stylesheet type="text/xsl" href="../assets/xml/rss.xsl" media="all"?><rss version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Today I Learned (Posts about git)</title><link>https://til.code-drill.eu/</link><description></description><atom:link href="https://til.code-drill.eu/categories/cat_git.xml" rel="self" type="application/rss+xml"></atom:link><language>en</language><copyright>Contents © 2025 &lt;a href="mailto:michal@code-drill.eu"&gt;Michał Rutkowski&lt;/a&gt; </copyright><lastBuildDate>Sun, 06 Jul 2025 20:43:48 GMT</lastBuildDate><generator>Nikola (getnikola.com)</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>how use multiple ssh keys with github</title><link>https://til.code-drill.eu/posts/2025-07-06/how-use-multiple-ssh-keys-with-git/</link><dc:creator>Michał Rutkowski</dc:creator><description>&lt;h4&gt;Step 1: Create Additional SSH Key&lt;/h4&gt;
+<?xml-stylesheet type="text/xsl" href="../assets/xml/rss.xsl" media="all"?><rss version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Today I Learned (Posts about git)</title><link>https://til.code-drill.eu/</link><description></description><atom:link href="https://til.code-drill.eu/categories/cat_git.xml" rel="self" type="application/rss+xml"></atom:link><language>en</language><copyright>Contents © 2025 &lt;a href="mailto:michal@code-drill.eu"&gt;Michał Rutkowski&lt;/a&gt; </copyright><lastBuildDate>Sat, 12 Jul 2025 11:16:34 GMT</lastBuildDate><generator>Nikola (getnikola.com)</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>how use multiple ssh keys with github</title><link>https://til.code-drill.eu/posts/2025-07-06/how-use-multiple-ssh-keys-with-git/</link><dc:creator>Michał Rutkowski</dc:creator><description>&lt;h4&gt;Step 1: Create Additional SSH Key&lt;/h4&gt;
 &lt;p&gt;Put an additional key in the SSH config directory, e.g.:&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;Windows:&lt;/strong&gt;&lt;/p&gt;
 &lt;div class="code"&gt;&lt;pre class="code literal-block"&gt;&lt;span class="c"&gt;%USERPROFILE%/.ssh/some-name/id_ed25519&lt;/span&gt;
@@ -47,18 +47,18 @@
 &lt;/ul&gt;
 &lt;h4&gt;Step 3: Configure Repository&lt;/h4&gt;
 &lt;p&gt;Go to repo that should use new key.&lt;/p&gt;
-&lt;p&gt;Optionally set new username and email for given repo:&lt;/p&gt;
-&lt;div class="code"&gt;&lt;pre class="code literal-block"&gt;git&lt;span class="w"&gt; &lt;/span&gt;config&lt;span class="w"&gt; &lt;/span&gt;user.name&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="s2"&gt;"username"&lt;/span&gt;
+&lt;p&gt;Optionally set new git username and git email for given repo:&lt;/p&gt;
+&lt;div class="code"&gt;&lt;pre class="code literal-block"&gt;git&lt;span class="w"&gt; &lt;/span&gt;config&lt;span class="w"&gt; &lt;/span&gt;user.name&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="s2"&gt;"git username"&lt;/span&gt;
 git&lt;span class="w"&gt; &lt;/span&gt;config&lt;span class="w"&gt; &lt;/span&gt;user.email&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="s2"&gt;"your.email@example.com"&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
 &lt;p&gt;Update remote to use new GitHub config:&lt;/p&gt;
-&lt;div class="code"&gt;&lt;pre class="code literal-block"&gt;git&lt;span class="w"&gt; &lt;/span&gt;remote&lt;span class="w"&gt; &lt;/span&gt;set-url&lt;span class="w"&gt; &lt;/span&gt;origin&lt;span class="w"&gt; &lt;/span&gt;git@github-some-new-label:username/project1.git
+&lt;div class="code"&gt;&lt;pre class="code literal-block"&gt;git&lt;span class="w"&gt; &lt;/span&gt;remote&lt;span class="w"&gt; &lt;/span&gt;set-url&lt;span class="w"&gt; &lt;/span&gt;origin&lt;span class="w"&gt; &lt;/span&gt;git@github-some-new-label:github-user/project1.git
 &lt;/pre&gt;&lt;/div&gt;
 
 &lt;p&gt;Where:
 - &lt;code&gt;github-some-new-label&lt;/code&gt; - is the same as label after &lt;code&gt;Host&lt;/code&gt; in &lt;code&gt;.ssh/config&lt;/code&gt; -&amp;gt; &lt;code&gt;Host github-some-new-label&lt;/code&gt;
-- &lt;code&gt;username&lt;/code&gt; is GitHub username of appropriate user set for repo.&lt;/p&gt;
+- &lt;code&gt;github-user&lt;/code&gt; is GitHub user of appropriate repo; i.e., if https url is &lt;code&gt;https://github.com/code-drill/django-app-template.git&lt;/code&gt; -&amp;gt; then ssh link will be: &lt;code&gt;git@github-code-drill:code-drill/django-app-template.git&lt;/code&gt;.&lt;/p&gt;
 &lt;h4&gt;Step 4: Test Configuration&lt;/h4&gt;
 &lt;p&gt;Test the SSH connection:&lt;/p&gt;
 &lt;div class="code"&gt;&lt;pre class="code literal-block"&gt;ssh&lt;span class="w"&gt; &lt;/span&gt;-T&lt;span class="w"&gt; &lt;/span&gt;git@github-some-new-label
