@@ -34,6 +34,14 @@
   <lastmod>2025-07-12T20:24:00Z</lastmod>
  </sitemap>
  <sitemap>
+  <loc>https://til.code-drill.eu/categories/cat_llm.xml</loc>
+  <lastmod>2025-07-12T21:38:00Z</lastmod>
+ </sitemap>
+ <sitemap>
+  <loc>https://til.code-drill.eu/categories/claude.xml</loc>
+  <lastmod>2025-07-12T21:38:00Z</lastmod>
+ </sitemap>
+ <sitemap>
   <loc>https://til.code-drill.eu/categories/cloudwatch.xml</loc>
   <lastmod>2025-07-12T20:24:00Z</lastmod>
  </sitemap>
@@ -55,7 +63,7 @@
  </sitemap>
  <sitemap>
   <loc>https://til.code-drill.eu/categories/docker.xml</loc>
-  <lastmod>2025-07-12T20:33:00Z</lastmod>
+  <lastmod>2025-07-12T21:38:00Z</lastmod>
  </sitemap>
  <sitemap>
   <loc>https://til.code-drill.eu/categories/ecs.xml</loc>
@@ -82,8 +90,16 @@
   <lastmod>2025-07-12T20:24:00Z</lastmod>
  </sitemap>
  <sitemap>
+  <loc>https://til.code-drill.eu/categories/llm.xml</loc>
+  <lastmod>2025-07-12T21:38:00Z</lastmod>
+ </sitemap>
+ <sitemap>
   <loc>https://til.code-drill.eu/categories/localhost.xml</loc>
   <lastmod>2025-07-12T20:33:00Z</lastmod>
+ </sitemap>
+ <sitemap>
+  <loc>https://til.code-drill.eu/categories/mcp.xml</loc>
+  <lastmod>2025-07-12T21:38:00Z</lastmod>
  </sitemap>
  <sitemap>
   <loc>https://til.code-drill.eu/categories/mongodb.xml</loc>
@@ -91,7 +107,11 @@
  </sitemap>
  <sitemap>
   <loc>https://til.code-drill.eu/categories/npx.xml</loc>
-  <lastmod>2025-07-12T20:33:00Z</lastmod>
+  <lastmod>2025-07-12T21:38:00Z</lastmod>
+ </sitemap>
+ <sitemap>
+  <loc>https://til.code-drill.eu/categories/playwright.xml</loc>
+  <lastmod>2025-07-12T21:38:00Z</lastmod>
  </sitemap>
  <sitemap>
   <loc>https://til.code-drill.eu/categories/prometheus.xml</loc>
@@ -139,10 +159,10 @@
  </sitemap>
  <sitemap>
   <loc>https://til.code-drill.eu/rss.xml</loc>
-  <lastmod>2025-07-12T20:33:00Z</lastmod>
+  <lastmod>2025-07-12T21:38:00Z</lastmod>
  </sitemap>
  <sitemap>
   <loc>https://til.code-drill.eu/sitemap.xml</loc>
-  <lastmod>2025-07-12T20:33:00Z</lastmod>
+  <lastmod>2025-07-12T21:38:00Z</lastmod>
  </sitemap>
 </sitemapindex>

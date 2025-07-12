@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<?xml-stylesheet type="text/xsl" href="../assets/xml/rss.xsl" media="all"?><rss version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Today I Learned (Posts about docker)</title><link>https://til.code-drill.eu/</link><description></description><atom:link href="https://til.code-drill.eu/categories/docker.xml" rel="self" type="application/rss+xml"></atom:link><language>en</language><copyright>Contents © 2025 &lt;a href="mailto:michal@code-drill.eu"&gt;Michał Rutkowski&lt;/a&gt; </copyright><lastBuildDate>Sat, 12 Jul 2025 21:38:01 GMT</lastBuildDate><generator>Nikola (getnikola.com)</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>Claude Desktop MCP Configuration Guide</title><link>https://til.code-drill.eu/posts/2025-07-12/claude-desktop-mcp-configuration-guide/</link><dc:creator>Michał Rutkowski</dc:creator><description>&lt;h1 id="claude-desktop-mcp-configuration-guide"&gt;Claude Desktop MCP
+<?xml-stylesheet type="text/xsl" href="../assets/xml/rss.xsl" media="all"?><rss version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Today I Learned (Posts about LLM)</title><link>https://til.code-drill.eu/</link><description></description><atom:link href="https://til.code-drill.eu/categories/llm.xml" rel="self" type="application/rss+xml"></atom:link><language>en</language><copyright>Contents © 2025 &lt;a href="mailto:michal@code-drill.eu"&gt;Michał Rutkowski&lt;/a&gt; </copyright><lastBuildDate>Sat, 12 Jul 2025 21:38:01 GMT</lastBuildDate><generator>Nikola (getnikola.com)</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>Claude Desktop MCP Configuration Guide</title><link>https://til.code-drill.eu/posts/2025-07-12/claude-desktop-mcp-configuration-guide/</link><dc:creator>Michał Rutkowski</dc:creator><description>&lt;h1 id="claude-desktop-mcp-configuration-guide"&gt;Claude Desktop MCP
 Configuration Guide&lt;/h1&gt;
 &lt;p&gt;This guide covers how to configure Claude Desktop with various MCP
 (Model Context Protocol) servers to extend Claude’s capabilities with
@@ -119,48 +119,4 @@ coffee?” - Search: “Find information about Ethiopian beans”&lt;/p&gt;
 &lt;/ol&gt;
 &lt;p&gt;These integrations significantly expand Claude’s capabilities, making
 it a powerful assistant for development, research, and productivity
-tasks.&lt;/p&gt;</description><category>Claude</category><category>docker</category><category>LLM</category><category>MCP</category><category>npx</category><category>playwright</category><guid>https://til.code-drill.eu/posts/2025-07-12/claude-desktop-mcp-configuration-guide/</guid><pubDate>Sat, 12 Jul 2025 21:36:35 GMT</pubDate></item><item><title>how serve static files on localhost</title><link>https://til.code-drill.eu/posts/2025-07-12/how-serve-static-files-on-localhost/</link><dc:creator>Michał Rutkowski</dc:creator><description>&lt;p&gt;How spin up http server to serve static files in a few seconds.&lt;/p&gt;
-&lt;h3 id="using-python"&gt;Using &lt;code&gt;python&lt;/code&gt;&lt;/h3&gt;
-&lt;pre class="shell"&gt;&lt;code&gt;python -m http.server 8000 --bind 127.0.0.1
-python -m http.server --directory /path-to-dir-with-static-files/
-python -m http.server 8000 --directory /path-to-dir-with-static-files/
-python -m http.server 9106 --directory /path/to/dir/with/static/files&lt;/code&gt;&lt;/pre&gt;
-&lt;h3 id="using-npx"&gt;Using &lt;code&gt;npx&lt;/code&gt;&lt;/h3&gt;
-&lt;pre class="shell"&gt;&lt;code&gt;npx http-server -p 7890 --cors="*" /path/to/dir/with/static/files&lt;/code&gt;&lt;/pre&gt;
-&lt;h3 id="using-docker"&gt;Using &lt;code&gt;docker&lt;/code&gt;&lt;/h3&gt;
-&lt;ul&gt;
-&lt;li&gt;and &lt;code&gt;nginx&lt;/code&gt;
-&lt;ul&gt;
-&lt;li&gt;on windows&lt;/li&gt;
-&lt;/ul&gt;
-&lt;pre class="shell"&gt;&lt;code&gt;# Serve files from current directory
-docker run -it --rm -p 8080:80 -v %cd%:/usr/share/nginx/html nginx:alpine 
-
-# Serve files from specific directory
-docker run -it --rm -p 8080:80 -v /path/to/your/files:/usr/share/nginx/html nginx:alpine&lt;/code&gt;&lt;/pre&gt;
-&lt;ul&gt;
-&lt;li&gt;on linux&lt;/li&gt;
-&lt;/ul&gt;
-&lt;pre class="shell"&gt;&lt;code&gt;# Serve files from current directory
-docker run -it --rm -p 8080:80 -v $(pwd):/usr/share/nginx/html nginx:alpine
-
-# Serve files from specific directory
-docker run -it --rm -p 8080:80 -v /path/to/your/files:/usr/share/nginx/html nginx:alpine&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
-&lt;li&gt;or &lt;code&gt;apache&lt;/code&gt;
-&lt;ul&gt;
-&lt;li&gt;on windows&lt;/li&gt;
-&lt;/ul&gt;
-&lt;pre class="shell"&gt;&lt;code&gt;# Serve files from current directory
-docker run -it --rm -p 8080:80 -v %cd%:/usr/local/apache2/htdocs httpd:alpine
-
-# Serve files from specific directory
-docker run -it --rm -p 8080:80 -v /path/to/your/files:/usr/local/apache2/htdocs httpd:alpine&lt;/code&gt;&lt;/pre&gt;
-&lt;ul&gt;
-&lt;li&gt;on linux&lt;/li&gt;
-&lt;/ul&gt;
-&lt;pre class="shell"&gt;&lt;code&gt;# Serve files from current directory
-docker run -it --rm -p 8080:80 -v $(pwd):/usr/local/apache2/htdocs httpd:alpine
-
-# Serve files from specific directory
-docker run -it --rm -p 8080:80 -v /path/to/your/files:/usr/local/apache2/htdocs httpd:alpine&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
-&lt;/ul&gt;</description><category>development</category><category>docker</category><category>http</category><category>localhost</category><category>npx</category><category>python</category><category>server</category><guid>https://til.code-drill.eu/posts/2025-07-12/how-serve-static-files-on-localhost/</guid><pubDate>Sat, 12 Jul 2025 19:51:27 GMT</pubDate></item></channel></rss>
+tasks.&lt;/p&gt;</description><category>Claude</category><category>docker</category><category>LLM</category><category>MCP</category><category>npx</category><category>playwright</category><guid>https://til.code-drill.eu/posts/2025-07-12/claude-desktop-mcp-configuration-guide/</guid><pubDate>Sat, 12 Jul 2025 21:36:35 GMT</pubDate></item></channel></rss>
