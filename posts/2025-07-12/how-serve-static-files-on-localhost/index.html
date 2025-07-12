@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width">
+<title>how serve static files on localhost | Today I Learned</title>
+<link href="../../../assets/css/all-nocdn.css" rel="stylesheet" type="text/css">
+<link rel="alternate" type="application/rss+xml" title="RSS" href="../../../rss.xml">
+<link rel="canonical" href="https://til.code-drill.eu/posts/2025-07-12/how-serve-static-files-on-localhost/">
+<!--[if lt IE 9]><script src="../../../assets/js/html5.js"></script><![endif]--><!-- Google Tag Manager --><script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-M6V4K637');</script><!-- End Google Tag Manager -->
+</head>
+<body class="home blog">
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-QZV88X5FN5"></script><script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-QZV88X5FN5');
+    </script><!-- Google Tag Manager (noscript) --><noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-M6V4K637" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    <!-- End Google Tag Manager (noscript) -->
+    <div id="wrap" style="width:850px">
+        <div id="container" style="width:560px">
+            
+            
+    <div class="post">
+    
+    <h1 class="p-name entry-title" itemprop="headline name"><a href="." class="u-url">how serve static files on localhost</a></h1>
+
+        <div class="meta" style="background-color: rgb(234, 234, 234); ">
+        <span class="authordate">
+            Posted: <time class="published" datetime="2025-07-12T21:51:27+02:00">2025-07-12 21:51</time>
+               [<a href="index.md" id="sourcelink">Source</a>]
+        </span>
+        <br><span class="tags">Tags: 
+                    <a class="tag" href="../../../categories/development/"><span>development</span></a>
+                    <a class="tag" href="../../../categories/docker/"><span>docker</span></a>
+                    <a class="tag" href="../../../categories/http/"><span>http</span></a>
+                    <a class="tag" href="../../../categories/localhost/"><span>localhost</span></a>
+                    <a class="tag" href="../../../categories/npx/"><span>npx</span></a>
+                    <a class="tag" href="../../../categories/python/"><span>python</span></a>
+                    <a class="tag" href="../../../categories/server/"><span>server</span></a>
+                </span>
+                <br><span class="authordate">
+            
+
+        </span>
+        </div>
+    <!--
+.. title: how serve static files on localhost
+.. slug: how-serve-static-files-on-localhost
+.. date: 2025-07-12 21:51:27 UTC+02:00
+.. tags: development,localhost,http,server,python,npx,docker
+.. category: development
+.. link: 
+.. description: 
+.. type: text
+-->
+<p>How spin up http server to serve static files in a few seconds.</p>
+<h3 id="using-python">Using <code>python</code>
+</h3>
+<pre class="shell"><code>python -m http.server 8000 --bind 127.0.0.1
+python -m http.server --directory /path-to-dir-with-static-files/
+python -m http.server 8000 --directory /path-to-dir-with-static-files/
+python -m http.server 9106 --directory /path/to/dir/with/static/files</code></pre>
+<h3 id="using-npx">Using <code>npx</code>
+</h3>
+<pre class="shell"><code>npx http-server -p 7890 --cors="*" /path/to/dir/with/static/files</code></pre>
+<h3 id="using-docker">Using <code>docker</code>
+</h3>
+<ul>
+<li>and <code>nginx</code>
+<ul>
+<li>on windows</li>
+</ul>
+<pre class="shell"><code># Serve files from current directory
+docker run -it --rm -p 8080:80 -v %cd%:/usr/share/nginx/html nginx:alpine 
+
+# Serve files from specific directory
+docker run -it --rm -p 8080:80 -v /path/to/your/files:/usr/share/nginx/html nginx:alpine</code></pre>
+<ul>
+<li>on linux</li>
+</ul>
+<pre class="shell"><code># Serve files from current directory
+docker run -it --rm -p 8080:80 -v $(pwd):/usr/share/nginx/html nginx:alpine
+
+# Serve files from specific directory
+docker run -it --rm -p 8080:80 -v /path/to/your/files:/usr/share/nginx/html nginx:alpine</code></pre>
+</li>
+<li>or <code>apache</code>
+<ul>
+<li>on windows</li>
+</ul>
+<pre class="shell"><code># Serve files from current directory
+docker run -it --rm -p 8080:80 -v %cd%:/usr/local/apache2/htdocs httpd:alpine
+
+# Serve files from specific directory
+docker run -it --rm -p 8080:80 -v /path/to/your/files:/usr/local/apache2/htdocs httpd:alpine</code></pre>
+<ul>
+<li>on linux</li>
+</ul>
+<pre class="shell"><code># Serve files from current directory
+docker run -it --rm -p 8080:80 -v $(pwd):/usr/local/apache2/htdocs httpd:alpine
+
+# Serve files from specific directory
+docker run -it --rm -p 8080:80 -v /path/to/your/files:/usr/local/apache2/htdocs httpd:alpine</code></pre>
+</li>
+</ul>
+<ul class="pager hidden-print">
+<li class="previous">
+                <a href="../../2025-07-06/how-to-detect-aws-ecs-deployment-failure/" rel="prev" title="how to detect aws ecs deployment failure">Previous post</a>
+            </li>
+        </ul>
+</div>
+
+        </div>
+        <div id="sidebar">
+            <!--Sidebar content-->
+            <h1 id="blog-title">
+                <a href="https://til.code-drill.eu/" title="Today I Learned">Today I Learned</a>
+            </h1>
+            
+            
+            <ul class="unstyled">
+<li>
+            
+                <li>
+<a href="../../../archive.html">Archive</a>
+                </li>
+<li>
+<a href="../../../categories/">Tags</a>
+                </li>
+<li>
+<a href="../../../rss.xml">RSS feed</a>
+
+            </li>
+<li>
+            
+            
+            </ul>
+</div>
+        <div id="footer">
+            Contents © 2025         <a href="mailto:michal@code-drill.eu">Michał Rutkowski</a> - Powered by         <a href="https://getnikola.com" rel="nofollow">Nikola</a>         
+            
+        </div>
+    </div>
+    
+            <script src="../../../assets/js/all-nocdn.js"></script><script>
+    baguetteBox.run('div#content', {
+        ignoreClass: 'islink',
+        captions: function(element) {
+            return element.getElementsByTagName('img')[0].alt;
+    }});
+    </script>
+</body>
+</html>

@@ -15,11 +15,11 @@
  </url>
  <url>
   <loc>https://til.code-drill.eu/archive.html</loc>
-  <lastmod>2025-07-12T11:13:00Z</lastmod>
+  <lastmod>2025-07-12T20:10:00Z</lastmod>
  </url>
  <url>
   <loc>https://til.code-drill.eu/categories/</loc>
-  <lastmod>2025-07-10T14:17:00Z</lastmod>
+  <lastmod>2025-07-12T20:33:00Z</lastmod>
  </url>
  <url>
   <loc>https://til.code-drill.eu/categories/aggregation/</loc>
@@ -42,6 +42,10 @@
   <lastmod>2025-07-10T14:17:00Z</lastmod>
  </url>
  <url>
+  <loc>https://til.code-drill.eu/categories/cat_development/</loc>
+  <lastmod>2025-07-12T20:10:00Z</lastmod>
+ </url>
+ <url>
   <loc>https://til.code-drill.eu/categories/cat_git/</loc>
   <lastmod>2025-07-10T14:17:00Z</lastmod>
  </url>
@@ -62,6 +66,14 @@
   <lastmod>2025-07-10T14:17:00Z</lastmod>
  </url>
  <url>
+  <loc>https://til.code-drill.eu/categories/development/</loc>
+  <lastmod>2025-07-12T20:10:00Z</lastmod>
+ </url>
+ <url>
+  <loc>https://til.code-drill.eu/categories/docker/</loc>
+  <lastmod>2025-07-12T20:33:00Z</lastmod>
+ </url>
+ <url>
   <loc>https://til.code-drill.eu/categories/ecs/</loc>
   <lastmod>2025-07-10T14:13:00Z</lastmod>
  </url>
@@ -78,16 +90,32 @@
   <lastmod>2025-07-10T14:17:00Z</lastmod>
  </url>
  <url>
+  <loc>https://til.code-drill.eu/categories/http/</loc>
+  <lastmod>2025-07-12T20:10:00Z</lastmod>
+ </url>
+ <url>
   <loc>https://til.code-drill.eu/categories/linux/</loc>
   <lastmod>2025-07-10T14:17:00Z</lastmod>
+ </url>
+ <url>
+  <loc>https://til.code-drill.eu/categories/localhost/</loc>
+  <lastmod>2025-07-12T20:10:00Z</lastmod>
  </url>
  <url>
   <loc>https://til.code-drill.eu/categories/mongodb/</loc>
   <lastmod>2025-07-10T14:17:00Z</lastmod>
  </url>
  <url>
+  <loc>https://til.code-drill.eu/categories/npx/</loc>
+  <lastmod>2025-07-12T20:10:00Z</lastmod>
+ </url>
+ <url>
   <loc>https://til.code-drill.eu/categories/prometheus/</loc>
   <lastmod>2025-07-10T14:13:00Z</lastmod>
+ </url>
+ <url>
+  <loc>https://til.code-drill.eu/categories/python/</loc>
+  <lastmod>2025-07-12T20:10:00Z</lastmod>
  </url>
  <url>
   <loc>https://til.code-drill.eu/categories/route-53/</loc>
@@ -96,6 +124,10 @@
  <url>
   <loc>https://til.code-drill.eu/categories/s3/</loc>
   <lastmod>2025-07-10T14:17:00Z</lastmod>
+ </url>
+ <url>
+  <loc>https://til.code-drill.eu/categories/server/</loc>
+  <lastmod>2025-07-12T20:10:00Z</lastmod>
  </url>
  <url>
   <loc>https://til.code-drill.eu/categories/ssh/</loc>
@@ -144,5 +176,9 @@
  <url>
   <loc>https://til.code-drill.eu/posts/2025-07-06/how-use-multiple-ssh-keys-with-git/</loc>
   <lastmod>2025-07-10T14:17:00Z</lastmod>
+ </url>
+ <url>
+  <loc>https://til.code-drill.eu/posts/2025-07-12/how-serve-static-files-on-localhost/</loc>
+  <lastmod>2025-07-12T20:10:00Z</lastmod>
  </url>
 </urlset>

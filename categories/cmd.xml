@@ -1,32 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
-<?xml-stylesheet type="text/xsl" href="../assets/xml/rss.xsl" media="all"?><rss version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Today I Learned (Posts about cmd)</title><link>https://til.code-drill.eu/</link><description></description><atom:link href="https://til.code-drill.eu/categories/cmd.xml" rel="self" type="application/rss+xml"></atom:link><language>en</language><copyright>Contents © 2025 &lt;a href="mailto:michal@code-drill.eu"&gt;Michał Rutkowski&lt;/a&gt; </copyright><lastBuildDate>Sun, 06 Jul 2025 14:12:34 GMT</lastBuildDate><generator>Nikola (getnikola.com)</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>Gitignore windows cmd util</title><link>https://til.code-drill.eu/posts/2025-06-22/gitignore-windows-cmd-util/</link><dc:creator>Michał Rutkowski</dc:creator><description>&lt;p&gt;Simple utility that lets you generate .gitignore using cmd/shell.
-You must have curl in your path.&lt;/p&gt;
+<?xml-stylesheet type="text/xsl" href="../assets/xml/rss.xsl" media="all"?><rss version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Today I Learned (Posts about cmd)</title><link>https://til.code-drill.eu/</link><description></description><atom:link href="https://til.code-drill.eu/categories/cmd.xml" rel="self" type="application/rss+xml"></atom:link><language>en</language><copyright>Contents © 2025 &lt;a href="mailto:michal@code-drill.eu"&gt;Michał Rutkowski&lt;/a&gt; </copyright><lastBuildDate>Sat, 12 Jul 2025 20:24:50 GMT</lastBuildDate><generator>Nikola (getnikola.com)</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>Gitignore windows cmd util</title><link>https://til.code-drill.eu/posts/2025-06-22/gitignore-windows-cmd-util/</link><dc:creator>Michał Rutkowski</dc:creator><description>&lt;p&gt;Simple utility that lets you generate .gitignore using cmd/shell. You
+must have curl in your path.&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;windows/cmd: &lt;code&gt;gitignore.cmd&lt;/code&gt;&lt;/li&gt;
 &lt;/ul&gt;
-&lt;div class="code"&gt;&lt;pre class="code literal-block"&gt;&lt;span class="nv"&gt;@echo&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="k"&gt;off&lt;/span&gt;
-&lt;span class="n"&gt;curl&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;sL&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nl"&gt;https&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="o"&gt;//&lt;/span&gt;&lt;span class="n"&gt;www&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;toptal&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;com&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;developers&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;gitignore&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;api&lt;/span&gt;&lt;span class="o"&gt;/%*&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-
+&lt;pre class="cmd"&gt;&lt;code&gt;@echo off
+curl -sL https://www.toptal.com/developers/gitignore/api/%*&lt;/code&gt;&lt;/pre&gt;
 &lt;ul&gt;
-&lt;li&gt;linux - add function into your aliases file or .*rc&lt;/li&gt;
+&lt;li&gt;linux - add function into your aliases file or .*rc
+&lt;ul&gt;
 &lt;li&gt;function for alias&lt;/li&gt;
 &lt;/ul&gt;
-&lt;div class="code"&gt;&lt;pre class="code literal-block"&gt;&lt;span class="k"&gt;function&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;gitignore&lt;span class="o"&gt;()&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;{&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;curl&lt;span class="w"&gt; &lt;/span&gt;-sL&lt;span class="w"&gt; &lt;/span&gt;https://www.toptal.com/developers/gitignore/api/&lt;span class="se"&gt;\$&lt;/span&gt;@&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;&lt;span class="o"&gt;}&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-
+&lt;pre class="shell"&gt;&lt;code&gt;function gitignore() { curl -sL https://www.toptal.com/developers/gitignore/api/\$@ ;}&lt;/code&gt;&lt;/pre&gt;
 &lt;ul&gt;
 &lt;li&gt;zsh - code to run to add function to &lt;code&gt;.zshrc&lt;/code&gt;&lt;/li&gt;
 &lt;/ul&gt;
-&lt;div class="code"&gt;&lt;pre class="code literal-block"&gt;&lt;span class="nb"&gt;echo&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="s2"&gt;"function gitignore() { curl -sL https://www.toptal.com/developers/gitignore/api/\$@ ;}"&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&amp;gt;&amp;gt;&lt;span class="w"&gt; &lt;/span&gt;~/.zshrc
-&lt;/pre&gt;&lt;/div&gt;
-
+&lt;pre class="shell"&gt;&lt;code&gt;echo "function gitignore() { curl -sL https://www.toptal.com/developers/gitignore/api/\$@ ;}" &amp;gt;&amp;gt; ~/.zshrc&lt;/code&gt;&lt;/pre&gt;
 &lt;ul&gt;
-&lt;li&gt;bash - code to run to add function to  &lt;code&gt;.bash&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;bash - code to run to add function to &lt;code&gt;.bash&lt;/code&gt;&lt;/li&gt;
 &lt;/ul&gt;
-&lt;div class="code"&gt;&lt;pre class="code literal-block"&gt;&lt;span class="nb"&gt;echo&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="s2"&gt;"function gitignore() { curl -sL https://www.toptal.com/developers/gitignore/api/\$@ ;}"&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&amp;gt;&amp;gt;&lt;span class="w"&gt; &lt;/span&gt;~/.bashrc
-&lt;/pre&gt;&lt;/div&gt;
-
+&lt;pre class="shell"&gt;&lt;code&gt;echo "function gitignore() { curl -sL https://www.toptal.com/developers/gitignore/api/\$@ ;}" &amp;gt;&amp;gt; ~/.bashrc&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+&lt;/ul&gt;
 &lt;p&gt;and than you can type:&lt;/p&gt;
-&lt;div class="code"&gt;&lt;pre class="code literal-block"&gt;gitignore&lt;span class="w"&gt; &lt;/span&gt;python,pycharm,django
-&lt;/pre&gt;&lt;/div&gt;</description><category>bash</category><category>cmd</category><category>command-line</category><category>git</category><category>gitignore</category><category>linux</category><category>windows</category><category>zsh</category><guid>https://til.code-drill.eu/posts/2025-06-22/gitignore-windows-cmd-util/</guid><pubDate>Sun, 22 Jun 2025 11:47:35 GMT</pubDate></item></channel></rss>
+&lt;pre class="shell"&gt;&lt;code&gt;gitignore python,pycharm,django&lt;/code&gt;&lt;/pre&gt;</description><category>bash</category><category>cmd</category><category>command-line</category><category>git</category><category>gitignore</category><category>linux</category><category>windows</category><category>zsh</category><guid>https://til.code-drill.eu/posts/2025-06-22/gitignore-windows-cmd-util/</guid><pubDate>Sun, 22 Jun 2025 11:47:35 GMT</pubDate></item></channel></rss>

@@ -48,81 +48,85 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 
         </span>
         </div>
-    <h4>Step 1: Create Additional SSH Key</h4>
+    <!--
+.. title: how use multiple ssh keys with github
+.. slug: how-use-multiple-ssh-keys-with-git
+.. date: 2025-07-06 17:15:20 UTC+02:00
+.. tags: git,ssh,github,windows,win
+.. category: git
+.. link: 
+.. description: 
+.. type: text
+-->
+<p>Assuming that you have already configured one key to access GitHub
+using SSH.</p>
+<h3 id="step-1-create-additional-ssh-key">Step 1: Create Additional SSH
+Key</h3>
 <p>Put an additional key in the SSH config directory, e.g.:</p>
 <p><strong>Windows:</strong></p>
-<div class="code"><pre class="code literal-block"><span class="c">%USERPROFILE%/.ssh/some-name/id_ed25519</span>
-</pre></div>
-
+<pre><code>%USERPROFILE%/.ssh/some-name/id_ed25519</code></pre>
 <p><strong>Linux/macOS:</strong></p>
-<div class="code"><pre class="code literal-block">~/.ssh/some-name/id_ed25519
-</pre></div>
-
-<h4>Step 2: Configure SSH Config</h4>
+<pre><code>~/.ssh/some-name/id_ed25519</code></pre>
+<h3 id="step-2-configure-ssh-config">Step 2: Configure SSH Config</h3>
 <p>Now you need to edit (or create) SSH config under:</p>
 <p><strong>Windows:</strong></p>
-<div class="code"><pre class="code literal-block"><span class="c">%USERPROFILE%/.ssh/config</span>
-</pre></div>
-
+<pre><code>%USERPROFILE%/.ssh/config</code></pre>
 <p><strong>Linux/macOS:</strong></p>
-<div class="code"><pre class="code literal-block">~/.ssh/config
-</pre></div>
-
+<pre><code>~/.ssh/config</code></pre>
 <p>Add additional config:</p>
-<div class="code"><pre class="code literal-block">Host github-some-new-label
+<pre><code>Host github-some-new-label
     HostName github.com
     User git
     IdentityFile c:\Users\USERNAME\.ssh\some-name\id_ed25519
-    IdentitiesOnly yes
-</pre></div>
-
-<h4>Caution</h4>
-<p><code>IdentityFile</code> - must be full path to SSH key </p>
-<h4>Notice</h4>
-<p><code>IdentitiesOnly yes</code> is a crucial SSH configuration option that tells SSH to only use the specific key file you've specified and ignore all other keys.</p>
-<h5>Without <code>IdentitiesOnly yes</code>
-</h5>
+    IdentitiesOnly yes</code></pre>
+<h3 id="caution">Caution</h3>
+<p><code>IdentityFile</code> - must be full path to SSH key</p>
+<h3 id="notice">Notice</h3>
+<p><code>IdentitiesOnly yes</code> is a crucial SSH configuration option
+that tells SSH to only use the specific key file you’ve specified and
+ignore all other keys.</p>
+<h4 id="without-identitiesonly-yes">Without
+<code>IdentitiesOnly yes</code>
+</h4>
 <p>SSH tries multiple keys in this order</p>
-<ol>
-<li>Keys loaded in SSH agent </li>
-<li>Default keys (<code>~/.ssh/id_rsa</code>, <code>~/.ssh/id_ed25519</code>, etc)</li>
+<ol type="1">
+<li>Keys loaded in SSH agent</li>
+<li>Default keys (<code>~/.ssh/id_rsa</code>,
+<code>~/.ssh/id_ed25519</code>, etc)</li>
 <li>Your specified key file</li>
 </ol>
-<p>GitHub sees the first key that works and authenticates with that account</p>
-<h5>With <code>IdentitiesOnly yes</code>
-</h5>
+<p>GitHub sees the first key that works and authenticates with that
+account</p>
+<h4 id="with-identitiesonly-yes">With
+<code>IdentitiesOnly yes</code>
+</h4>
 <ul>
 <li>SSH only uses the exact key file you specified</li>
 <li>It ignores SSH agent keys and default keys</li>
 <li>GitHub only sees your intended key</li>
 </ul>
-<h4>Step 3: Configure Repository</h4>
+<h3 id="step-3-configure-repository">Step 3: Configure Repository</h3>
 <p>Go to repo that should use new key.</p>
 <p>Optionally set new git username and git email for given repo:</p>
-<div class="code"><pre class="code literal-block">git<span class="w"> </span>config<span class="w"> </span>user.name<span class="w"> </span><span class="s2">"git username"</span>
-git<span class="w"> </span>config<span class="w"> </span>user.email<span class="w"> </span><span class="s2">"your.email@example.com"</span>
-</pre></div>
-
+<pre class="shell"><code>git config user.name "git username"
+git config user.email "your.email@example.com"</code></pre>
 <p>Update remote to use new GitHub config:</p>
-<div class="code"><pre class="code literal-block">git<span class="w"> </span>remote<span class="w"> </span>set-url<span class="w"> </span>origin<span class="w"> </span>git@github-some-new-label:github-user/project1.git
-</pre></div>
-
-<p>Where:
-- <code>github-some-new-label</code> - is the same as label after <code>Host</code> in <code>.ssh/config</code> -&gt; <code>Host github-some-new-label</code>
-- <code>github-user</code> is GitHub user of appropriate repo; i.e., if https url is <code>https://github.com/code-drill/django-app-template.git</code> -&gt; then ssh link will be: <code>git@github-code-drill:code-drill/django-app-template.git</code>.</p>
-<h4>Step 4: Test Configuration</h4>
+<pre class="shell"><code>git remote set-url origin git@github-some-new-label:github-user/project1.git</code></pre>
+<p>Where: - <code>github-some-new-label</code> - is the same as label
+after <code>Host</code> in <code>.ssh/config</code> -&gt;
+<code>Host github-some-new-label</code> - <code>github-user</code> is
+GitHub user of appropriate repo; i.e., if https url is
+<code>https://github.com/code-drill/django-app-template.git</code> -&gt;
+then ssh link will be:
+<code>git@github-code-drill:code-drill/django-app-template.git</code>.</p>
+<h3 id="step-4-test-configuration">Step 4: Test Configuration</h3>
 <p>Test the SSH connection:</p>
-<div class="code"><pre class="code literal-block">ssh<span class="w"> </span>-T<span class="w"> </span>git@github-some-new-label
-</pre></div>
-
+<pre class="shell"><code>ssh -T git@github-some-new-label</code></pre>
 <p>You should see:</p>
-<div class="code"><pre class="code literal-block">Hi username! You've successfully authenticated, but GitHub does not provide shell access.
-</pre></div>
-
-<h4>Step 5: Push Changes</h4>
+<pre><code>Hi username! You've successfully authenticated, but GitHub does not provide shell access.</code></pre>
+<h3 id="step-5-push-changes">Step 5: Push Changes</h3>
 <p>Now you can push using the correct SSH key:</p>
-<div class="code"><pre class="code literal-block">git<span class="w"> </span>push<span class="w"> </span>origin<span class="w"> </span>main
-</pre></div>
+<pre class="shell"><code>git push origin main</code></pre>
     
         <ul class="pager hidden-print">
 <li class="previous">

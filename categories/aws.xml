@@ -1,59 +1,64 @@
 <?xml version="1.0" encoding="utf-8"?>
-<?xml-stylesheet type="text/xsl" href="../assets/xml/rss.xsl" media="all"?><rss version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Today I Learned (Posts about aws)</title><link>https://til.code-drill.eu/</link><description></description><atom:link href="https://til.code-drill.eu/categories/aws.xml" rel="self" type="application/rss+xml"></atom:link><language>en</language><copyright>Contents © 2025 &lt;a href="mailto:michal@code-drill.eu"&gt;Michał Rutkowski&lt;/a&gt; </copyright><lastBuildDate>Sat, 12 Jul 2025 11:13:17 GMT</lastBuildDate><generator>Nikola (getnikola.com)</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>how to detect aws ecs deployment failure</title><link>https://til.code-drill.eu/posts/2025-07-06/how-to-detect-aws-ecs-deployment-failure/</link><dc:creator>Michał Rutkowski</dc:creator><description>&lt;p&gt;Recently we had an interesting issue.&lt;br&gt;
-Due to an incorrect cloud config entry, one of our services fell into an endless loop of failed deployments.  &lt;/p&gt;
-&lt;p&gt;So we had to add some kind of alerts to detect this in the future.&lt;/p&gt;
+<?xml-stylesheet type="text/xsl" href="../assets/xml/rss.xsl" media="all"?><rss version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Today I Learned (Posts about aws)</title><link>https://til.code-drill.eu/</link><description></description><atom:link href="https://til.code-drill.eu/categories/aws.xml" rel="self" type="application/rss+xml"></atom:link><language>en</language><copyright>Contents © 2025 &lt;a href="mailto:michal@code-drill.eu"&gt;Michał Rutkowski&lt;/a&gt; </copyright><lastBuildDate>Sat, 12 Jul 2025 20:24:50 GMT</lastBuildDate><generator>Nikola (getnikola.com)</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>how to detect aws ecs deployment failure</title><link>https://til.code-drill.eu/posts/2025-07-06/how-to-detect-aws-ecs-deployment-failure/</link><dc:creator>Michał Rutkowski</dc:creator><description>&lt;h1 id="deployment-issue-and-alert-configuration"&gt;Deployment Issue and
+Alert Configuration&lt;/h1&gt;
+&lt;p&gt;Recently we had an interesting issue.&lt;br&gt;
+Due to an incorrect cloud config entry, one of our services fell into an
+endless loop of failed deployments.&lt;/p&gt;
+&lt;p&gt;So we had to add some kind of alerts to detect this in the
+future.&lt;/p&gt;
 &lt;p&gt;We are deploying our services on AWS ECS.&lt;br&gt;
-As we are using &lt;a href="https://github.com/prometheus-community/yet-another-cloudwatch-exporter"&gt;yet-another-cloudwatch-exporter&lt;/a&gt; to export CloudWatch metrics into Prometheus, 
-the natural way was to expose new metrics and add a Prometheus alert based on it.&lt;/p&gt;
-&lt;p&gt;We exported one new metric from &lt;code&gt;ECS/ContainerInsights&lt;/code&gt;:&lt;/p&gt;
-&lt;div class="code"&gt;&lt;pre class="code literal-block"&gt;&lt;span class="nt"&gt;apiVersion&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="l l-Scalar l-Scalar-Plain"&gt;v1alpha1&lt;/span&gt;
-&lt;span class="c1"&gt;# [...]&lt;/span&gt;
-&lt;span class="nt"&gt;discovery&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
-&lt;span class="w"&gt;  &lt;/span&gt;&lt;span class="nt"&gt;jobs&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
-&lt;span class="w"&gt;    &lt;/span&gt;&lt;span class="p p-Indicator"&gt;-&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nt"&gt;type&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="l l-Scalar l-Scalar-Plain"&gt;ECS/ContainerInsights&lt;/span&gt;
-&lt;span class="w"&gt;      &lt;/span&gt;&lt;span class="nt"&gt;regions&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
-&lt;span class="w"&gt;        &lt;/span&gt;&lt;span class="p p-Indicator"&gt;-&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="l l-Scalar l-Scalar-Plain"&gt;eu-west-1&lt;/span&gt;
-&lt;span class="w"&gt;      &lt;/span&gt;&lt;span class="nt"&gt;dimensionNameRequirements&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="p p-Indicator"&gt;[&lt;/span&gt;&lt;span class="nv"&gt;ClusterName&lt;/span&gt;&lt;span class="p p-Indicator"&gt;,&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nv"&gt;ServiceName&lt;/span&gt;&lt;span class="p p-Indicator"&gt;]&lt;/span&gt;
-&lt;span class="w"&gt;      &lt;/span&gt;&lt;span class="nt"&gt;statistics&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="p p-Indicator"&gt;[&lt;/span&gt;&lt;span class="nv"&gt;Average&lt;/span&gt;&lt;span class="p p-Indicator"&gt;]&lt;/span&gt;
-&lt;span class="w"&gt;      &lt;/span&gt;&lt;span class="nt"&gt;nilToZero&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="l l-Scalar l-Scalar-Plain"&gt;true&lt;/span&gt;
-&lt;span class="w"&gt;      &lt;/span&gt;&lt;span class="nt"&gt;addCloudwatchTimestamp&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="l l-Scalar l-Scalar-Plain"&gt;false&lt;/span&gt;
-&lt;span class="w"&gt;      &lt;/span&gt;&lt;span class="nt"&gt;metrics&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
-&lt;span class="w"&gt;        &lt;/span&gt;&lt;span class="p p-Indicator"&gt;-&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nt"&gt;name&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="l l-Scalar l-Scalar-Plain"&gt;DeploymentCount&lt;/span&gt;
-&lt;span class="c1"&gt;# [...]&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-
-&lt;p&gt;and added new config for Prometheus alerts to &lt;code&gt;config/apps-alerts.yml&lt;/code&gt;:&lt;/p&gt;
-&lt;div class="code"&gt;&lt;pre class="code literal-block"&gt;&lt;span class="nn"&gt;---&lt;/span&gt;
-&lt;span class="nt"&gt;groups&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
-&lt;span class="w"&gt;  &lt;/span&gt;&lt;span class="p p-Indicator"&gt;-&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nt"&gt;name&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="l l-Scalar l-Scalar-Plain"&gt;apps-alerts&lt;/span&gt;
-&lt;span class="w"&gt;    &lt;/span&gt;&lt;span class="nt"&gt;rules&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
-&lt;span class="w"&gt;      &lt;/span&gt;&lt;span class="p p-Indicator"&gt;-&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nt"&gt;alert&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="l l-Scalar l-Scalar-Plain"&gt;DeploymentAlert&lt;/span&gt;
-&lt;span class="w"&gt;        &lt;/span&gt;&lt;span class="nt"&gt;expr&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="l l-Scalar l-Scalar-Plain"&gt;sum by (dimension_ServiceName) (aws_ecs_containerinsights_deployment_count_average) &amp;gt;= 2&lt;/span&gt;
-&lt;span class="w"&gt;        &lt;/span&gt;&lt;span class="nt"&gt;for&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="l l-Scalar l-Scalar-Plain"&gt;15m&lt;/span&gt;
-&lt;span class="w"&gt;        &lt;/span&gt;&lt;span class="nt"&gt;labels&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
-&lt;span class="w"&gt;          &lt;/span&gt;&lt;span class="nt"&gt;severity&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="l l-Scalar l-Scalar-Plain"&gt;page&lt;/span&gt;
-&lt;span class="w"&gt;        &lt;/span&gt;&lt;span class="nt"&gt;annotations&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
-&lt;span class="w"&gt;          &lt;/span&gt;&lt;span class="nt"&gt;summary&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="s"&gt;"Probable&lt;/span&gt;&lt;span class="nv"&gt; &lt;/span&gt;&lt;span class="s"&gt;deployment&lt;/span&gt;&lt;span class="nv"&gt; &lt;/span&gt;&lt;span class="s"&gt;problem:&lt;/span&gt;&lt;span class="nv"&gt; &lt;/span&gt;&lt;span class="s"&gt;`{{&lt;/span&gt;&lt;span class="nv"&gt; &lt;/span&gt;&lt;span class="s"&gt;$labels.dimension_ServiceName&lt;/span&gt;&lt;span class="nv"&gt; &lt;/span&gt;&lt;span class="s"&gt;}}`"&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-
-&lt;p&gt;and finally added new config to Prometheus env-based configs (&lt;code&gt;prometheus-XXX-config.yml&lt;/code&gt;):&lt;/p&gt;
-&lt;div class="code"&gt;&lt;pre class="code literal-block"&gt;&lt;span class="c1"&gt;# [...]&lt;/span&gt;
-&lt;span class="nt"&gt;rule_files&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
-&lt;span class="w"&gt;  &lt;/span&gt;&lt;span class="c1"&gt;# [...]&lt;/span&gt;
-&lt;span class="p p-Indicator"&gt;-&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="l l-Scalar l-Scalar-Plain"&gt;apps-alerts.yml&lt;/span&gt;
-&lt;span class="c1"&gt;# [...]&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-
-&lt;p&gt;Now if there are some problems with failed deployments, we are seeing notifications in our slack.&lt;/p&gt;</description><category>aws</category><category>cloudwatch</category><category>ecs</category><category>prometheus</category><guid>https://til.code-drill.eu/posts/2025-07-06/how-to-detect-aws-ecs-deployment-failure/</guid><pubDate>Sun, 06 Jul 2025 20:21:46 GMT</pubDate></item><item><title>Simple Domain Redirect On AWS</title><link>https://til.code-drill.eu/posts/2025-06-29/simple-domain-redirect-on-aws/</link><dc:creator>Michał Rutkowski</dc:creator><description>&lt;p&gt;Assuming you have some domain configured on AWS using Route 53: &lt;a href="https://example.eu"&gt;example.eu&lt;/a&gt;&lt;br&gt;
+As we are using &lt;a href="https://github.com/prometheus-community/yet-another-cloudwatch-exporter"&gt;yet-another-cloudwatch-exporter&lt;/a&gt;
+to export CloudWatch metrics into Prometheus, the natural way was to
+expose new metrics and add a Prometheus alert based on it.&lt;/p&gt;
+&lt;p&gt;We exported one new metric from
+&lt;code&gt;ECS/ContainerInsights&lt;/code&gt;:&lt;/p&gt;
+&lt;div class="sourceCode" id="cb1"&gt;&lt;pre class="sourceCode yaml"&gt;&lt;code class="sourceCode yaml"&gt;&lt;span id="cb1-1"&gt;&lt;a href="https://til.code-drill.eu/posts/2025-07-06/how-to-detect-aws-ecs-deployment-failure/#cb1-1" aria-hidden="true" tabindex="-1"&gt;&lt;/a&gt;&lt;span class="fu"&gt;apiVersion&lt;/span&gt;&lt;span class="kw"&gt;:&lt;/span&gt;&lt;span class="at"&gt; v1alpha1&lt;/span&gt;&lt;/span&gt;
+&lt;span id="cb1-2"&gt;&lt;a href="https://til.code-drill.eu/posts/2025-07-06/how-to-detect-aws-ecs-deployment-failure/#cb1-2" aria-hidden="true" tabindex="-1"&gt;&lt;/a&gt;&lt;span class="co"&gt;# [...]&lt;/span&gt;&lt;/span&gt;
+&lt;span id="cb1-3"&gt;&lt;a href="https://til.code-drill.eu/posts/2025-07-06/how-to-detect-aws-ecs-deployment-failure/#cb1-3" aria-hidden="true" tabindex="-1"&gt;&lt;/a&gt;&lt;span class="fu"&gt;discovery&lt;/span&gt;&lt;span class="kw"&gt;:&lt;/span&gt;&lt;/span&gt;
+&lt;span id="cb1-4"&gt;&lt;a href="https://til.code-drill.eu/posts/2025-07-06/how-to-detect-aws-ecs-deployment-failure/#cb1-4" aria-hidden="true" tabindex="-1"&gt;&lt;/a&gt;&lt;span class="at"&gt;  &lt;/span&gt;&lt;span class="fu"&gt;jobs&lt;/span&gt;&lt;span class="kw"&gt;:&lt;/span&gt;&lt;/span&gt;
+&lt;span id="cb1-5"&gt;&lt;a href="https://til.code-drill.eu/posts/2025-07-06/how-to-detect-aws-ecs-deployment-failure/#cb1-5" aria-hidden="true" tabindex="-1"&gt;&lt;/a&gt;&lt;span class="at"&gt;    &lt;/span&gt;&lt;span class="kw"&gt;-&lt;/span&gt;&lt;span class="at"&gt; &lt;/span&gt;&lt;span class="fu"&gt;type&lt;/span&gt;&lt;span class="kw"&gt;:&lt;/span&gt;&lt;span class="at"&gt; ECS/ContainerInsights&lt;/span&gt;&lt;/span&gt;
+&lt;span id="cb1-6"&gt;&lt;a href="https://til.code-drill.eu/posts/2025-07-06/how-to-detect-aws-ecs-deployment-failure/#cb1-6" aria-hidden="true" tabindex="-1"&gt;&lt;/a&gt;&lt;span class="at"&gt;      &lt;/span&gt;&lt;span class="fu"&gt;regions&lt;/span&gt;&lt;span class="kw"&gt;:&lt;/span&gt;&lt;/span&gt;
+&lt;span id="cb1-7"&gt;&lt;a href="https://til.code-drill.eu/posts/2025-07-06/how-to-detect-aws-ecs-deployment-failure/#cb1-7" aria-hidden="true" tabindex="-1"&gt;&lt;/a&gt;&lt;span class="at"&gt;        &lt;/span&gt;&lt;span class="kw"&gt;-&lt;/span&gt;&lt;span class="at"&gt; eu-west-1&lt;/span&gt;&lt;/span&gt;
+&lt;span id="cb1-8"&gt;&lt;a href="https://til.code-drill.eu/posts/2025-07-06/how-to-detect-aws-ecs-deployment-failure/#cb1-8" aria-hidden="true" tabindex="-1"&gt;&lt;/a&gt;&lt;span class="at"&gt;      &lt;/span&gt;&lt;span class="fu"&gt;dimensionNameRequirements&lt;/span&gt;&lt;span class="kw"&gt;:&lt;/span&gt;&lt;span class="at"&gt; &lt;/span&gt;&lt;span class="kw"&gt;[&lt;/span&gt;&lt;span class="at"&gt;ClusterName&lt;/span&gt;&lt;span class="kw"&gt;,&lt;/span&gt;&lt;span class="at"&gt; ServiceName&lt;/span&gt;&lt;span class="kw"&gt;]&lt;/span&gt;&lt;/span&gt;
+&lt;span id="cb1-9"&gt;&lt;a href="https://til.code-drill.eu/posts/2025-07-06/how-to-detect-aws-ecs-deployment-failure/#cb1-9" aria-hidden="true" tabindex="-1"&gt;&lt;/a&gt;&lt;span class="at"&gt;      &lt;/span&gt;&lt;span class="fu"&gt;statistics&lt;/span&gt;&lt;span class="kw"&gt;:&lt;/span&gt;&lt;span class="at"&gt; &lt;/span&gt;&lt;span class="kw"&gt;[&lt;/span&gt;&lt;span class="at"&gt;Average&lt;/span&gt;&lt;span class="kw"&gt;]&lt;/span&gt;&lt;/span&gt;
+&lt;span id="cb1-10"&gt;&lt;a href="https://til.code-drill.eu/posts/2025-07-06/how-to-detect-aws-ecs-deployment-failure/#cb1-10" aria-hidden="true" tabindex="-1"&gt;&lt;/a&gt;&lt;span class="at"&gt;      &lt;/span&gt;&lt;span class="fu"&gt;nilToZero&lt;/span&gt;&lt;span class="kw"&gt;:&lt;/span&gt;&lt;span class="at"&gt; &lt;/span&gt;&lt;span class="ch"&gt;true&lt;/span&gt;&lt;/span&gt;
+&lt;span id="cb1-11"&gt;&lt;a href="https://til.code-drill.eu/posts/2025-07-06/how-to-detect-aws-ecs-deployment-failure/#cb1-11" aria-hidden="true" tabindex="-1"&gt;&lt;/a&gt;&lt;span class="at"&gt;      &lt;/span&gt;&lt;span class="fu"&gt;addCloudwatchTimestamp&lt;/span&gt;&lt;span class="kw"&gt;:&lt;/span&gt;&lt;span class="at"&gt; &lt;/span&gt;&lt;span class="ch"&gt;false&lt;/span&gt;&lt;/span&gt;
+&lt;span id="cb1-12"&gt;&lt;a href="https://til.code-drill.eu/posts/2025-07-06/how-to-detect-aws-ecs-deployment-failure/#cb1-12" aria-hidden="true" tabindex="-1"&gt;&lt;/a&gt;&lt;span class="at"&gt;      &lt;/span&gt;&lt;span class="fu"&gt;metrics&lt;/span&gt;&lt;span class="kw"&gt;:&lt;/span&gt;&lt;/span&gt;
+&lt;span id="cb1-13"&gt;&lt;a href="https://til.code-drill.eu/posts/2025-07-06/how-to-detect-aws-ecs-deployment-failure/#cb1-13" aria-hidden="true" tabindex="-1"&gt;&lt;/a&gt;&lt;span class="at"&gt;        &lt;/span&gt;&lt;span class="kw"&gt;-&lt;/span&gt;&lt;span class="at"&gt; &lt;/span&gt;&lt;span class="fu"&gt;name&lt;/span&gt;&lt;span class="kw"&gt;:&lt;/span&gt;&lt;span class="at"&gt; DeploymentCount&lt;/span&gt;&lt;/span&gt;
+&lt;span id="cb1-14"&gt;&lt;a href="https://til.code-drill.eu/posts/2025-07-06/how-to-detect-aws-ecs-deployment-failure/#cb1-14" aria-hidden="true" tabindex="-1"&gt;&lt;/a&gt;&lt;span class="co"&gt;# [...]&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;and added new config for Prometheus alerts to
+&lt;code&gt;config/apps-alerts.yml&lt;/code&gt;:&lt;/p&gt;
+&lt;div class="sourceCode" id="cb2"&gt;&lt;pre class="sourceCode yaml"&gt;&lt;code class="sourceCode yaml"&gt;&lt;span id="cb2-1"&gt;&lt;a href="https://til.code-drill.eu/posts/2025-07-06/how-to-detect-aws-ecs-deployment-failure/#cb2-1" aria-hidden="true" tabindex="-1"&gt;&lt;/a&gt;&lt;span class="pp"&gt;---&lt;/span&gt;&lt;/span&gt;
+&lt;span id="cb2-2"&gt;&lt;a href="https://til.code-drill.eu/posts/2025-07-06/how-to-detect-aws-ecs-deployment-failure/#cb2-2" aria-hidden="true" tabindex="-1"&gt;&lt;/a&gt;&lt;span class="fu"&gt;groups&lt;/span&gt;&lt;span class="kw"&gt;:&lt;/span&gt;&lt;/span&gt;
+&lt;span id="cb2-3"&gt;&lt;a href="https://til.code-drill.eu/posts/2025-07-06/how-to-detect-aws-ecs-deployment-failure/#cb2-3" aria-hidden="true" tabindex="-1"&gt;&lt;/a&gt;&lt;span class="at"&gt;  &lt;/span&gt;&lt;span class="kw"&gt;-&lt;/span&gt;&lt;span class="at"&gt; &lt;/span&gt;&lt;span class="fu"&gt;name&lt;/span&gt;&lt;span class="kw"&gt;:&lt;/span&gt;&lt;span class="at"&gt; apps-alerts&lt;/span&gt;&lt;/span&gt;
+&lt;span id="cb2-4"&gt;&lt;a href="https://til.code-drill.eu/posts/2025-07-06/how-to-detect-aws-ecs-deployment-failure/#cb2-4" aria-hidden="true" tabindex="-1"&gt;&lt;/a&gt;&lt;span class="at"&gt;    &lt;/span&gt;&lt;span class="fu"&gt;rules&lt;/span&gt;&lt;span class="kw"&gt;:&lt;/span&gt;&lt;/span&gt;
+&lt;span id="cb2-5"&gt;&lt;a href="https://til.code-drill.eu/posts/2025-07-06/how-to-detect-aws-ecs-deployment-failure/#cb2-5" aria-hidden="true" tabindex="-1"&gt;&lt;/a&gt;&lt;span class="at"&gt;      &lt;/span&gt;&lt;span class="kw"&gt;-&lt;/span&gt;&lt;span class="at"&gt; &lt;/span&gt;&lt;span class="fu"&gt;alert&lt;/span&gt;&lt;span class="kw"&gt;:&lt;/span&gt;&lt;span class="at"&gt; DeploymentAlert&lt;/span&gt;&lt;/span&gt;
+&lt;span id="cb2-6"&gt;&lt;a href="https://til.code-drill.eu/posts/2025-07-06/how-to-detect-aws-ecs-deployment-failure/#cb2-6" aria-hidden="true" tabindex="-1"&gt;&lt;/a&gt;&lt;span class="at"&gt;        &lt;/span&gt;&lt;span class="fu"&gt;expr&lt;/span&gt;&lt;span class="kw"&gt;:&lt;/span&gt;&lt;span class="at"&gt; sum by (dimension_ServiceName) (aws_ecs_containerinsights_deployment_count_average) &amp;gt;= 2&lt;/span&gt;&lt;/span&gt;
+&lt;span id="cb2-7"&gt;&lt;a href="https://til.code-drill.eu/posts/2025-07-06/how-to-detect-aws-ecs-deployment-failure/#cb2-7" aria-hidden="true" tabindex="-1"&gt;&lt;/a&gt;&lt;span class="at"&gt;        &lt;/span&gt;&lt;span class="fu"&gt;for&lt;/span&gt;&lt;span class="kw"&gt;:&lt;/span&gt;&lt;span class="at"&gt; 15m&lt;/span&gt;&lt;/span&gt;
+&lt;span id="cb2-8"&gt;&lt;a href="https://til.code-drill.eu/posts/2025-07-06/how-to-detect-aws-ecs-deployment-failure/#cb2-8" aria-hidden="true" tabindex="-1"&gt;&lt;/a&gt;&lt;span class="at"&gt;        &lt;/span&gt;&lt;span class="fu"&gt;labels&lt;/span&gt;&lt;span class="kw"&gt;:&lt;/span&gt;&lt;/span&gt;
+&lt;span id="cb2-9"&gt;&lt;a href="https://til.code-drill.eu/posts/2025-07-06/how-to-detect-aws-ecs-deployment-failure/#cb2-9" aria-hidden="true" tabindex="-1"&gt;&lt;/a&gt;&lt;span class="at"&gt;          &lt;/span&gt;&lt;span class="fu"&gt;severity&lt;/span&gt;&lt;span class="kw"&gt;:&lt;/span&gt;&lt;span class="at"&gt; page&lt;/span&gt;&lt;/span&gt;
+&lt;span id="cb2-10"&gt;&lt;a href="https://til.code-drill.eu/posts/2025-07-06/how-to-detect-aws-ecs-deployment-failure/#cb2-10" aria-hidden="true" tabindex="-1"&gt;&lt;/a&gt;&lt;span class="at"&gt;        &lt;/span&gt;&lt;span class="fu"&gt;annotations&lt;/span&gt;&lt;span class="kw"&gt;:&lt;/span&gt;&lt;/span&gt;
+&lt;span id="cb2-11"&gt;&lt;a href="https://til.code-drill.eu/posts/2025-07-06/how-to-detect-aws-ecs-deployment-failure/#cb2-11" aria-hidden="true" tabindex="-1"&gt;&lt;/a&gt;&lt;span class="at"&gt;          &lt;/span&gt;&lt;span class="fu"&gt;summary&lt;/span&gt;&lt;span class="kw"&gt;:&lt;/span&gt;&lt;span class="at"&gt; &lt;/span&gt;&lt;span class="st"&gt;"Probable deployment problem: `{{ $labels.dimension_ServiceName }}`"&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;and finally added new config to Prometheus env-based configs
+(&lt;code&gt;prometheus-XXX-config.yml&lt;/code&gt;):&lt;/p&gt;
+&lt;div class="sourceCode" id="cb3"&gt;&lt;pre class="sourceCode yaml"&gt;&lt;code class="sourceCode yaml"&gt;&lt;span id="cb3-1"&gt;&lt;a href="https://til.code-drill.eu/posts/2025-07-06/how-to-detect-aws-ecs-deployment-failure/#cb3-1" aria-hidden="true" tabindex="-1"&gt;&lt;/a&gt;&lt;span class="co"&gt;# [...]&lt;/span&gt;&lt;/span&gt;
+&lt;span id="cb3-2"&gt;&lt;a href="https://til.code-drill.eu/posts/2025-07-06/how-to-detect-aws-ecs-deployment-failure/#cb3-2" aria-hidden="true" tabindex="-1"&gt;&lt;/a&gt;&lt;span class="fu"&gt;rule_files&lt;/span&gt;&lt;span class="kw"&gt;:&lt;/span&gt;&lt;/span&gt;
+&lt;span id="cb3-3"&gt;&lt;a href="https://til.code-drill.eu/posts/2025-07-06/how-to-detect-aws-ecs-deployment-failure/#cb3-3" aria-hidden="true" tabindex="-1"&gt;&lt;/a&gt;&lt;span class="co"&gt;  # [...]&lt;/span&gt;&lt;/span&gt;
+&lt;span id="cb3-4"&gt;&lt;a href="https://til.code-drill.eu/posts/2025-07-06/how-to-detect-aws-ecs-deployment-failure/#cb3-4" aria-hidden="true" tabindex="-1"&gt;&lt;/a&gt;&lt;span class="kw"&gt;-&lt;/span&gt;&lt;span class="at"&gt; apps-alerts.yml&lt;/span&gt;&lt;/span&gt;
+&lt;span id="cb3-5"&gt;&lt;a href="https://til.code-drill.eu/posts/2025-07-06/how-to-detect-aws-ecs-deployment-failure/#cb3-5" aria-hidden="true" tabindex="-1"&gt;&lt;/a&gt;&lt;span class="co"&gt;# [...]&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Now if there are some problems with failed deployments, we are seeing
+notifications in our slack.&lt;/p&gt;</description><category>aws</category><category>cloudwatch</category><category>ecs</category><category>prometheus</category><guid>https://til.code-drill.eu/posts/2025-07-06/how-to-detect-aws-ecs-deployment-failure/</guid><pubDate>Sun, 06 Jul 2025 20:21:46 GMT</pubDate></item><item><title>Simple Domain Redirect On AWS</title><link>https://til.code-drill.eu/posts/2025-06-29/simple-domain-redirect-on-aws/</link><dc:creator>Michał Rutkowski</dc:creator><description>&lt;p&gt;Assuming you have some domain configured on AWS using Route 53: &lt;a href="https://example.eu"&gt;example.eu&lt;/a&gt;&lt;br&gt;
 And now you want to redirect all traffic from &lt;a href="https://example.eu"&gt;example.eu&lt;/a&gt; to &lt;a href="https://blog.example.eu"&gt;blog.example.eu&lt;/a&gt;&lt;/p&gt;
-&lt;h4&gt;Step 1: Create S3 Bucket&lt;/h4&gt;
-&lt;ol&gt;
+&lt;h3 id="step-1-create-s3-bucket"&gt;Step 1: Create S3 Bucket&lt;/h3&gt;
+&lt;ol type="1"&gt;
 &lt;li&gt;S3 Console -&amp;gt; Create bucket&lt;/li&gt;
-&lt;li&gt;Bucket name: &lt;code&gt;example.eu&lt;/code&gt; (must match your domain exactly)&lt;/li&gt;
+&lt;li&gt;Bucket name: &lt;code&gt;example.eu&lt;/code&gt; (must match your domain
+exactly)&lt;/li&gt;
 &lt;li&gt;Keep all default settings -&amp;gt; Create bucket&lt;/li&gt;
 &lt;/ol&gt;
-&lt;h4&gt;Step 2: Configure S3 for Redirect&lt;/h4&gt;
-&lt;ol&gt;
+&lt;h3 id="step-2-configure-s3-for-redirect"&gt;Step 2: Configure S3 for
+Redirect&lt;/h3&gt;
+&lt;ol type="1"&gt;
 &lt;li&gt;Select your bucket -&amp;gt; Properties tab&lt;/li&gt;
 &lt;li&gt;Static website hosting -&amp;gt; Edit&lt;/li&gt;
 &lt;li&gt;Enable static website hosting&lt;/li&gt;
@@ -62,21 +67,25 @@ And now you want to redirect all traffic from &lt;a href="https://example.eu"&gt
 &lt;li&gt;Protocol: &lt;code&gt;https&lt;/code&gt;&lt;/li&gt;
 &lt;li&gt;Save changes&lt;/li&gt;
 &lt;/ol&gt;
-&lt;p&gt;Copy the S3 website endpoint (e.g., &lt;code&gt;http://example.eu.s3-website-us-east-1.amazonaws.com&lt;/code&gt;)&lt;/p&gt;
-&lt;h4&gt;Step 3: Request SSL Certificate&lt;/h4&gt;
+&lt;p&gt;Copy the S3 website endpoint (e.g.,
+&lt;code&gt;http://example.eu.s3-website-us-east-1.amazonaws.com&lt;/code&gt;)&lt;/p&gt;
+&lt;h3 id="step-3-request-ssl-certificate"&gt;Step 3: Request SSL
+Certificate&lt;/h3&gt;
 &lt;p&gt;Important: Must be done in us-east-1 region&lt;/p&gt;
-&lt;ol&gt;
+&lt;ol type="1"&gt;
 &lt;li&gt;Certificate Manager -&amp;gt; Request certificate&lt;/li&gt;
 &lt;li&gt;Domain name: &lt;code&gt;example.eu&lt;/code&gt;&lt;/li&gt;
 &lt;li&gt;Validation: DNS validation&lt;/li&gt;
 &lt;li&gt;Request certificate&lt;/li&gt;
 &lt;li&gt;Create records in Route 53 (button will appear)&lt;/li&gt;
-&lt;li&gt;Wait for "Issued" status (5-10 minutes)&lt;/li&gt;
+&lt;li&gt;Wait for “Issued” status (5-10 minutes)&lt;/li&gt;
 &lt;/ol&gt;
-&lt;h4&gt;Step 4: Create CloudFront Distribution&lt;/h4&gt;
-&lt;ol&gt;
+&lt;h3 id="step-4-create-cloudfront-distribution"&gt;Step 4: Create CloudFront
+Distribution&lt;/h3&gt;
+&lt;ol type="1"&gt;
 &lt;li&gt;CloudFront Console -&amp;gt; Create distribution&lt;/li&gt;
-&lt;li&gt;Origin domain: Paste your S3 website endpoint from Step 2 (e.g., &lt;code&gt;http://example.eu.s3-website-us-east-1.amazonaws.com&lt;/code&gt;)&lt;/li&gt;
+&lt;li&gt;Origin domain: Paste your S3 website endpoint from Step 2 (e.g.,
+&lt;code&gt;http://example.eu.s3-website-us-east-1.amazonaws.com&lt;/code&gt;)&lt;/li&gt;
 &lt;li&gt;Protocol: HTTP only&lt;/li&gt;
 &lt;li&gt;Viewer protocol policy: Redirect HTTP to HTTPS&lt;/li&gt;
 &lt;li&gt;Alternate domain names: &lt;code&gt;example.eu&lt;/code&gt;&lt;/li&gt;
@@ -84,8 +93,8 @@ And now you want to redirect all traffic from &lt;a href="https://example.eu"&gt
 &lt;li&gt;Create distribution&lt;/li&gt;
 &lt;/ol&gt;
 &lt;p&gt;Wait 15-20 minutes for deployment&lt;/p&gt;
-&lt;h4&gt;Step 5: Update Route 53&lt;/h4&gt;
-&lt;ol&gt;
+&lt;h3 id="step-5-update-route-53"&gt;Step 5: Update Route 53&lt;/h3&gt;
+&lt;ol type="1"&gt;
 &lt;li&gt;Route 53 -&amp;gt; Hosted zones -&amp;gt; example.eu&lt;/li&gt;
 &lt;li&gt;Create record&lt;/li&gt;
 &lt;li&gt;Record name: Leave empty&lt;/li&gt;
@@ -96,5 +105,7 @@ And now you want to redirect all traffic from &lt;a href="https://example.eu"&gt
 &lt;li&gt;Create records&lt;/li&gt;
 &lt;/ol&gt;
 &lt;p&gt;Wait 5~20 minutes, then test:&lt;br&gt;
-- Opening &lt;code&gt;http://example.eu&lt;/code&gt; -&amp;gt; should redirect to &lt;code&gt;https://blog.example.eu&lt;/code&gt;&lt;br&gt;
-- Opening &lt;code&gt;https://example.eu&lt;/code&gt; -&amp;gt; should redirect to &lt;code&gt;https://blog.example.eu&lt;/code&gt;&lt;/p&gt;</description><category>aws</category><category>route 53</category><category>s3</category><guid>https://til.code-drill.eu/posts/2025-06-29/simple-domain-redirect-on-aws/</guid><pubDate>Sun, 29 Jun 2025 19:58:07 GMT</pubDate></item></channel></rss>
+- Opening &lt;code&gt;http://example.eu&lt;/code&gt; -&amp;gt; should redirect to
+&lt;code&gt;https://blog.example.eu&lt;/code&gt;&lt;br&gt;
+- Opening &lt;code&gt;https://example.eu&lt;/code&gt; -&amp;gt; should redirect to
+&lt;code&gt;https://blog.example.eu&lt;/code&gt;&lt;/p&gt;</description><category>aws</category><category>route 53</category><category>s3</category><guid>https://til.code-drill.eu/posts/2025-06-29/simple-domain-redirect-on-aws/</guid><pubDate>Sun, 29 Jun 2025 19:58:07 GMT</pubDate></item></channel></rss>

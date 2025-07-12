@@ -47,56 +47,72 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 
         </span>
         </div>
-    <p>Recently we had an interesting issue.<br>
-Due to an incorrect cloud config entry, one of our services fell into an endless loop of failed deployments.  </p>
-<p>So we had to add some kind of alerts to detect this in the future.</p>
+    <!--
+.. title: how to detect aws ecs deployment failure
+.. slug: how-to-detect-aws-ecs-deployment-failure
+.. date: 2025-07-06 22:21:46 UTC+02:00
+.. tags: aws,ecs,cloudwatch,prometheus
+.. category: aws
+.. link: 
+.. description: 
+.. type: text
+-->
+<h1 id="deployment-issue-and-alert-configuration">Deployment Issue and
+Alert Configuration</h1>
+<p>Recently we had an interesting issue.<br>
+Due to an incorrect cloud config entry, one of our services fell into an
+endless loop of failed deployments.</p>
+<p>So we had to add some kind of alerts to detect this in the
+future.</p>
 <p>We are deploying our services on AWS ECS.<br>
-As we are using <a href="https://github.com/prometheus-community/yet-another-cloudwatch-exporter">yet-another-cloudwatch-exporter</a> to export CloudWatch metrics into Prometheus, 
-the natural way was to expose new metrics and add a Prometheus alert based on it.</p>
-<p>We exported one new metric from <code>ECS/ContainerInsights</code>:</p>
-<div class="code"><pre class="code literal-block"><span class="nt">apiVersion</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">v1alpha1</span>
-<span class="c1"># [...]</span>
-<span class="nt">discovery</span><span class="p">:</span>
-<span class="w">  </span><span class="nt">jobs</span><span class="p">:</span>
-<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ECS/ContainerInsights</span>
-<span class="w">      </span><span class="nt">regions</span><span class="p">:</span>
-<span class="w">        </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">eu-west-1</span>
-<span class="w">      </span><span class="nt">dimensionNameRequirements</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">ClusterName</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">ServiceName</span><span class="p p-Indicator">]</span>
-<span class="w">      </span><span class="nt">statistics</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">Average</span><span class="p p-Indicator">]</span>
-<span class="w">      </span><span class="nt">nilToZero</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
-<span class="w">      </span><span class="nt">addCloudwatchTimestamp</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">false</span>
-<span class="w">      </span><span class="nt">metrics</span><span class="p">:</span>
-<span class="w">        </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">DeploymentCount</span>
-<span class="c1"># [...]</span>
-</pre></div>
-
-<p>and added new config for Prometheus alerts to <code>config/apps-alerts.yml</code>:</p>
-<div class="code"><pre class="code literal-block"><span class="nn">---</span>
-<span class="nt">groups</span><span class="p">:</span>
-<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">apps-alerts</span>
-<span class="w">    </span><span class="nt">rules</span><span class="p">:</span>
-<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">alert</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">DeploymentAlert</span>
-<span class="w">        </span><span class="nt">expr</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">sum by (dimension_ServiceName) (aws_ecs_containerinsights_deployment_count_average) &gt;= 2</span>
-<span class="w">        </span><span class="nt">for</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">15m</span>
-<span class="w">        </span><span class="nt">labels</span><span class="p">:</span>
-<span class="w">          </span><span class="nt">severity</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">page</span>
-<span class="w">        </span><span class="nt">annotations</span><span class="p">:</span>
-<span class="w">          </span><span class="nt">summary</span><span class="p">:</span><span class="w"> </span><span class="s">"Probable</span><span class="nv"> </span><span class="s">deployment</span><span class="nv"> </span><span class="s">problem:</span><span class="nv"> </span><span class="s">`{{</span><span class="nv"> </span><span class="s">$labels.dimension_ServiceName</span><span class="nv"> </span><span class="s">}}`"</span>
-</pre></div>
-
-<p>and finally added new config to Prometheus env-based configs (<code>prometheus-XXX-config.yml</code>):</p>
-<div class="code"><pre class="code literal-block"><span class="c1"># [...]</span>
-<span class="nt">rule_files</span><span class="p">:</span>
-<span class="w">  </span><span class="c1"># [...]</span>
-<span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">apps-alerts.yml</span>
-<span class="c1"># [...]</span>
-</pre></div>
-
-<p>Now if there are some problems with failed deployments, we are seeing notifications in our slack.</p>
+As we are using <a href="https://github.com/prometheus-community/yet-another-cloudwatch-exporter">yet-another-cloudwatch-exporter</a>
+to export CloudWatch metrics into Prometheus, the natural way was to
+expose new metrics and add a Prometheus alert based on it.</p>
+<p>We exported one new metric from
+<code>ECS/ContainerInsights</code>:</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">apiVersion</span><span class="kw">:</span><span class="at"> v1alpha1</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="co"># [...]</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">discovery</span><span class="kw">:</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">jobs</span><span class="kw">:</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="kw">-</span><span class="at"> </span><span class="fu">type</span><span class="kw">:</span><span class="at"> ECS/ContainerInsights</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="fu">regions</span><span class="kw">:</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="at">        </span><span class="kw">-</span><span class="at"> eu-west-1</span></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="fu">dimensionNameRequirements</span><span class="kw">:</span><span class="at"> </span><span class="kw">[</span><span class="at">ClusterName</span><span class="kw">,</span><span class="at"> ServiceName</span><span class="kw">]</span></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="fu">statistics</span><span class="kw">:</span><span class="at"> </span><span class="kw">[</span><span class="at">Average</span><span class="kw">]</span></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="fu">nilToZero</span><span class="kw">:</span><span class="at"> </span><span class="ch">true</span></span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="fu">addCloudwatchTimestamp</span><span class="kw">:</span><span class="at"> </span><span class="ch">false</span></span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="fu">metrics</span><span class="kw">:</span></span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a><span class="at">        </span><span class="kw">-</span><span class="at"> </span><span class="fu">name</span><span class="kw">:</span><span class="at"> DeploymentCount</span></span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a><span class="co"># [...]</span></span></code></pre></div>
+<p>and added new config for Prometheus alerts to
+<code>config/apps-alerts.yml</code>:</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="pp">---</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="fu">groups</span><span class="kw">:</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="kw">-</span><span class="at"> </span><span class="fu">name</span><span class="kw">:</span><span class="at"> apps-alerts</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">rules</span><span class="kw">:</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="kw">-</span><span class="at"> </span><span class="fu">alert</span><span class="kw">:</span><span class="at"> DeploymentAlert</span></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="at">        </span><span class="fu">expr</span><span class="kw">:</span><span class="at"> sum by (dimension_ServiceName) (aws_ecs_containerinsights_deployment_count_average) &gt;= 2</span></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="at">        </span><span class="fu">for</span><span class="kw">:</span><span class="at"> 15m</span></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a><span class="at">        </span><span class="fu">labels</span><span class="kw">:</span></span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a><span class="at">          </span><span class="fu">severity</span><span class="kw">:</span><span class="at"> page</span></span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a><span class="at">        </span><span class="fu">annotations</span><span class="kw">:</span></span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a><span class="at">          </span><span class="fu">summary</span><span class="kw">:</span><span class="at"> </span><span class="st">"Probable deployment problem: `{{ $labels.dimension_ServiceName }}`"</span></span></code></pre></div>
+<p>and finally added new config to Prometheus env-based configs
+(<code>prometheus-XXX-config.yml</code>):</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># [...]</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="fu">rule_files</span><span class="kw">:</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="co">  # [...]</span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="kw">-</span><span class="at"> apps-alerts.yml</span></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="co"># [...]</span></span></code></pre></div>
+<p>Now if there are some problems with failed deployments, we are seeing
+notifications in our slack.</p>
     
         <ul class="pager hidden-print">
 <li class="previous">
                 <a href="../how-use-multiple-ssh-keys-with-git/" rel="prev" title="how use multiple ssh keys with github">Previous post</a>
+            </li>
+            <li class="next">
+                <a href="../../2025-07-12/how-serve-static-files-on-localhost/" rel="next" title="how serve static files on localhost">Next post</a>
             </li>
         </ul>
 </div>

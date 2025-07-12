@@ -51,40 +51,44 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 
         </span>
         </div>
-    <p>Simple utility that lets you generate .gitignore using cmd/shell.
-You must have curl in your path.</p>
+    <!--
+.. title: Gitignore windows cmd util
+.. slug: gitignore-windows-cmd-util
+.. date: 2025-06-22 13:47:35 UTC+02:00
+.. tags: git,gitignore,windows,linux,command-line,cmd,zsh,bash
+.. category: git
+.. link: 
+.. description: 
+.. type: text
+-->
+<p>Simple utility that lets you generate .gitignore using cmd/shell. You
+must have curl in your path.</p>
 <ul>
 <li>windows/cmd: <code>gitignore.cmd</code>
 </li>
 </ul>
-<div class="code"><pre class="code literal-block"><span class="nv">@echo</span><span class="w"> </span><span class="k">off</span>
-<span class="n">curl</span><span class="w"> </span><span class="o">-</span><span class="n">sL</span><span class="w"> </span><span class="nl">https</span><span class="p">:</span><span class="o">//</span><span class="n">www</span><span class="p">.</span><span class="n">toptal</span><span class="p">.</span><span class="n">com</span><span class="o">/</span><span class="n">developers</span><span class="o">/</span><span class="n">gitignore</span><span class="o">/</span><span class="n">api</span><span class="o">/%*</span>
-</pre></div>
-
+<pre class="cmd"><code>@echo off
+curl -sL https://www.toptal.com/developers/gitignore/api/%*</code></pre>
 <ul>
-<li>linux - add function into your aliases file or .*rc</li>
+<li>linux - add function into your aliases file or .*rc
+<ul>
 <li>function for alias</li>
 </ul>
-<div class="code"><pre class="code literal-block"><span class="k">function</span><span class="w"> </span>gitignore<span class="o">()</span><span class="w"> </span><span class="o">{</span><span class="w"> </span>curl<span class="w"> </span>-sL<span class="w"> </span>https://www.toptal.com/developers/gitignore/api/<span class="se">\$</span>@<span class="w"> </span><span class="p">;</span><span class="o">}</span>
-</pre></div>
-
+<pre class="shell"><code>function gitignore() { curl -sL https://www.toptal.com/developers/gitignore/api/\$@ ;}</code></pre>
 <ul>
 <li>zsh - code to run to add function to <code>.zshrc</code>
 </li>
 </ul>
-<div class="code"><pre class="code literal-block"><span class="nb">echo</span><span class="w"> </span><span class="s2">"function gitignore() { curl -sL https://www.toptal.com/developers/gitignore/api/\$@ ;}"</span><span class="w"> </span>&gt;&gt;<span class="w"> </span>~/.zshrc
-</pre></div>
-
+<pre class="shell"><code>echo "function gitignore() { curl -sL https://www.toptal.com/developers/gitignore/api/\$@ ;}" &gt;&gt; ~/.zshrc</code></pre>
 <ul>
-<li>bash - code to run to add function to  <code>.bash</code>
+<li>bash - code to run to add function to <code>.bash</code>
 </li>
 </ul>
-<div class="code"><pre class="code literal-block"><span class="nb">echo</span><span class="w"> </span><span class="s2">"function gitignore() { curl -sL https://www.toptal.com/developers/gitignore/api/\$@ ;}"</span><span class="w"> </span>&gt;&gt;<span class="w"> </span>~/.bashrc
-</pre></div>
-
+<pre class="shell"><code>echo "function gitignore() { curl -sL https://www.toptal.com/developers/gitignore/api/\$@ ;}" &gt;&gt; ~/.bashrc</code></pre>
+</li>
+</ul>
 <p>and than you can type:</p>
-<div class="code"><pre class="code literal-block">gitignore<span class="w"> </span>python,pycharm,django
-</pre></div>
+<pre class="shell"><code>gitignore python,pycharm,django</code></pre>
     
         <ul class="pager hidden-print">
 <li class="next">

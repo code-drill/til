@@ -47,103 +47,111 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 
         </span>
         </div>
-    <p>As mongo docs says:</p>
-<div class="code"><pre class="code literal-block"><span class="n">MongoDB</span><span class="w"> </span><span class="n">aggregation</span><span class="w"> </span><span class="n">stage</span><span class="w"> </span><span class="n">limits</span>
-<span class="n">Each</span><span class="w"> </span><span class="n">stage</span><span class="w"> </span><span class="n">can</span><span class="w"> </span><span class="n">use</span><span class="w"> </span><span class="n">up</span><span class="w"> </span><span class="n">to</span><span class="w"> </span><span class="mh">100</span><span class="w"> </span><span class="n">MB</span><span class="w"> </span><span class="n">of</span><span class="w"> </span><span class="n">RAM</span><span class="p">.</span><span class="w"> </span><span class="n">You</span><span class="w"> </span><span class="n">will</span><span class="w"> </span><span class="n">get</span><span class="w"> </span><span class="n">an</span><span class="w"> </span><span class="n">error</span><span class="w"> </span><span class="n">from</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="n">database</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="n">you</span><span class="w"> </span><span class="n">exceed</span><span class="w"> </span><span class="n">this</span><span class="w"> </span><span class="n">limit</span><span class="p">.</span><span class="w"> </span>
-</pre></div>
-
-<p>So if you are having this problem and you need the first (or last) element from a sorted collection, you can use the top operator. </p>
+    <!--
+.. title: Using top in mongodb aggregation
+.. slug: using-top-in-mongodb-aggregation
+.. date: 2025-06-22 20:59:15 UTC+02:00
+.. tags: mongodb,db,aggregation,top
+.. category: db
+.. link: 
+.. description: 
+.. type: text
+-->
+<p>As mongo docs says:</p>
+<pre><code>MongoDB aggregation stage limits
+Each stage can use up to 100 MB of RAM. You will get an error from the database if you exceed this limit. </code></pre>
+<p>So if you are having this problem and you need the first (or last)
+element from a sorted collection, you can use the top operator.</p>
 <p>So instead of sorting:</p>
-<div class="code"><pre class="code literal-block"><span class="n">db</span><span class="p">.</span><span class="n">Entity</span><span class="p">.</span><span class="n">aggregate</span><span class="p">([</span>
-<span class="w">    </span><span class="p">{</span>
-<span class="w">        </span><span class="s">"$match"</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
-<span class="w">            </span><span class="s">"startTime"</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
-<span class="w">                </span><span class="s">"$gte"</span><span class="o">:</span><span class="w"> </span><span class="n">ISODate</span><span class="p">(</span><span class="s">"2025-04-02T22:00:00Z"</span><span class="p">),</span>
-<span class="w">                </span><span class="s">"$lt"</span><span class="o">:</span><span class="w"> </span><span class="n">ISODate</span><span class="p">(</span><span class="s">"2025-04-03T22:00:00Z"</span><span class="p">)</span>
-<span class="w">                </span><span class="p">}</span>
-<span class="w">            </span><span class="p">}</span>
-<span class="w">        </span><span class="p">},</span>
-<span class="w">    </span><span class="p">{</span>
-<span class="w">        </span><span class="s">"$addFields"</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
-<span class="w">            </span><span class="s">"creatorPriority"</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
-<span class="w">                </span><span class="s">"$switch"</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
-<span class="w">                    </span><span class="s">"branches"</span><span class="o">:</span><span class="w"> </span><span class="p">[</span>
-<span class="w">                        </span><span class="p">{</span><span class="w"> </span><span class="s">"case"</span><span class="o">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="s">"$eq"</span><span class="o">:</span><span class="w"> </span><span class="p">[</span><span class="s">"$creator"</span><span class="p">,</span><span class="w"> </span><span class="s">"ADMIN"</span><span class="p">]</span><span class="w"> </span><span class="p">},</span><span class="w"> </span><span class="s">"then"</span><span class="o">:</span><span class="w"> </span><span class="mh">1</span><span class="w"> </span><span class="p">}</span>
-<span class="w">                        </span><span class="p">],</span>
-<span class="w">                    </span><span class="s">"default"</span><span class="o">:</span><span class="w"> </span><span class="mh">0</span>
-<span class="w">                    </span><span class="p">}</span>
-<span class="w">                </span><span class="p">}</span>
-<span class="w">            </span><span class="p">}</span>
-<span class="w">        </span><span class="p">},</span>
-<span class="w">    </span><span class="p">{</span>
-<span class="w">        </span><span class="s">"$sort"</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
-<span class="w">            </span><span class="s">"creatorPriority"</span><span class="o">:</span><span class="w"> </span><span class="o">-</span><span class="mh">1</span><span class="p">,</span>
-<span class="w">            </span><span class="s">"createdAt"</span><span class="o">:</span><span class="w"> </span><span class="o">-</span><span class="mh">1</span>
-<span class="w">            </span><span class="p">}</span>
-<span class="w">        </span><span class="p">},</span>
-<span class="w">    </span><span class="p">{</span>
-<span class="w">        </span><span class="s">"$group"</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
-<span class="w">            </span><span class="s">"_id"</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
-<span class="w">                </span><span class="s">"deviceId"</span><span class="o">:</span><span class="w"> </span><span class="s">"$deviceId"</span><span class="p">,</span>
-<span class="w">                </span><span class="s">"startTime"</span><span class="o">:</span><span class="w"> </span><span class="s">"$startTime"</span>
-<span class="w">                </span><span class="p">},</span>
-<span class="w">            </span><span class="s">"records"</span><span class="o">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="s">"$push"</span><span class="o">:</span><span class="w"> </span><span class="s">"$$CURRENT"</span><span class="w"> </span><span class="p">}</span>
-<span class="w">            </span><span class="p">}</span>
-<span class="w">        </span><span class="p">},</span>
-<span class="w">    </span><span class="p">{</span>
-<span class="w">        </span><span class="s">"$replaceRoot"</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
-<span class="w">            </span><span class="s">"newRoot"</span><span class="o">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="s">"$first"</span><span class="o">:</span><span class="w"> </span><span class="s">"$records"</span><span class="w"> </span><span class="p">}</span>
-<span class="w">            </span><span class="p">}</span>
-<span class="w">        </span><span class="p">}</span>
-<span class="w">    </span><span class="p">])</span>
-</pre></div>
-
+<pre><code>db.Entity.aggregate([
+    {
+        "$match": {
+            "startTime": {
+                "$gte": ISODate("2025-04-02T22:00:00Z"),
+                "$lt": ISODate("2025-04-03T22:00:00Z")
+                }
+            }
+        },
+    {
+        "$addFields": {
+            "creatorPriority": {
+                "$switch": {
+                    "branches": [
+                        { "case": { "$eq": ["$creator", "ADMIN"] }, "then": 1 }
+                        ],
+                    "default": 0
+                    }
+                }
+            }
+        },
+    {
+        "$sort": {
+            "creatorPriority": -1,
+            "createdAt": -1
+            }
+        },
+    {
+        "$group": {
+            "_id": {
+                "deviceId": "$deviceId",
+                "startTime": "$startTime"
+                },
+            "records": { "$push": "$$CURRENT" }
+            }
+        },
+    {
+        "$replaceRoot": {
+            "newRoot": { "$first": "$records" }
+            }
+        }
+    ])
+</code></pre>
 <p>Use top:</p>
-<div class="code"><pre class="code literal-block"><span class="n">db</span><span class="p">.</span><span class="n">Entity</span><span class="p">.</span><span class="n">aggregate</span><span class="p">([</span>
-<span class="w">    </span><span class="p">{</span>
-<span class="w">        </span><span class="s">"$match"</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
-<span class="w">            </span><span class="s">"startTime"</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
-<span class="w">                </span><span class="s">"$gte"</span><span class="o">:</span><span class="w"> </span><span class="n">ISODate</span><span class="p">(</span><span class="s">"2025-06-18T22:00:00Z"</span><span class="p">),</span>
-<span class="w">                </span><span class="s">"$lt"</span><span class="o">:</span><span class="w"> </span><span class="n">ISODate</span><span class="p">(</span><span class="s">"2025-06-20T22:00:00Z"</span><span class="p">)</span>
-<span class="w">                </span><span class="p">}</span>
-<span class="w">            </span><span class="p">}</span>
-<span class="w">        </span><span class="p">},</span>
-<span class="w">    </span><span class="p">{</span>
-<span class="w">        </span><span class="s">"$addFields"</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
-<span class="w">            </span><span class="s">"creatorPriority"</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
-<span class="w">                </span><span class="s">"$switch"</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
-<span class="w">                    </span><span class="s">"branches"</span><span class="o">:</span><span class="w"> </span><span class="p">[</span>
-<span class="w">                        </span><span class="p">{</span><span class="w"> </span><span class="s">"case"</span><span class="o">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="s">"$eq"</span><span class="o">:</span><span class="w"> </span><span class="p">[</span><span class="s">"$creator"</span><span class="p">,</span><span class="w"> </span><span class="s">"ADMIN"</span><span class="p">]</span><span class="w"> </span><span class="p">},</span><span class="w"> </span><span class="s">"then"</span><span class="o">:</span><span class="w"> </span><span class="mh">1</span><span class="w"> </span><span class="p">}</span>
-<span class="w">                        </span><span class="p">],</span>
-<span class="w">                    </span><span class="s">"default"</span><span class="o">:</span><span class="w"> </span><span class="mh">0</span>
-<span class="w">                </span><span class="p">}</span>
-<span class="w">            </span><span class="p">}</span>
-<span class="w">        </span><span class="p">}</span>
-<span class="w">    </span><span class="p">},</span>
+<pre class="mongodb"><code>db.Entity.aggregate([
+    {
+        "$match": {
+            "startTime": {
+                "$gte": ISODate("2025-06-18T22:00:00Z"),
+                "$lt": ISODate("2025-06-20T22:00:00Z")
+                }
+            }
+        },
+    {
+        "$addFields": {
+            "creatorPriority": {
+                "$switch": {
+                    "branches": [
+                        { "case": { "$eq": ["$creator", "ADMIN"] }, "then": 1 }
+                        ],
+                    "default": 0
+                }
+            }
+        }
+    },
 
-<span class="w">    </span><span class="p">{</span>
-<span class="w">        </span><span class="s">"$group"</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
-<span class="w">            </span><span class="s">"_id"</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
-<span class="w">                </span><span class="s">"entityId"</span><span class="o">:</span><span class="w"> </span><span class="s">"$entityId"</span><span class="p">,</span>
-<span class="w">                </span><span class="s">"startTime"</span><span class="o">:</span><span class="w"> </span><span class="s">"$startTime"</span>
-<span class="w">                </span><span class="p">},</span>
-<span class="w">            </span><span class="s">"topRecord"</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
-<span class="w">                </span><span class="s">"$top"</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
-<span class="w">                    </span><span class="s">"sortBy"</span><span class="o">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="s">"createdAt"</span><span class="o">:</span><span class="w"> </span><span class="o">-</span><span class="mh">1</span><span class="w"> </span><span class="p">},</span>
-<span class="w">                    </span><span class="s">"output"</span><span class="o">:</span><span class="w"> </span><span class="s">"$$ROOT"</span>
-<span class="w">                    </span><span class="p">}</span>
-<span class="w">                </span><span class="p">}</span>
-<span class="w">            </span><span class="p">}</span>
-<span class="w">        </span><span class="p">},</span>
-<span class="w">    </span><span class="p">{</span>
-<span class="w">        </span><span class="s">"$replaceRoot"</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
-<span class="w">            </span><span class="s">"newRoot"</span><span class="o">:</span><span class="w"> </span><span class="s">"$topRecord"</span>
-<span class="w">            </span><span class="p">}</span>
-<span class="w">        </span><span class="p">}</span>
-<span class="w">    </span><span class="p">]</span><span class="w"> </span><span class="p">,</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="nl">allowDiskUse:</span><span class="w"> </span><span class="n">false</span>
-<span class="w">    </span><span class="p">})</span>
-</pre></div>
+    {
+        "$group": {
+            "_id": {
+                "entityId": "$entityId",
+                "startTime": "$startTime"
+                },
+            "topRecord": {
+                "$top": {
+                    "sortBy": { "createdAt": -1 },
+                    "output": "$$ROOT"
+                    }
+                }
+            }
+        },
+    {
+        "$replaceRoot": {
+            "newRoot": "$topRecord"
+            }
+        }
+    ] , {
+    allowDiskUse: false
+    })
+</code></pre>
     
         <ul class="pager hidden-print">
 <li class="previous">
