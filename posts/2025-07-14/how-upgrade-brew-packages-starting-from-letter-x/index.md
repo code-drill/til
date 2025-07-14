@@ -9,7 +9,6 @@
 .. type: text
 -->
 
-How upgrade brew packages starting from letter x.
 Run this command:
 ```shell
 brew upgrade $(brew list | grep '^x')
