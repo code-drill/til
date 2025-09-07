@@ -29,6 +29,46 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
             
             
         <div class="postbox">
+        <h1><a href="posts/2025-09-07/how-use-ngrok-run-inside-docker/">how use ngrok run inside docker</a></h1>
+            <div class="meta" style="background-color: rgb(234, 234, 234); ">
+                <span class="authordate">
+                    Posted: <time class="published" datetime="2025-09-07T16:15:32+02:00">2025-09-07 16:15</time></span>
+                <br><span class="tags">Tags: 
+                            <a class="tag" href="categories/development/"><span>development</span></a>
+                            <a class="tag" href="categories/docker/"><span>docker</span></a>
+                            <a class="tag" href="categories/localhost/"><span>localhost</span></a>
+                            <a class="tag" href="categories/ngrok/"><span>ngrok</span></a>
+                </span>
+            </div>
+        <!--
+.. title: how use ngrok run inside docker
+.. slug: how-use-ngrok-run-inside-docker
+.. date: 2025-09-07 16:15:32 UTC+02:00
+.. tags: ngrok,docker,localhost,development
+.. category: development
+.. link: 
+.. description: 
+.. type: text
+-->
+<p>If you wish use ngrok, but dont want to install another system app,
+you can run it using docker.</p>
+<h3 id="steps">Steps</h3>
+<ol type="1">
+<li><p>go to: <a href="https://dashboard.ngrok.com/get-started/your-authtoken">https://dashboard.ngrok.com/get-started/your-authtoken</a></p></li>
+<li><p>copy the auth token</p></li>
+<li>
+<p>run the below command line with the appropriate
+<code>&lt;TOKEN&gt;</code> (from the above step) and
+<code>&lt;PORT&gt;</code> of the running app:</p>
+<pre class="shell"><code>docker run -it -e NGROK_AUTHTOKEN=&lt;TOKEN&gt; --add-host=host.docker.internal:host-gateway ngrok/ngrok http host.docker.internal:&lt;PORT&gt;</code></pre>
+<p><em>please note that you should add <code>host.docker.internal</code>
+and use it instead of <code>127.0.0.1</code> or <code>localhost</code>
+for your host</em></p>
+</li>
+<li><p>copy the provided url and share your app</p></li>
+</ol>
+</div>
+        <div class="postbox">
         <h1><a href="posts/2025-07-14/how-upgrade-brew-packages-starting-from-letter-x/">how upgrade brew packages starting from letter X</a></h1>
             <div class="meta" style="background-color: rgb(234, 234, 234); ">
                 <span class="authordate">
@@ -703,8 +743,8 @@ must have curl in your path.</p>
 <li>windows/cmd: <code>gitignore.cmd</code>
 </li>
 </ul>
-<pre class="cmd"><code>@echo off
-curl -sL https://www.toptal.com/developers/gitignore/api/%*</code></pre>
+<div class="sourceCode" id="cb1"><pre class="sourceCode cmd"><code class="sourceCode dosbat"><span id="cb1-1"><a href="posts/2025-06-22/gitignore-windows-cmd-util/#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="kw">@</span><span class="bu">echo off</span></span>
+<span id="cb1-2"><a href="posts/2025-06-22/gitignore-windows-cmd-util/#cb1-2" aria-hidden="true" tabindex="-1"></a>curl <span class="at">-sL</span> https:/<span class="at">/www</span>.toptal.com<span class="at">/developers/gitignore/api</span>/<span class="pp">%</span><span class="va">*</span></span></code></pre></div>
 <ul>
 <li>linux - add function into your aliases file or .*rc
 <ul>

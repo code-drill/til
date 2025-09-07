@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<?xml-stylesheet type="text/xsl" href="../assets/xml/rss.xsl" media="all"?><rss version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Today I Learned (Posts about git)</title><link>https://til.code-drill.eu/</link><description></description><atom:link href="https://til.code-drill.eu/categories/cat_git.xml" rel="self" type="application/rss+xml"></atom:link><language>en</language><copyright>Contents © 2025 &lt;a href="mailto:michal@code-drill.eu"&gt;Michał Rutkowski&lt;/a&gt; </copyright><lastBuildDate>Sat, 12 Jul 2025 20:24:51 GMT</lastBuildDate><generator>Nikola (getnikola.com)</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>how use multiple ssh keys with github</title><link>https://til.code-drill.eu/posts/2025-07-06/how-use-multiple-ssh-keys-with-git/</link><dc:creator>Michał Rutkowski</dc:creator><description>&lt;p&gt;Assuming that you have already configured one key to access GitHub
+<?xml-stylesheet type="text/xsl" href="../assets/xml/rss.xsl" media="all"?><rss version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Today I Learned (Posts about git)</title><link>https://til.code-drill.eu/</link><description></description><atom:link href="https://til.code-drill.eu/categories/cat_git.xml" rel="self" type="application/rss+xml"></atom:link><language>en</language><copyright>Contents © 2025 &lt;a href="mailto:michal@code-drill.eu"&gt;Michał Rutkowski&lt;/a&gt; </copyright><lastBuildDate>Sun, 07 Sep 2025 14:25:56 GMT</lastBuildDate><generator>Nikola (getnikola.com)</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>how use multiple ssh keys with github</title><link>https://til.code-drill.eu/posts/2025-07-06/how-use-multiple-ssh-keys-with-git/</link><dc:creator>Michał Rutkowski</dc:creator><description>&lt;p&gt;Assuming that you have already configured one key to access GitHub
 using SSH.&lt;/p&gt;
 &lt;h3 id="step-1-create-additional-ssh-key"&gt;Step 1: Create Additional SSH
 Key&lt;/h3&gt;
@@ -70,8 +70,8 @@ must have curl in your path.&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;windows/cmd: &lt;code&gt;gitignore.cmd&lt;/code&gt;&lt;/li&gt;
 &lt;/ul&gt;
-&lt;pre class="cmd"&gt;&lt;code&gt;@echo off
-curl -sL https://www.toptal.com/developers/gitignore/api/%*&lt;/code&gt;&lt;/pre&gt;
+&lt;div class="sourceCode" id="cb1"&gt;&lt;pre class="sourceCode cmd"&gt;&lt;code class="sourceCode dosbat"&gt;&lt;span id="cb1-1"&gt;&lt;a href="https://til.code-drill.eu/posts/2025-06-22/gitignore-windows-cmd-util/#cb1-1" aria-hidden="true" tabindex="-1"&gt;&lt;/a&gt;&lt;span class="kw"&gt;@&lt;/span&gt;&lt;span class="bu"&gt;echo off&lt;/span&gt;&lt;/span&gt;
+&lt;span id="cb1-2"&gt;&lt;a href="https://til.code-drill.eu/posts/2025-06-22/gitignore-windows-cmd-util/#cb1-2" aria-hidden="true" tabindex="-1"&gt;&lt;/a&gt;curl &lt;span class="at"&gt;-sL&lt;/span&gt; https:/&lt;span class="at"&gt;/www&lt;/span&gt;.toptal.com&lt;span class="at"&gt;/developers/gitignore/api&lt;/span&gt;/&lt;span class="pp"&gt;%&lt;/span&gt;&lt;span class="va"&gt;*&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;ul&gt;
 &lt;li&gt;linux - add function into your aliases file or .*rc
 &lt;ul&gt;

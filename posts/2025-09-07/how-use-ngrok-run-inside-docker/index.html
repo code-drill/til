@@ -3,10 +3,10 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width">
-<title>how upgrade brew packages starting from letter X | Today I Learned</title>
+<title>how use ngrok run inside docker | Today I Learned</title>
 <link href="../../../assets/css/all-nocdn.css" rel="stylesheet" type="text/css">
 <link rel="alternate" type="application/rss+xml" title="RSS" href="../../../rss.xml">
-<link rel="canonical" href="https://til.code-drill.eu/posts/2025-07-14/how-upgrade-brew-packages-starting-from-letter-x/">
+<link rel="canonical" href="https://til.code-drill.eu/posts/2025-09-07/how-use-ngrok-run-inside-docker/">
 <!--[if lt IE 9]><script src="../../../assets/js/html5.js"></script><![endif]--><!-- Google Tag Manager --><script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
 new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
 j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
@@ -29,19 +29,18 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
             
     <div class="post">
     
-    <h1 class="p-name entry-title" itemprop="headline name"><a href="." class="u-url">how upgrade brew packages starting from letter X</a></h1>
+    <h1 class="p-name entry-title" itemprop="headline name"><a href="." class="u-url">how use ngrok run inside docker</a></h1>
 
         <div class="meta" style="background-color: rgb(234, 234, 234); ">
         <span class="authordate">
-            Posted: <time class="published" datetime="2025-07-14T16:42:01+02:00">2025-07-14 16:42</time>
+            Posted: <time class="published" datetime="2025-09-07T16:15:32+02:00">2025-09-07 16:15</time>
                [<a href="index.md" id="sourcelink">Source</a>]
         </span>
         <br><span class="tags">Tags: 
-                    <a class="tag" href="../../../categories/bash/"><span>bash</span></a>
-                    <a class="tag" href="../../../categories/brew/"><span>brew</span></a>
-                    <a class="tag" href="../../../categories/linux/"><span>linux</span></a>
-                    <a class="tag" href="../../../categories/shell/"><span>shell</span></a>
-                    <a class="tag" href="../../../categories/zsh/"><span>zsh</span></a>
+                    <a class="tag" href="../../../categories/development/"><span>development</span></a>
+                    <a class="tag" href="../../../categories/docker/"><span>docker</span></a>
+                    <a class="tag" href="../../../categories/localhost/"><span>localhost</span></a>
+                    <a class="tag" href="../../../categories/ngrok/"><span>ngrok</span></a>
                 </span>
                 <br><span class="authordate">
             
@@ -49,24 +48,35 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
         </span>
         </div>
     <!--
-.. title: how upgrade brew packages starting from letter X
-.. slug: how-upgrade-brew-packages-starting-from-letter-x
-.. date: 2025-07-14 16:42:01 UTC+02:00
-.. tags: brew,linux,shell,bash,zsh
-.. category: brew
+.. title: how use ngrok run inside docker
+.. slug: how-use-ngrok-run-inside-docker
+.. date: 2025-09-07 16:15:32 UTC+02:00
+.. tags: ngrok,docker,localhost,development
+.. category: development
 .. link: 
 .. description: 
 .. type: text
 -->
-<p>Run this command:</p>
-<pre class="shell"><code>brew upgrade $(brew list | grep '^x')</code></pre>
-    
-        <ul class="pager hidden-print">
+<p>If you wish use ngrok, but dont want to install another system app,
+you can run it using docker.</p>
+<h3 id="steps">Steps</h3>
+<ol type="1">
+<li><p>go to: <a href="https://dashboard.ngrok.com/get-started/your-authtoken">https://dashboard.ngrok.com/get-started/your-authtoken</a></p></li>
+<li><p>copy the auth token</p></li>
+<li>
+<p>run the below command line with the appropriate
+<code>&lt;TOKEN&gt;</code> (from the above step) and
+<code>&lt;PORT&gt;</code> of the running app:</p>
+<pre class="shell"><code>docker run -it -e NGROK_AUTHTOKEN=&lt;TOKEN&gt; --add-host=host.docker.internal:host-gateway ngrok/ngrok http host.docker.internal:&lt;PORT&gt;</code></pre>
+<p><em>please note that you should add <code>host.docker.internal</code>
+and use it instead of <code>127.0.0.1</code> or <code>localhost</code>
+for your host</em></p>
+</li>
+<li><p>copy the provided url and share your app</p></li>
+</ol>
+<ul class="pager hidden-print">
 <li class="previous">
-                <a href="../../2025-07-12/claude-desktop-mcp-configuration-guide/" rel="prev" title="Claude Desktop MCP Configuration Guide">Previous post</a>
-            </li>
-            <li class="next">
-                <a href="../../2025-09-07/how-use-ngrok-run-inside-docker/" rel="next" title="how use ngrok run inside docker">Next post</a>
+                <a href="../../2025-07-14/how-upgrade-brew-packages-starting-from-letter-x/" rel="prev" title="how upgrade brew packages starting from letter X">Previous post</a>
             </li>
         </ul>
 </div>

@@ -1,5 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
-<?xml-stylesheet type="text/xsl" href="assets/xml/rss.xsl" media="all"?><rss version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Today I Learned</title><link>https://til.code-drill.eu/</link><description>Things I've learned, collected in code-drill/til.</description><atom:link href="https://til.code-drill.eu/rss.xml" rel="self" type="application/rss+xml"></atom:link><language>en</language><copyright>Contents © 2025 &lt;a href="mailto:michal@code-drill.eu"&gt;Michał Rutkowski&lt;/a&gt; </copyright><lastBuildDate>Mon, 14 Jul 2025 14:56:03 GMT</lastBuildDate><generator>Nikola (getnikola.com)</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>how upgrade brew packages starting from letter X</title><link>https://til.code-drill.eu/posts/2025-07-14/how-upgrade-brew-packages-starting-from-letter-x/</link><dc:creator>Michał Rutkowski</dc:creator><description>&lt;p&gt;Run this command:&lt;/p&gt;
+<?xml-stylesheet type="text/xsl" href="assets/xml/rss.xsl" media="all"?><rss version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Today I Learned</title><link>https://til.code-drill.eu/</link><description>Things I've learned, collected in code-drill/til.</description><atom:link href="https://til.code-drill.eu/rss.xml" rel="self" type="application/rss+xml"></atom:link><language>en</language><copyright>Contents © 2025 &lt;a href="mailto:michal@code-drill.eu"&gt;Michał Rutkowski&lt;/a&gt; </copyright><lastBuildDate>Sun, 07 Sep 2025 14:34:03 GMT</lastBuildDate><generator>Nikola (getnikola.com)</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>how use ngrok run inside docker</title><link>https://til.code-drill.eu/posts/2025-09-07/how-use-ngrok-run-inside-docker/</link><dc:creator>Michał Rutkowski</dc:creator><description>&lt;p&gt;If you wish use ngrok, but dont want to install another system app,
+you can run it using docker.&lt;/p&gt;
+&lt;h3 id="steps"&gt;Steps&lt;/h3&gt;
+&lt;ol type="1"&gt;
+&lt;li&gt;&lt;p&gt;go to: &lt;a href="https://dashboard.ngrok.com/get-started/your-authtoken"&gt;https://dashboard.ngrok.com/get-started/your-authtoken&lt;/a&gt;&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;copy the auth token&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;run the below command line with the appropriate
+&lt;code&gt;&amp;lt;TOKEN&amp;gt;&lt;/code&gt; (from the above step) and
+&lt;code&gt;&amp;lt;PORT&amp;gt;&lt;/code&gt; of the running app:&lt;/p&gt;
+&lt;pre class="shell"&gt;&lt;code&gt;docker run -it -e NGROK_AUTHTOKEN=&amp;lt;TOKEN&amp;gt; --add-host=host.docker.internal:host-gateway ngrok/ngrok http host.docker.internal:&amp;lt;PORT&amp;gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;em&gt;please note that you should add &lt;code&gt;host.docker.internal&lt;/code&gt;
+and use it instead of &lt;code&gt;127.0.0.1&lt;/code&gt; or &lt;code&gt;localhost&lt;/code&gt;
+for your host&lt;/em&gt;&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;copy the provided url and share your app&lt;/p&gt;&lt;/li&gt;
+&lt;/ol&gt;</description><category>development</category><category>docker</category><category>localhost</category><category>ngrok</category><guid>https://til.code-drill.eu/posts/2025-09-07/how-use-ngrok-run-inside-docker/</guid><pubDate>Sun, 07 Sep 2025 14:15:32 GMT</pubDate></item><item><title>how upgrade brew packages starting from letter X</title><link>https://til.code-drill.eu/posts/2025-07-14/how-upgrade-brew-packages-starting-from-letter-x/</link><dc:creator>Michał Rutkowski</dc:creator><description>&lt;p&gt;Run this command:&lt;/p&gt;
 &lt;pre class="shell"&gt;&lt;code&gt;brew upgrade $(brew list | grep '^x')&lt;/code&gt;&lt;/pre&gt;</description><category>bash</category><category>brew</category><category>linux</category><category>shell</category><category>zsh</category><guid>https://til.code-drill.eu/posts/2025-07-14/how-upgrade-brew-packages-starting-from-letter-x/</guid><pubDate>Mon, 14 Jul 2025 14:42:01 GMT</pubDate></item><item><title>Claude Desktop MCP Configuration Guide</title><link>https://til.code-drill.eu/posts/2025-07-12/claude-desktop-mcp-configuration-guide/</link><dc:creator>Michał Rutkowski</dc:creator><description>&lt;h1 id="claude-desktop-mcp-configuration-guide"&gt;Claude Desktop MCP
 Configuration Guide&lt;/h1&gt;
 &lt;p&gt;This guide covers how to configure Claude Desktop with various MCP
@@ -438,8 +452,8 @@ must have curl in your path.&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;windows/cmd: &lt;code&gt;gitignore.cmd&lt;/code&gt;&lt;/li&gt;
 &lt;/ul&gt;
-&lt;pre class="cmd"&gt;&lt;code&gt;@echo off
-curl -sL https://www.toptal.com/developers/gitignore/api/%*&lt;/code&gt;&lt;/pre&gt;
+&lt;div class="sourceCode" id="cb1"&gt;&lt;pre class="sourceCode cmd"&gt;&lt;code class="sourceCode dosbat"&gt;&lt;span id="cb1-1"&gt;&lt;a href="https://til.code-drill.eu/posts/2025-06-22/gitignore-windows-cmd-util/#cb1-1" aria-hidden="true" tabindex="-1"&gt;&lt;/a&gt;&lt;span class="kw"&gt;@&lt;/span&gt;&lt;span class="bu"&gt;echo off&lt;/span&gt;&lt;/span&gt;
+&lt;span id="cb1-2"&gt;&lt;a href="https://til.code-drill.eu/posts/2025-06-22/gitignore-windows-cmd-util/#cb1-2" aria-hidden="true" tabindex="-1"&gt;&lt;/a&gt;curl &lt;span class="at"&gt;-sL&lt;/span&gt; https:/&lt;span class="at"&gt;/www&lt;/span&gt;.toptal.com&lt;span class="at"&gt;/developers/gitignore/api&lt;/span&gt;/&lt;span class="pp"&gt;%&lt;/span&gt;&lt;span class="va"&gt;*&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;ul&gt;
 &lt;li&gt;linux - add function into your aliases file or .*rc
 &lt;ul&gt;

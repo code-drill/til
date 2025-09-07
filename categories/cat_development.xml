@@ -1,5 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
-<?xml-stylesheet type="text/xsl" href="../assets/xml/rss.xsl" media="all"?><rss version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Today I Learned (Posts about development)</title><link>https://til.code-drill.eu/</link><description></description><atom:link href="https://til.code-drill.eu/categories/cat_development.xml" rel="self" type="application/rss+xml"></atom:link><language>en</language><copyright>Contents © 2025 &lt;a href="mailto:michal@code-drill.eu"&gt;Michał Rutkowski&lt;/a&gt; </copyright><lastBuildDate>Sat, 12 Jul 2025 20:33:29 GMT</lastBuildDate><generator>Nikola (getnikola.com)</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>how serve static files on localhost</title><link>https://til.code-drill.eu/posts/2025-07-12/how-serve-static-files-on-localhost/</link><dc:creator>Michał Rutkowski</dc:creator><description>&lt;p&gt;How spin up http server to serve static files in a few seconds.&lt;/p&gt;
+<?xml-stylesheet type="text/xsl" href="../assets/xml/rss.xsl" media="all"?><rss version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Today I Learned (Posts about development)</title><link>https://til.code-drill.eu/</link><description></description><atom:link href="https://til.code-drill.eu/categories/cat_development.xml" rel="self" type="application/rss+xml"></atom:link><language>en</language><copyright>Contents © 2025 &lt;a href="mailto:michal@code-drill.eu"&gt;Michał Rutkowski&lt;/a&gt; </copyright><lastBuildDate>Sun, 07 Sep 2025 14:34:03 GMT</lastBuildDate><generator>Nikola (getnikola.com)</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>how use ngrok run inside docker</title><link>https://til.code-drill.eu/posts/2025-09-07/how-use-ngrok-run-inside-docker/</link><dc:creator>Michał Rutkowski</dc:creator><description>&lt;p&gt;If you wish use ngrok, but dont want to install another system app,
+you can run it using docker.&lt;/p&gt;
+&lt;h3 id="steps"&gt;Steps&lt;/h3&gt;
+&lt;ol type="1"&gt;
+&lt;li&gt;&lt;p&gt;go to: &lt;a href="https://dashboard.ngrok.com/get-started/your-authtoken"&gt;https://dashboard.ngrok.com/get-started/your-authtoken&lt;/a&gt;&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;copy the auth token&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;run the below command line with the appropriate
+&lt;code&gt;&amp;lt;TOKEN&amp;gt;&lt;/code&gt; (from the above step) and
+&lt;code&gt;&amp;lt;PORT&amp;gt;&lt;/code&gt; of the running app:&lt;/p&gt;
+&lt;pre class="shell"&gt;&lt;code&gt;docker run -it -e NGROK_AUTHTOKEN=&amp;lt;TOKEN&amp;gt; --add-host=host.docker.internal:host-gateway ngrok/ngrok http host.docker.internal:&amp;lt;PORT&amp;gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;em&gt;please note that you should add &lt;code&gt;host.docker.internal&lt;/code&gt;
+and use it instead of &lt;code&gt;127.0.0.1&lt;/code&gt; or &lt;code&gt;localhost&lt;/code&gt;
+for your host&lt;/em&gt;&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;copy the provided url and share your app&lt;/p&gt;&lt;/li&gt;
+&lt;/ol&gt;</description><category>development</category><category>docker</category><category>localhost</category><category>ngrok</category><guid>https://til.code-drill.eu/posts/2025-09-07/how-use-ngrok-run-inside-docker/</guid><pubDate>Sun, 07 Sep 2025 14:15:32 GMT</pubDate></item><item><title>how serve static files on localhost</title><link>https://til.code-drill.eu/posts/2025-07-12/how-serve-static-files-on-localhost/</link><dc:creator>Michał Rutkowski</dc:creator><description>&lt;p&gt;How spin up http server to serve static files in a few seconds.&lt;/p&gt;
 &lt;h3 id="using-python"&gt;Using &lt;code&gt;python&lt;/code&gt;&lt;/h3&gt;
 &lt;pre class="shell"&gt;&lt;code&gt;python -m http.server 8000 --bind 127.0.0.1
 python -m http.server --directory /path-to-dir-with-static-files/
