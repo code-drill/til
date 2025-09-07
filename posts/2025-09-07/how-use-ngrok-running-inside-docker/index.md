@@ -1,6 +1,6 @@
 <!--
-.. title: how use ngrok run inside docker
-.. slug: how-use-ngrok-run-inside-docker
+.. title: how use ngrok running inside docker
+.. slug: how-use-ngrok-running-inside-docker
 .. date: 2025-09-07 16:15:32 UTC+02:00
 .. tags: ngrok,docker,localhost,development
 .. category: development
