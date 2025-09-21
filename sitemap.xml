@@ -7,226 +7,246 @@
                         http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
  <url>
   <loc>https://til.code-drill.eu/</loc>
-  <lastmod>2025-07-30T15:17:00Z</lastmod>
+  <lastmod>2025-09-08T07:22:00Z</lastmod>
  </url>
  <url>
   <loc>https://til.code-drill.eu/2025/</loc>
-  <lastmod>2025-07-30T15:17:00Z</lastmod>
+  <lastmod>2025-09-08T07:22:00Z</lastmod>
  </url>
  <url>
   <loc>https://til.code-drill.eu/archive.html</loc>
-  <lastmod>2025-09-07T14:25:00Z</lastmod>
+  <lastmod>2025-09-21T10:20:00Z</lastmod>
  </url>
  <url>
   <loc>https://til.code-drill.eu/categories/</loc>
-  <lastmod>2025-09-07T14:25:00Z</lastmod>
+  <lastmod>2025-09-21T10:21:00Z</lastmod>
  </url>
  <url>
   <loc>https://til.code-drill.eu/categories/aggregation/</loc>
-  <lastmod>2025-07-10T14:17:00Z</lastmod>
+  <lastmod>2025-06-22T19:27:00Z</lastmod>
  </url>
  <url>
   <loc>https://til.code-drill.eu/categories/aws/</loc>
-  <lastmod>2025-07-10T14:17:00Z</lastmod>
+  <lastmod>2025-06-29T20:21:00Z</lastmod>
  </url>
  <url>
   <loc>https://til.code-drill.eu/categories/bash/</loc>
-  <lastmod>2025-07-30T15:17:00Z</lastmod>
+  <lastmod>2025-07-15T06:18:00Z</lastmod>
  </url>
  <url>
   <loc>https://til.code-drill.eu/categories/brew/</loc>
-  <lastmod>2025-07-30T15:17:00Z</lastmod>
+  <lastmod>2025-07-15T06:18:00Z</lastmod>
  </url>
  <url>
   <loc>https://til.code-drill.eu/categories/cat_aws/</loc>
-  <lastmod>2025-07-10T14:17:00Z</lastmod>
+  <lastmod>2025-06-29T20:21:00Z</lastmod>
  </url>
  <url>
   <loc>https://til.code-drill.eu/categories/cat_brew/</loc>
-  <lastmod>2025-07-30T15:17:00Z</lastmod>
+  <lastmod>2025-07-15T06:18:00Z</lastmod>
  </url>
  <url>
   <loc>https://til.code-drill.eu/categories/cat_db/</loc>
-  <lastmod>2025-07-10T14:17:00Z</lastmod>
+  <lastmod>2025-06-22T19:27:00Z</lastmod>
  </url>
  <url>
   <loc>https://til.code-drill.eu/categories/cat_development/</loc>
-  <lastmod>2025-07-12T20:10:00Z</lastmod>
+  <lastmod>2025-09-08T07:22:00Z</lastmod>
  </url>
  <url>
   <loc>https://til.code-drill.eu/categories/cat_git/</loc>
-  <lastmod>2025-07-10T14:17:00Z</lastmod>
+  <lastmod>2025-06-22T12:52:00Z</lastmod>
  </url>
  <url>
   <loc>https://til.code-drill.eu/categories/cat_llm/</loc>
-  <lastmod>2025-07-12T21:37:00Z</lastmod>
+  <lastmod>2025-07-13T08:24:00Z</lastmod>
+ </url>
+ <url>
+  <loc>https://til.code-drill.eu/categories/cat_network/</loc>
+  <lastmod>2025-09-21T10:21:00Z</lastmod>
  </url>
  <url>
   <loc>https://til.code-drill.eu/categories/claude/</loc>
-  <lastmod>2025-07-12T21:37:00Z</lastmod>
+  <lastmod>2025-07-13T08:24:00Z</lastmod>
  </url>
  <url>
   <loc>https://til.code-drill.eu/categories/cloudwatch/</loc>
-  <lastmod>2025-07-10T14:13:00Z</lastmod>
+  <lastmod>2025-07-06T20:38:00Z</lastmod>
  </url>
  <url>
   <loc>https://til.code-drill.eu/categories/cmd/</loc>
-  <lastmod>2025-07-10T14:17:00Z</lastmod>
+  <lastmod>2025-06-22T12:52:00Z</lastmod>
  </url>
  <url>
   <loc>https://til.code-drill.eu/categories/command-line/</loc>
-  <lastmod>2025-07-10T14:17:00Z</lastmod>
+  <lastmod>2025-06-22T12:52:00Z</lastmod>
+ </url>
+ <url>
+  <loc>https://til.code-drill.eu/categories/curl/</loc>
+  <lastmod>2025-09-21T10:21:00Z</lastmod>
  </url>
  <url>
   <loc>https://til.code-drill.eu/categories/db/</loc>
-  <lastmod>2025-07-10T14:17:00Z</lastmod>
+  <lastmod>2025-06-22T19:27:00Z</lastmod>
  </url>
  <url>
   <loc>https://til.code-drill.eu/categories/development/</loc>
-  <lastmod>2025-07-12T20:10:00Z</lastmod>
+  <lastmod>2025-09-08T07:22:00Z</lastmod>
  </url>
  <url>
   <loc>https://til.code-drill.eu/categories/docker/</loc>
-  <lastmod>2025-07-12T20:33:00Z</lastmod>
+  <lastmod>2025-09-08T07:22:00Z</lastmod>
  </url>
  <url>
   <loc>https://til.code-drill.eu/categories/ecs/</loc>
-  <lastmod>2025-07-10T14:13:00Z</lastmod>
+  <lastmod>2025-07-06T20:38:00Z</lastmod>
  </url>
  <url>
   <loc>https://til.code-drill.eu/categories/git/</loc>
-  <lastmod>2025-07-10T14:17:00Z</lastmod>
+  <lastmod>2025-06-22T12:52:00Z</lastmod>
  </url>
  <url>
   <loc>https://til.code-drill.eu/categories/github/</loc>
-  <lastmod>2025-07-10T14:13:00Z</lastmod>
+  <lastmod>2025-07-06T20:07:00Z</lastmod>
  </url>
  <url>
   <loc>https://til.code-drill.eu/categories/gitignore/</loc>
-  <lastmod>2025-07-10T14:17:00Z</lastmod>
+  <lastmod>2025-06-22T12:52:00Z</lastmod>
  </url>
  <url>
   <loc>https://til.code-drill.eu/categories/http/</loc>
-  <lastmod>2025-07-12T20:10:00Z</lastmod>
+  <lastmod>2025-07-13T08:24:00Z</lastmod>
+ </url>
+ <url>
+  <loc>https://til.code-drill.eu/categories/ip/</loc>
+  <lastmod>2025-09-21T10:21:00Z</lastmod>
  </url>
  <url>
   <loc>https://til.code-drill.eu/categories/linux/</loc>
-  <lastmod>2025-07-30T15:17:00Z</lastmod>
+  <lastmod>2025-07-15T06:18:00Z</lastmod>
  </url>
  <url>
   <loc>https://til.code-drill.eu/categories/llm/</loc>
-  <lastmod>2025-07-12T21:37:00Z</lastmod>
+  <lastmod>2025-07-13T08:24:00Z</lastmod>
  </url>
  <url>
   <loc>https://til.code-drill.eu/categories/localhost/</loc>
-  <lastmod>2025-07-12T20:10:00Z</lastmod>
+  <lastmod>2025-09-08T07:22:00Z</lastmod>
  </url>
  <url>
   <loc>https://til.code-drill.eu/categories/mcp/</loc>
-  <lastmod>2025-07-12T21:37:00Z</lastmod>
+  <lastmod>2025-07-13T08:24:00Z</lastmod>
  </url>
  <url>
   <loc>https://til.code-drill.eu/categories/mongodb/</loc>
-  <lastmod>2025-07-10T14:17:00Z</lastmod>
+  <lastmod>2025-06-22T19:27:00Z</lastmod>
+ </url>
+ <url>
+  <loc>https://til.code-drill.eu/categories/network/</loc>
+  <lastmod>2025-09-21T10:21:00Z</lastmod>
  </url>
  <url>
   <loc>https://til.code-drill.eu/categories/ngrok/</loc>
-  <lastmod>2025-09-07T14:25:00Z</lastmod>
+  <lastmod>2025-09-08T07:22:00Z</lastmod>
  </url>
  <url>
   <loc>https://til.code-drill.eu/categories/npx/</loc>
-  <lastmod>2025-07-12T20:10:00Z</lastmod>
+  <lastmod>2025-07-13T08:24:00Z</lastmod>
  </url>
  <url>
   <loc>https://til.code-drill.eu/categories/playwright/</loc>
-  <lastmod>2025-07-12T21:37:00Z</lastmod>
+  <lastmod>2025-07-13T08:24:00Z</lastmod>
  </url>
  <url>
   <loc>https://til.code-drill.eu/categories/prometheus/</loc>
-  <lastmod>2025-07-10T14:13:00Z</lastmod>
+  <lastmod>2025-07-06T20:38:00Z</lastmod>
  </url>
  <url>
   <loc>https://til.code-drill.eu/categories/python/</loc>
-  <lastmod>2025-07-12T20:10:00Z</lastmod>
+  <lastmod>2025-07-13T08:24:00Z</lastmod>
  </url>
  <url>
   <loc>https://til.code-drill.eu/categories/route-53/</loc>
-  <lastmod>2025-07-10T14:17:00Z</lastmod>
+  <lastmod>2025-06-29T20:21:00Z</lastmod>
  </url>
  <url>
   <loc>https://til.code-drill.eu/categories/s3/</loc>
-  <lastmod>2025-07-10T14:17:00Z</lastmod>
+  <lastmod>2025-06-29T20:21:00Z</lastmod>
  </url>
  <url>
   <loc>https://til.code-drill.eu/categories/server/</loc>
-  <lastmod>2025-07-12T20:10:00Z</lastmod>
+  <lastmod>2025-07-13T08:24:00Z</lastmod>
  </url>
  <url>
   <loc>https://til.code-drill.eu/categories/shell/</loc>
-  <lastmod>2025-07-30T15:17:00Z</lastmod>
+  <lastmod>2025-07-15T06:18:00Z</lastmod>
  </url>
  <url>
   <loc>https://til.code-drill.eu/categories/ssh/</loc>
-  <lastmod>2025-07-10T14:13:00Z</lastmod>
+  <lastmod>2025-07-06T19:43:00Z</lastmod>
  </url>
  <url>
   <loc>https://til.code-drill.eu/categories/top/</loc>
-  <lastmod>2025-07-10T14:17:00Z</lastmod>
+  <lastmod>2025-06-22T19:27:00Z</lastmod>
  </url>
  <url>
   <loc>https://til.code-drill.eu/categories/win/</loc>
-  <lastmod>2025-07-10T14:13:00Z</lastmod>
+  <lastmod>2025-07-06T19:43:00Z</lastmod>
  </url>
  <url>
   <loc>https://til.code-drill.eu/categories/windows/</loc>
-  <lastmod>2025-07-10T14:17:00Z</lastmod>
+  <lastmod>2025-06-22T12:52:00Z</lastmod>
  </url>
  <url>
   <loc>https://til.code-drill.eu/categories/zsh/</loc>
-  <lastmod>2025-07-30T15:17:00Z</lastmod>
+  <lastmod>2025-07-15T06:18:00Z</lastmod>
  </url>
  <url>
   <loc>https://til.code-drill.eu/galleries/</loc>
-  <lastmod>2025-07-10T14:17:00Z</lastmod>
+  <lastmod>2025-09-08T07:22:00Z</lastmod>
  </url>
  <url>
   <loc>https://til.code-drill.eu/listings/</loc>
-  <lastmod>2025-07-10T14:17:00Z</lastmod>
+  <lastmod>2025-06-22T12:52:00Z</lastmod>
  </url>
  <url>
   <loc>https://til.code-drill.eu/posts/2025-06-22/gitignore-windows-cmd-util/</loc>
-  <lastmod>2025-07-10T14:24:00Z</lastmod>
+  <lastmod>2025-09-08T07:24:00Z</lastmod>
  </url>
  <url>
   <loc>https://til.code-drill.eu/posts/2025-06-22/using-top-in-mongodb-aggregation/</loc>
-  <lastmod>2025-07-10T14:24:00Z</lastmod>
+  <lastmod>2025-07-13T08:25:00Z</lastmod>
  </url>
  <url>
   <loc>https://til.code-drill.eu/posts/2025-06-29/simple-domain-redirect-on-aws/</loc>
-  <lastmod>2025-07-10T14:24:00Z</lastmod>
+  <lastmod>2025-07-13T08:25:00Z</lastmod>
  </url>
  <url>
   <loc>https://til.code-drill.eu/posts/2025-07-06/how-to-detect-aws-ecs-deployment-failure/</loc>
-  <lastmod>2025-07-10T14:17:00Z</lastmod>
+  <lastmod>2025-07-13T08:25:00Z</lastmod>
  </url>
  <url>
   <loc>https://til.code-drill.eu/posts/2025-07-06/how-use-multiple-ssh-keys-with-git/</loc>
-  <lastmod>2025-07-10T14:17:00Z</lastmod>
+  <lastmod>2025-07-13T08:25:00Z</lastmod>
  </url>
  <url>
   <loc>https://til.code-drill.eu/posts/2025-07-12/claude-desktop-mcp-configuration-guide/</loc>
-  <lastmod>2025-07-30T15:17:00Z</lastmod>
+  <lastmod>2025-07-15T06:18:00Z</lastmod>
  </url>
  <url>
   <loc>https://til.code-drill.eu/posts/2025-07-12/how-serve-static-files-on-localhost/</loc>
-  <lastmod>2025-07-12T20:10:00Z</lastmod>
+  <lastmod>2025-07-13T08:25:00Z</lastmod>
  </url>
  <url>
   <loc>https://til.code-drill.eu/posts/2025-07-14/how-upgrade-brew-packages-starting-from-letter-x/</loc>
-  <lastmod>2025-07-30T15:17:00Z</lastmod>
+  <lastmod>2025-09-08T07:24:00Z</lastmod>
  </url>
  <url>
   <loc>https://til.code-drill.eu/posts/2025-09-07/how-use-ngrok-running-inside-docker/</loc>
-  <lastmod>2025-09-07T14:54:00Z</lastmod>
+  <lastmod>2025-09-08T07:24:00Z</lastmod>
+ </url>
+ <url>
+  <loc>https://til.code-drill.eu/posts/2025-09-21/how-to-check-your-ip-using-the-command-line/</loc>
+  <lastmod>2025-09-21T10:20:00Z</lastmod>
  </url>
 </urlset>
