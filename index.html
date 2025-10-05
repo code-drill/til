@@ -54,11 +54,71 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <pre class="shell"><code>curl ipinfo.io</code></pre>
 <p>or <code>wget</code>:</p>
 <pre class="shell"><code>wget -q -O - ipinfo.io</code></pre>
-            
-    
-
-
-        </div>
+<p>Or if you want to get just the IP (IPv6 is preferred):</p>
+<pre class="shell"><code>
+curl ifconfig.me
+</code></pre>
+<p>or get explicitly IPv4</p>
+<pre class="shell"><code>
+curl -4 ifconfig.me</code></pre>
+<h2 id="more-of-ifconfig.me">More of ifconfig.me</h2>
+<h3 id="command-line-examples">Command Line Examples</h3>
+<div class="sourceCode" id="cb5"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb5-1"><a href="posts/2025-09-21/how-to-check-your-ip-using-the-command-line/#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Basic usage - returns your IP (IPv4 or IPv6, depending on your connection)</span></span>
+<span id="cb5-2"><a href="posts/2025-09-21/how-to-check-your-ip-using-the-command-line/#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="ex">curl</span> ifconfig.me</span>
+<span id="cb5-3"><a href="posts/2025-09-21/how-to-check-your-ip-using-the-command-line/#cb5-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-4"><a href="posts/2025-09-21/how-to-check-your-ip-using-the-command-line/#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Force IPv4</span></span>
+<span id="cb5-5"><a href="posts/2025-09-21/how-to-check-your-ip-using-the-command-line/#cb5-5" aria-hidden="true" tabindex="-1"></a><span class="ex">curl</span> <span class="at">-4</span> ifconfig.me</span>
+<span id="cb5-6"><a href="posts/2025-09-21/how-to-check-your-ip-using-the-command-line/#cb5-6" aria-hidden="true" tabindex="-1"></a><span class="ex">curl</span> ipv4.ifconfig.me</span>
+<span id="cb5-7"><a href="posts/2025-09-21/how-to-check-your-ip-using-the-command-line/#cb5-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-8"><a href="posts/2025-09-21/how-to-check-your-ip-using-the-command-line/#cb5-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Force IPv6</span></span>
+<span id="cb5-9"><a href="posts/2025-09-21/how-to-check-your-ip-using-the-command-line/#cb5-9" aria-hidden="true" tabindex="-1"></a><span class="ex">curl</span> <span class="at">-6</span> ifconfig.me</span>
+<span id="cb5-10"><a href="posts/2025-09-21/how-to-check-your-ip-using-the-command-line/#cb5-10" aria-hidden="true" tabindex="-1"></a><span class="ex">curl</span> ipv6.ifconfig.me</span>
+<span id="cb5-11"><a href="posts/2025-09-21/how-to-check-your-ip-using-the-command-line/#cb5-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-12"><a href="posts/2025-09-21/how-to-check-your-ip-using-the-command-line/#cb5-12" aria-hidden="true" tabindex="-1"></a><span class="co"># Using wget instead</span></span>
+<span id="cb5-13"><a href="posts/2025-09-21/how-to-check-your-ip-using-the-command-line/#cb5-13" aria-hidden="true" tabindex="-1"></a><span class="fu">wget</span> <span class="at">-qO-</span> ifconfig.me</span></code></pre></div>
+<h2 id="additional-features">Additional Features</h2>
+<p>ifconfig.me offers more than just your IP address. You can retrieve
+various information about your connection:</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb6-1"><a href="posts/2025-09-21/how-to-check-your-ip-using-the-command-line/#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Get all information</span></span>
+<span id="cb6-2"><a href="posts/2025-09-21/how-to-check-your-ip-using-the-command-line/#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="ex">curl</span> ifconfig.me/all</span>
+<span id="cb6-3"><a href="posts/2025-09-21/how-to-check-your-ip-using-the-command-line/#cb6-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-4"><a href="posts/2025-09-21/how-to-check-your-ip-using-the-command-line/#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Get specific headers</span></span>
+<span id="cb6-5"><a href="posts/2025-09-21/how-to-check-your-ip-using-the-command-line/#cb6-5" aria-hidden="true" tabindex="-1"></a><span class="ex">curl</span> ifconfig.me/host          <span class="co"># Hostname</span></span>
+<span id="cb6-6"><a href="posts/2025-09-21/how-to-check-your-ip-using-the-command-line/#cb6-6" aria-hidden="true" tabindex="-1"></a><span class="ex">curl</span> ifconfig.me/ua            <span class="co"># User agent</span></span>
+<span id="cb6-7"><a href="posts/2025-09-21/how-to-check-your-ip-using-the-command-line/#cb6-7" aria-hidden="true" tabindex="-1"></a><span class="ex">curl</span> ifconfig.me/port          <span class="co"># Port number</span></span>
+<span id="cb6-8"><a href="posts/2025-09-21/how-to-check-your-ip-using-the-command-line/#cb6-8" aria-hidden="true" tabindex="-1"></a><span class="ex">curl</span> ifconfig.me/forwarded     <span class="co"># X-Forwarded-For header</span></span></code></pre></div>
+<h2 id="ipv6-vs-ipv4-why-you-might-see-an-ipv6-address">IPv6 vs IPv4:
+Why You Might See an IPv6 Address</h2>
+<p>If ifconfig.me shows you an IPv6 address (something like
+<code>2001:0db8:85a3::8a2e:0370:7334</code>), it’s because:</p>
+<ol type="1">
+<li><p><strong>Your ISP provides IPv6</strong> - Most modern ISPs now
+offer IPv6 connectivity alongside traditional IPv4.</p></li>
+<li><p><strong>Your system prefers IPv6</strong> - When both IPv4 and
+IPv6 are available, modern operating systems typically prefer IPv6 by
+default.</p></li>
+<li><p><strong>ifconfig.me supports dual-stack</strong> - The service
+has both IPv4 and IPv6 addresses, so it responds to whichever protocol
+you use to connect.</p></li>
+</ol>
+<p>This is actually a positive sign—IPv6 is the future of internet
+addressing, designed to solve the IPv4 address exhaustion problem.</p>
+<h2 id="similar-services">Similar Services</h2>
+<p>While ifconfig.me is popular, several alternatives exist:</p>
+<ul>
+<li>
+<code>icanhazip.com</code> - Another simple IP lookup service</li>
+<li>
+<code>ipinfo.io</code> - Provides additional geolocation data</li>
+<li>
+<code>ifconfig.co</code> - Offers more detailed JSON output</li>
+<li>
+<code>ident.me</code> - Minimal service similar to ifconfig.me</li>
+<li>
+<code>checkip.amazonaws.com</code> - Amazon’s IP checking
+service</li>
+</ul>
+</div>
         <div class="postbox">
         <h1><a href="posts/2025-09-07/how-use-ngrok-running-inside-docker/">how use ngrok running inside docker</a></h1>
             <div class="meta" style="background-color: rgb(234, 234, 234); ">

@@ -1,9 +1,68 @@
 <?xml version="1.0" encoding="utf-8"?>
-<?xml-stylesheet type="text/xsl" href="assets/xml/rss.xsl" media="all"?><rss version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Today I Learned</title><link>https://til.code-drill.eu/</link><description>Things I've learned, collected in code-drill/til.</description><atom:link href="https://til.code-drill.eu/rss.xml" rel="self" type="application/rss+xml"></atom:link><language>en</language><copyright>Contents © 2025 &lt;a href="mailto:michal@code-drill.eu"&gt;Michał Rutkowski&lt;/a&gt; </copyright><lastBuildDate>Sun, 21 Sep 2025 10:27:23 GMT</lastBuildDate><generator>Nikola (getnikola.com)</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>How to check your IP using the command line?</title><link>https://til.code-drill.eu/posts/2025-09-21/how-to-check-your-ip-using-the-command-line/</link><dc:creator>Michał Rutkowski</dc:creator><description>&lt;p&gt;You just need to fetch &lt;code&gt;ipinfo.io&lt;/code&gt;, either using
+<?xml-stylesheet type="text/xsl" href="assets/xml/rss.xsl" media="all"?><rss version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Today I Learned</title><link>https://til.code-drill.eu/</link><description>Things I've learned, collected in code-drill/til.</description><atom:link href="https://til.code-drill.eu/rss.xml" rel="self" type="application/rss+xml"></atom:link><language>en</language><copyright>Contents © 2025 &lt;a href="mailto:michal@code-drill.eu"&gt;Michał Rutkowski&lt;/a&gt; </copyright><lastBuildDate>Sun, 05 Oct 2025 23:38:25 GMT</lastBuildDate><generator>Nikola (getnikola.com)</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>How to check your IP using the command line?</title><link>https://til.code-drill.eu/posts/2025-09-21/how-to-check-your-ip-using-the-command-line/</link><dc:creator>Michał Rutkowski</dc:creator><description>&lt;p&gt;You just need to fetch &lt;code&gt;ipinfo.io&lt;/code&gt;, either using
 &lt;code&gt;curl&lt;/code&gt;:&lt;/p&gt;
 &lt;pre class="shell"&gt;&lt;code&gt;curl ipinfo.io&lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;or &lt;code&gt;wget&lt;/code&gt;:&lt;/p&gt;
-&lt;pre class="shell"&gt;&lt;code&gt;wget -q -O - ipinfo.io&lt;/code&gt;&lt;/pre&gt;</description><category>curl</category><category>IP</category><category>network</category><guid>https://til.code-drill.eu/posts/2025-09-21/how-to-check-your-ip-using-the-command-line/</guid><pubDate>Sun, 21 Sep 2025 10:19:39 GMT</pubDate></item><item><title>how use ngrok running inside docker</title><link>https://til.code-drill.eu/posts/2025-09-07/how-use-ngrok-running-inside-docker/</link><dc:creator>Michał Rutkowski</dc:creator><description>&lt;p&gt;If you wish use ngrok, but dont want to install another system app,
+&lt;pre class="shell"&gt;&lt;code&gt;wget -q -O - ipinfo.io&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Or if you want to get just the IP (IPv6 is preferred):&lt;/p&gt;
+&lt;pre class="shell"&gt;&lt;code&gt;
+curl ifconfig.me
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;or get explicitly IPv4&lt;/p&gt;
+&lt;pre class="shell"&gt;&lt;code&gt;
+curl -4 ifconfig.me&lt;/code&gt;&lt;/pre&gt;
+&lt;h2 id="more-of-ifconfig.me"&gt;More of ifconfig.me&lt;/h2&gt;
+&lt;h3 id="command-line-examples"&gt;Command Line Examples&lt;/h3&gt;
+&lt;div class="sourceCode" id="cb5"&gt;&lt;pre class="sourceCode bash"&gt;&lt;code class="sourceCode bash"&gt;&lt;span id="cb5-1"&gt;&lt;a href="https://til.code-drill.eu/posts/2025-09-21/how-to-check-your-ip-using-the-command-line/#cb5-1" aria-hidden="true" tabindex="-1"&gt;&lt;/a&gt;&lt;span class="co"&gt;# Basic usage - returns your IP (IPv4 or IPv6, depending on your connection)&lt;/span&gt;&lt;/span&gt;
+&lt;span id="cb5-2"&gt;&lt;a href="https://til.code-drill.eu/posts/2025-09-21/how-to-check-your-ip-using-the-command-line/#cb5-2" aria-hidden="true" tabindex="-1"&gt;&lt;/a&gt;&lt;span class="ex"&gt;curl&lt;/span&gt; ifconfig.me&lt;/span&gt;
+&lt;span id="cb5-3"&gt;&lt;a href="https://til.code-drill.eu/posts/2025-09-21/how-to-check-your-ip-using-the-command-line/#cb5-3" aria-hidden="true" tabindex="-1"&gt;&lt;/a&gt;&lt;/span&gt;
+&lt;span id="cb5-4"&gt;&lt;a href="https://til.code-drill.eu/posts/2025-09-21/how-to-check-your-ip-using-the-command-line/#cb5-4" aria-hidden="true" tabindex="-1"&gt;&lt;/a&gt;&lt;span class="co"&gt;# Force IPv4&lt;/span&gt;&lt;/span&gt;
+&lt;span id="cb5-5"&gt;&lt;a href="https://til.code-drill.eu/posts/2025-09-21/how-to-check-your-ip-using-the-command-line/#cb5-5" aria-hidden="true" tabindex="-1"&gt;&lt;/a&gt;&lt;span class="ex"&gt;curl&lt;/span&gt; &lt;span class="at"&gt;-4&lt;/span&gt; ifconfig.me&lt;/span&gt;
+&lt;span id="cb5-6"&gt;&lt;a href="https://til.code-drill.eu/posts/2025-09-21/how-to-check-your-ip-using-the-command-line/#cb5-6" aria-hidden="true" tabindex="-1"&gt;&lt;/a&gt;&lt;span class="ex"&gt;curl&lt;/span&gt; ipv4.ifconfig.me&lt;/span&gt;
+&lt;span id="cb5-7"&gt;&lt;a href="https://til.code-drill.eu/posts/2025-09-21/how-to-check-your-ip-using-the-command-line/#cb5-7" aria-hidden="true" tabindex="-1"&gt;&lt;/a&gt;&lt;/span&gt;
+&lt;span id="cb5-8"&gt;&lt;a href="https://til.code-drill.eu/posts/2025-09-21/how-to-check-your-ip-using-the-command-line/#cb5-8" aria-hidden="true" tabindex="-1"&gt;&lt;/a&gt;&lt;span class="co"&gt;# Force IPv6&lt;/span&gt;&lt;/span&gt;
+&lt;span id="cb5-9"&gt;&lt;a href="https://til.code-drill.eu/posts/2025-09-21/how-to-check-your-ip-using-the-command-line/#cb5-9" aria-hidden="true" tabindex="-1"&gt;&lt;/a&gt;&lt;span class="ex"&gt;curl&lt;/span&gt; &lt;span class="at"&gt;-6&lt;/span&gt; ifconfig.me&lt;/span&gt;
+&lt;span id="cb5-10"&gt;&lt;a href="https://til.code-drill.eu/posts/2025-09-21/how-to-check-your-ip-using-the-command-line/#cb5-10" aria-hidden="true" tabindex="-1"&gt;&lt;/a&gt;&lt;span class="ex"&gt;curl&lt;/span&gt; ipv6.ifconfig.me&lt;/span&gt;
+&lt;span id="cb5-11"&gt;&lt;a href="https://til.code-drill.eu/posts/2025-09-21/how-to-check-your-ip-using-the-command-line/#cb5-11" aria-hidden="true" tabindex="-1"&gt;&lt;/a&gt;&lt;/span&gt;
+&lt;span id="cb5-12"&gt;&lt;a href="https://til.code-drill.eu/posts/2025-09-21/how-to-check-your-ip-using-the-command-line/#cb5-12" aria-hidden="true" tabindex="-1"&gt;&lt;/a&gt;&lt;span class="co"&gt;# Using wget instead&lt;/span&gt;&lt;/span&gt;
+&lt;span id="cb5-13"&gt;&lt;a href="https://til.code-drill.eu/posts/2025-09-21/how-to-check-your-ip-using-the-command-line/#cb5-13" aria-hidden="true" tabindex="-1"&gt;&lt;/a&gt;&lt;span class="fu"&gt;wget&lt;/span&gt; &lt;span class="at"&gt;-qO-&lt;/span&gt; ifconfig.me&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;h2 id="additional-features"&gt;Additional Features&lt;/h2&gt;
+&lt;p&gt;ifconfig.me offers more than just your IP address. You can retrieve
+various information about your connection:&lt;/p&gt;
+&lt;div class="sourceCode" id="cb6"&gt;&lt;pre class="sourceCode bash"&gt;&lt;code class="sourceCode bash"&gt;&lt;span id="cb6-1"&gt;&lt;a href="https://til.code-drill.eu/posts/2025-09-21/how-to-check-your-ip-using-the-command-line/#cb6-1" aria-hidden="true" tabindex="-1"&gt;&lt;/a&gt;&lt;span class="co"&gt;# Get all information&lt;/span&gt;&lt;/span&gt;
+&lt;span id="cb6-2"&gt;&lt;a href="https://til.code-drill.eu/posts/2025-09-21/how-to-check-your-ip-using-the-command-line/#cb6-2" aria-hidden="true" tabindex="-1"&gt;&lt;/a&gt;&lt;span class="ex"&gt;curl&lt;/span&gt; ifconfig.me/all&lt;/span&gt;
+&lt;span id="cb6-3"&gt;&lt;a href="https://til.code-drill.eu/posts/2025-09-21/how-to-check-your-ip-using-the-command-line/#cb6-3" aria-hidden="true" tabindex="-1"&gt;&lt;/a&gt;&lt;/span&gt;
+&lt;span id="cb6-4"&gt;&lt;a href="https://til.code-drill.eu/posts/2025-09-21/how-to-check-your-ip-using-the-command-line/#cb6-4" aria-hidden="true" tabindex="-1"&gt;&lt;/a&gt;&lt;span class="co"&gt;# Get specific headers&lt;/span&gt;&lt;/span&gt;
+&lt;span id="cb6-5"&gt;&lt;a href="https://til.code-drill.eu/posts/2025-09-21/how-to-check-your-ip-using-the-command-line/#cb6-5" aria-hidden="true" tabindex="-1"&gt;&lt;/a&gt;&lt;span class="ex"&gt;curl&lt;/span&gt; ifconfig.me/host          &lt;span class="co"&gt;# Hostname&lt;/span&gt;&lt;/span&gt;
+&lt;span id="cb6-6"&gt;&lt;a href="https://til.code-drill.eu/posts/2025-09-21/how-to-check-your-ip-using-the-command-line/#cb6-6" aria-hidden="true" tabindex="-1"&gt;&lt;/a&gt;&lt;span class="ex"&gt;curl&lt;/span&gt; ifconfig.me/ua            &lt;span class="co"&gt;# User agent&lt;/span&gt;&lt;/span&gt;
+&lt;span id="cb6-7"&gt;&lt;a href="https://til.code-drill.eu/posts/2025-09-21/how-to-check-your-ip-using-the-command-line/#cb6-7" aria-hidden="true" tabindex="-1"&gt;&lt;/a&gt;&lt;span class="ex"&gt;curl&lt;/span&gt; ifconfig.me/port          &lt;span class="co"&gt;# Port number&lt;/span&gt;&lt;/span&gt;
+&lt;span id="cb6-8"&gt;&lt;a href="https://til.code-drill.eu/posts/2025-09-21/how-to-check-your-ip-using-the-command-line/#cb6-8" aria-hidden="true" tabindex="-1"&gt;&lt;/a&gt;&lt;span class="ex"&gt;curl&lt;/span&gt; ifconfig.me/forwarded     &lt;span class="co"&gt;# X-Forwarded-For header&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;h2 id="ipv6-vs-ipv4-why-you-might-see-an-ipv6-address"&gt;IPv6 vs IPv4:
+Why You Might See an IPv6 Address&lt;/h2&gt;
+&lt;p&gt;If ifconfig.me shows you an IPv6 address (something like
+&lt;code&gt;2001:0db8:85a3::8a2e:0370:7334&lt;/code&gt;), it’s because:&lt;/p&gt;
+&lt;ol type="1"&gt;
+&lt;li&gt;&lt;p&gt;&lt;strong&gt;Your ISP provides IPv6&lt;/strong&gt; - Most modern ISPs now
+offer IPv6 connectivity alongside traditional IPv4.&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;strong&gt;Your system prefers IPv6&lt;/strong&gt; - When both IPv4 and
+IPv6 are available, modern operating systems typically prefer IPv6 by
+default.&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;strong&gt;ifconfig.me supports dual-stack&lt;/strong&gt; - The service
+has both IPv4 and IPv6 addresses, so it responds to whichever protocol
+you use to connect.&lt;/p&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;This is actually a positive sign—IPv6 is the future of internet
+addressing, designed to solve the IPv4 address exhaustion problem.&lt;/p&gt;
+&lt;h2 id="similar-services"&gt;Similar Services&lt;/h2&gt;
+&lt;p&gt;While ifconfig.me is popular, several alternatives exist:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;icanhazip.com&lt;/code&gt; - Another simple IP lookup service&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;ipinfo.io&lt;/code&gt; - Provides additional geolocation data&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;ifconfig.co&lt;/code&gt; - Offers more detailed JSON output&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;ident.me&lt;/code&gt; - Minimal service similar to ifconfig.me&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;checkip.amazonaws.com&lt;/code&gt; - Amazon’s IP checking
+service&lt;/li&gt;
+&lt;/ul&gt;</description><category>curl</category><category>IP</category><category>network</category><guid>https://til.code-drill.eu/posts/2025-09-21/how-to-check-your-ip-using-the-command-line/</guid><pubDate>Sun, 21 Sep 2025 10:19:39 GMT</pubDate></item><item><title>how use ngrok running inside docker</title><link>https://til.code-drill.eu/posts/2025-09-07/how-use-ngrok-running-inside-docker/</link><dc:creator>Michał Rutkowski</dc:creator><description>&lt;p&gt;If you wish use ngrok, but dont want to install another system app,
 you can run it using docker.&lt;/p&gt;
 &lt;h3 id="steps"&gt;Steps&lt;/h3&gt;
 &lt;ol type="1"&gt;
